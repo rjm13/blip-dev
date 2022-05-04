@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "blipdev",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/rjm/blip-dev/amplify/backend/api/blipdev/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authblipdev587bb707"
+    }
+  }
+}
