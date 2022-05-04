@@ -1,13 +1,15 @@
 {
   "auth": {
-    "blipdev587bb707": {
+    "blipdev0e2b1f16": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "signupAttributes": [
           "EMAIL"
         ],
@@ -32,7 +34,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "blipdev587bb707",
+          "resourceName": "blipdev0e2b1f16",
           "attributes": [
             "UserPoolId"
           ]
@@ -43,7 +45,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authblipdev587bb707"
+              "userPoolId": "authblipdev0e2b1f16"
             }
           },
           "additionalAuthenticationProviders": []

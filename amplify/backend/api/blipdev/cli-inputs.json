@@ -6,7 +6,7 @@
     "gqlSchemaPath": "/Users/rjm/blip-dev/amplify/backend/api/blipdev/schema.graphql",
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authblipdev587bb707"
+      "cognitoUserPoolId": "authblipdev0e2b1f16"
     }
   }
 }
