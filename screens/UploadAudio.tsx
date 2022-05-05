@@ -831,48 +831,6 @@ const UploadAudio = ({navigation} : any) => {
     //function for selecting a shared audio file
     const [sharedAudio, setSharedAudio] = useState([]);
 
-    // useEffect(() => {
-
-    //     const fetchAudioAssets = async () => {
-
-    //     let userInfo = await Auth.currentAuthenticatedUser();  
-
-    //     const response = await API.graphql(graphqlOperation(
-    //         getUser, {id: userInfo.attributes.sub}
-    //     ))
-
-    //     setSharedAudio(response.data.getUser.sharedWithAssets.items);
-
-    //     }
-    //     fetchAudioAssets();
-
-    // }, [])
-
-    // useEffect(() => {
-
-    //     const fetchAudioAssets = async () => {
-
-    //     let userInfo = await Auth.currentAuthenticatedUser();  
-
-    //     const response = await API.graphql(graphqlOperation(
-    //         audioAssetsByDate, {
-    //             type: 'AudioAsset',
-    //             sortDirection: 'DESC',
-    //             filter: {
-    //                 sharedUserID: {
-    //                     eq: userInfo.attributes.sub
-    //                 }
-    //             }
-    //         }
-    //     ))
-
-    //     setSharedAudio(response.data.audioAssetsByDate.items);
-
-    //     }
-    //     fetchAudioAssets();
-
-    // }, [])
-
 
     const SharedItem = ({id, title, audioUri, userName, sharedUserName, isSample, time, userID, sharedUserID, createdAt} : any) => {
         
@@ -1668,6 +1626,7 @@ userId: {
     color: '#ffffffa5',
     marginRight: 15,
     marginLeft: 5,
+    textTransform: 'capitalize'
 },
 uploadbutton: {
     paddingHorizontal: 20, 
