@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "BlipStories",
+    "name": "BlipStories-dev",
     "scheme": "blip",
-    "slug": "BlipStories",
+    "slug": "BlipStories-dev",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/blankprofile.png",

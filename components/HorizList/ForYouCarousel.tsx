@@ -296,7 +296,7 @@ const ForYouCarousel = () => {
         let genreName = ''
         let primary = ''
 
-        if (item.genre) {
+        if (item?.genre) {
             icon = item.genre.icon
             genreName = item.genre.genre
             primary = item.genre.PrimaryColor
@@ -304,20 +304,20 @@ const ForYouCarousel = () => {
         
         return (
         <Item 
-          title={item.title}
-          imageUri={item.imageUri}
+          title={item?.title}
+          imageUri={item?.imageUri}
           genreName={genreName}
           icon={icon}
           primary={primary}
-          audioUri={item.audioUri}
-          summary={item.summary}
-          author={item.author}
-          narrator={item.narrator}
-          narratorID={item.narratorID}
-          artistID={item.artistID}
-          time={item.time}
-          id={item.id}
-          userID={item.userID}
+          audioUri={item?.audioUri}
+          summary={item?.summary}
+          author={item?.author}
+          narrator={item?.narrator}
+          narratorID={item?.narratorID}
+          artistID={item?.artistID}
+          time={item?.time}
+          id={item?.id}
+          userID={item?.userID}
           
         />
       );}
