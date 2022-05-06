@@ -110,6 +110,7 @@ const HomeScreen = ({navigation} : any) => {
                         <Text style={styles.pageheader}>
                             For you
                         </Text>
+                        
                     </View>
 
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('ProfileScreen')}>
