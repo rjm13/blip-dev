@@ -154,7 +154,7 @@ const ViewMessage = ({navigation} : any) => {
             let response = await API.graphql(graphqlOperation(
                 getMessage, {id: messageid}
             ))
-            setReplies(response.data.getMessage.replies.items.reverse())
+            setReplies(response.data.getMessage.replies.items)
             if (response.data.getMessage.replies.items.length > 0) {
                 setIsExpanded(false);
             }
@@ -583,10 +583,10 @@ const ViewMessage = ({navigation} : any) => {
                         <TextInput
                             placeholder={'Reply to ' + (
                                 message?.userID === user && message?.subtitle === 'artist' ? 
-                                message?.otherUser?.artistPseudo : 
+                                message?.otherUser?.artistPseudo.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))) : 
                                 message?.userID === user && message?.subtitle === 'narrator' ?
-                                message?.otherUser?.narratorPseudo : 
-                                message?.user?.pseudonym)}
+                                message?.otherUser?.narratorPseudo.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))) : 
+                                message?.user?.pseudonym.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))))}
                             placeholderTextColor='#ffffffa5'
                             style={{color: '#fff', padding: 10, width: SCREEN_WIDTH - 60}}
                             maxLength={1000}
@@ -614,7 +614,7 @@ const ViewMessage = ({navigation} : any) => {
                 <View style={{alignSelf: 'center', position: 'absolute', top: 120, borderRadius: 15, alignSelf: 'center', backgroundColor: '#303030', padding: 20, width: Dimensions.get('window').width - 40}}>
                                                 
                             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                <View>
+                                <View style={{width: '84%'}}>
                                     <Text style={{color: '#fff', fontWeight: 'bold'}}>
                                         {message?.title}
                                     </Text>
