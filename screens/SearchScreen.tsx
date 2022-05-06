@@ -54,7 +54,7 @@ const SearchScreen = ({navigation} : any) => {
             <Searchbar
               placeholder={'Search Stories, Tags'}
               placeholderTextColor='#000000a5'
-              autoComplete={true}
+              //autoComplete={true}
               onChangeText={onChangeSearch}
               onIconPress={() => {setNewSearch(searchQuery); setSearchedStories([]); setNextToken(null); setDidUpdate(!didUpdate); }}
               onSubmitEditing={() => {setNewSearch(searchQuery); setSearchedStories([]); setNextToken(null); setDidUpdate(!didUpdate);}}

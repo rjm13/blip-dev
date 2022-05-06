@@ -950,7 +950,7 @@ const SharedAssets = ({navigation} : any) => {
                         <View style={{marginTop: 20}}>
                             {data.sharedUserID ? (
                                 <View>
-                                    <Text style={{textAlign: 'center', color: '#00ffffa5'}}>
+                                    <Text style={{textAlign: 'center', color: '#00ffffa5', textTransform: 'capitalize'}}>
                                         {data.sharedUserName}
                                     </Text>
                                     {isPublishing === true ? (

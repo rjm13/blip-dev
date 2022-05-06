@@ -640,7 +640,7 @@ const MyArt = ({navigation} : any) => {
 {/* user list modal */}
                 <Modal visible={visible5} onDismiss={hideConfirmModal} contentContainerStyle={[containerStyle, {marginHorizontal: 20}]}>
                     <View style={{paddingHorizontal: 20}}>
-                        <Text style={{marginBottom: 20, fontWeight: 'bold', textAlign: 'center', color: '#fff', alignSelf: 'center'}}>
+                        <Text style={{marginBottom: 20, fontWeight: 'bold', textAlign: 'center', color: '#fff', alignSelf: 'center', textTransform: 'capitalize'}}>
                             Share with {data.sharedUserName}?
                         </Text>
                         {isUploading === true ? (

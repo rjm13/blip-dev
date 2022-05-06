@@ -182,7 +182,7 @@ const FindArtist = ({navigation} : any) => {
             <Searchbar
               placeholder={'Search illustrators'}
               placeholderTextColor='#000000a5'
-              autoComplete={true}
+              //autoComplete={off}
               onChangeText={onChangeSearch}
               onIconPress={() => {setNewSearch(searchQuery); setArtists([]); setNextToken(null); setDidUpdate(!didUpdate); }}
               onSubmitEditing={() => {setNewSearch(searchQuery); setNextToken(null); setDidUpdate(!didUpdate);}}

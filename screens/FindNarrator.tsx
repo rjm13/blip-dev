@@ -180,7 +180,7 @@ const FindNarrator = ({navigation} : any) => {
             <Searchbar
               placeholder={'Search narrators'}
               placeholderTextColor='#000000a5'
-              autoComplete={true}
+              //autoComplete={true}
               onChangeText={onChangeSearch}
               onIconPress={() => {setNewSearch(searchQuery); setNarrators([]); setNextToken(null); setDidUpdate(!didUpdate); }}
               onSubmitEditing={() => {setNewSearch(searchQuery); setNarrators([]); setNextToken(null); setDidUpdate(!didUpdate);}}
