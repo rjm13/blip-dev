@@ -191,7 +191,7 @@ const CreateUser = async () => {
         const hideModal = () => setVisible(false);
 
         const containerStyle = {
-            backgroundColor: '#ececec', 
+            backgroundColor: '#363636', 
             borderRadius: 15,
             paddingVertical: 40
         };
