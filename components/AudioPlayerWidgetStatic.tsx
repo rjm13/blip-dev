@@ -232,6 +232,8 @@ const AudioPlayer  = () => {
     const onClose = () => {
         setStoryID(null);
         setStory(null);
+        setPosition(0);
+        setIsPlaying(false);
     }
 
 //unpin a story
@@ -394,7 +396,7 @@ const AddToHistory = async () => {
         }
             
         : undefined;
-    }, [sound]);
+    }, [sound, storyID]);
 
     if (!Story) {
         return null;
