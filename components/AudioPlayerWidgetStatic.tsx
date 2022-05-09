@@ -342,6 +342,7 @@ const AddToHistory = async () => {
             allowsRecordingIOS: false,
             interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
             playsInSilentModeIOS: true,
+            
           });
           console.log(AudioUri)
         const { sound } = await Audio.Sound.createAsync(
@@ -358,7 +359,6 @@ const AddToHistory = async () => {
             },
         );
         setSound(sound);
-
 
         let time = await sound.getStatusAsync();
         setSlideLength(time.durationMillis);
