@@ -107,10 +107,9 @@ const HomeScreen = ({navigation} : any) => {
             
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 60, marginBottom: 10, marginHorizontal: 20}}>
                     <View style={{ flexDirection: 'row'}}>
-                        <Text style={styles.pageheader}>
+                            <Text style={styles.pageheader}>
                             For you
                         </Text>
-                        
                     </View>
 
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('ProfileScreen')}>

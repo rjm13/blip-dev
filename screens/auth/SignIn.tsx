@@ -36,6 +36,10 @@ const SignIn = ({navigation} : any) => {
 
 
     const CreateUser = async () => {
+
+        const {password} = data;
+
+        const username = data.username.replace(/ /g, '');
     
         const userInfo = await Auth.currentAuthenticatedUser(
             { bypassCache: true }
@@ -43,6 +47,11 @@ const SignIn = ({navigation} : any) => {
     
           if (userInfo === 'The user is not authenticated') {
             return;
+          }
+
+          if (userInfo.attributes.email_verified === false) {
+              await Auth.resendSignUp(username)
+              .then(navigation.navigate('ConfirmEmail', {username, password}))
           }
     
           else if (userInfo) {
@@ -94,7 +103,8 @@ const SignIn = ({navigation} : any) => {
         } 
         catch (error) {
             console.log('error signing in', error)
-            setIsErr(true)
+            setIsErr(true);
+            setSigningIn(false);
         }
         setSigningIn(false);
     }
