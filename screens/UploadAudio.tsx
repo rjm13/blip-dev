@@ -33,7 +33,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import uuid from 'react-native-uuid';
 
 import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
-import { createStory, createStoryTag, createTag, updateUser, createGenreTag,  } from '../src/graphql/mutations';
+import { createStory, createStoryTag, createTag, updateUser, createGenreTag, createMessage  } from '../src/graphql/mutations';
 import { listTags, getUser, listGenres, listGenreTags } from '../src/graphql/queries';
 
 
@@ -523,6 +523,26 @@ const UploadAudio = ({navigation} : any) => {
                 }
             }));
             console.log(updateUserInfo);
+
+            await API.graphql(graphqlOperation(
+                createMessage, {
+                    input: {
+                        type: 'Message',
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        userID: userInfo.attributes.sub,
+                        otherUserID: null,
+                        content: 'Your story, ' + data.title + ' is under review.\n\nIt may take up to 48 hours for approval. You will be notified when your story goes live.',
+                        title: 'Thank you for submitting your story!',
+                        subtitle: null,
+                        isReadbyUser: false,
+                        isReadByOtherUser: true,
+                        docID: null,
+                        request: null,
+                        status: 'noreply'
+                    }
+                }
+            ))
 
             setIsPublishing(false);
             navigation.goBack();
