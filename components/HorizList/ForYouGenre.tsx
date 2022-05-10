@@ -13,7 +13,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import HorzStoryTile from '../HorzStoryTile';
 import { AppContext } from '../../AppContext';
 
-import { getGenre, storiesByUpdated } from '../../src/graphql/queries';
+import { getGenre, storiesByUpdated, listStories } from '../../src/graphql/queries';
 import {graphqlOperation, API} from 'aws-amplify';
 
 
@@ -24,6 +24,8 @@ const ForYouGenre = ({genreid} : any) => {
     const navigation = useNavigation();
 
     const [Genre, setGenre] = useState()
+
+    const [nextToken, setNextToken] = useState()
 
     useEffect(() => {
         const fetchGenre = async () => {
@@ -52,12 +54,13 @@ const ForYouGenre = ({genreid} : any) => {
                     const response = await API.graphql(
                         graphqlOperation(
                             storiesByUpdated, {
+                                nextToken,
                                 type: 'Story',
                                 sortDirection: 'DESC',
                                 filter: {
-                                    ratingAvg: {
-                                        gt: 6
-                                    },
+                                    // ratingAvg: {
+                                    //     gt: 6
+                                    // },
                                     genreID: {
                                         eq: genreid
                                     },
@@ -74,16 +77,37 @@ const ForYouGenre = ({genreid} : any) => {
                             } 
                         )
                     )
-                    if (response.data.storiesByUpdated.items.length < 11) {
+
+                    console.log(response.data.storiesByUpdated.items.length)
+
+                    if (response.data.storiesByUpdated.items.length > 0) {
                         for (let i = 0; i < response.data.storiesByUpdated.items.length; i++) {
-                            genreArr.push(response.data.storiesByUpdated.items[i])
+                            if (i === response.data.storiesByUpdated.items.length - 1 ) {
+                                genreArr.push(response.data.storiesByUpdated.items[i])
+                                if (genreArr.length === 8) {
+                                    setTagStories(genreArr);
+                                    return
+                                }
+                                if (response.data.storiesByUpdated.nextToken) {
+                                    setNextToken(response.data.storiesByUpdated.nextToken)
+                                    fetchStorys()
+                                    return
+                                } 
+                                else {
+                                    setTagStories(genreArr);
+                                    return;
+                                }
+                            } else {
+                                if (genreArr.length === 8) {
+                                    setTagStories(genreArr);
+                                    return
+                                }
+                                else {genreArr.push(response.data.storiesByUpdated.items[i])}
+                                setTagStories(genreArr);
+                                
+                            }
                         }
-                    } else {
-                        for (let i = 0; i < 11; i++) {
-                            genreArr.push(response.data.storiesByUpdated.items[i])
-                        }
-                    }
-                    setTagStories(genreArr);
+                    } 
        
                 } catch (e) {
                     console.log(e);}
@@ -92,7 +116,7 @@ const ForYouGenre = ({genreid} : any) => {
 
         fetchStorys();
 
-    },[genreid])
+    },[genreid, nextToken])
 
 
     const renderItem = ({ item }: any) => {
@@ -120,9 +144,12 @@ const ForYouGenre = ({genreid} : any) => {
 
         <View>
             <View style={{marginBottom: 0, marginLeft: 20}}>
-                <Text style={{textTransform: 'capitalize', fontSize: 18, color: '#fff', fontWeight: 'bold'}}>
-                    {Genre?.genre}
-                </Text>
+                {tagStories.length === 0 ? null : (
+                    <Text style={{textTransform: 'capitalize', fontSize: 18, color: '#fff', fontWeight: 'bold'}}>
+                        {Genre?.genre}
+                    </Text>
+                )}
+                
             </View>
             <FlatList
                 data={tagStories}
@@ -131,7 +158,8 @@ const ForYouGenre = ({genreid} : any) => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 ListFooterComponent={
-                        <TouchableOpacity onPress={() => navigation.navigate('GenreHome', {genreRoute: Genre?.id})}>
+                    <TouchableOpacity onPress={() => navigation.navigate('GenreHome', {genreRoute: Genre?.id})}>
+                        {tagStories.length === 0 ? null : (
                         <View style={{ width: 100, height: 200, justifyContent: 'center', alignItems: 'center'}}>
                             <FontAwesome5 
                                 name='chevron-circle-right'
@@ -139,11 +167,11 @@ const ForYouGenre = ({genreid} : any) => {
                                 size={25}
                             />
                         </View>
+                )}
                     </TouchableOpacity>
                 }
             />
         </View>
-
     );
 }
 

@@ -93,6 +93,7 @@ const PendingStories = ({navigation} : any) => {
                 updateStory, {input: {
                     id: id,
                     approved: 'approved',
+                    updatedAt: new Date(),
                     nsfw: NSFW === nsfw ? nsfw : NSFW
                 }}
             ))

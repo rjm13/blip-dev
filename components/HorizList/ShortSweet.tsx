@@ -109,9 +109,12 @@ const ShortSweet = () => {
 
         <View>
             <View style={{marginBottom: 0, marginLeft: 20}}>
-                <Text style={{fontSize: 18, color: '#fff', fontWeight: 'bold'}}>
-                    Short and Sweet
-                </Text>
+                {stories.length === 0 ? null : (
+                    <Text style={{fontSize: 18, color: '#fff', fontWeight: 'bold'}}>
+                        Short and Sweet
+                    </Text>  
+                )}
+                
             </View>
             <FlatList
                 data={stories}
