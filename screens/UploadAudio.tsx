@@ -267,6 +267,26 @@ const UploadAudio = ({navigation} : any) => {
                 }
             }));
 
+            await API.graphql(graphqlOperation(
+                createMessage, {
+                    input: {
+                        type: 'Message',
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        userID: userInfo.attributes.sub,
+                        otherUserID: null,
+                        content: 'Your story, ' + data.title + ' is under review.\n\nIt may take up to 48 hours for approval. You will be notified when your story goes live.',
+                        title: 'Thank you for submitting your story!',
+                        subtitle: null,
+                        isReadbyUser: false,
+                        isReadByOtherUser: true,
+                        docID: null,
+                        request: null,
+                        status: 'noreply'
+                    }
+                }
+            ))
+
             setIsPublishing(false);
             navigation.goBack();
 
@@ -350,6 +370,26 @@ const UploadAudio = ({navigation} : any) => {
                 }
             }));
             console.log(updateUserInfo);
+
+            await API.graphql(graphqlOperation(
+                createMessage, {
+                    input: {
+                        type: 'Message',
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        userID: userInfo.attributes.sub,
+                        otherUserID: null,
+                        content: 'Your story, ' + data.title + ' is under review.\n\nIt may take up to 48 hours for approval. You will be notified when your story goes live.',
+                        title: 'Thank you for submitting your story!',
+                        subtitle: null,
+                        isReadbyUser: false,
+                        isReadByOtherUser: true,
+                        docID: null,
+                        request: null,
+                        status: 'noreply'
+                    }
+                }
+            ))
 
             setIsPublishing(false);
             navigation.goBack();
@@ -443,6 +483,26 @@ const UploadAudio = ({navigation} : any) => {
                 }
             }));
             console.log(updateUserInfo);
+
+            await API.graphql(graphqlOperation(
+                createMessage, {
+                    input: {
+                        type: 'Message',
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        userID: userInfo.attributes.sub,
+                        otherUserID: null,
+                        content: 'Your story, ' + data.title + ' is under review.\n\nIt may take up to 48 hours for approval. You will be notified when your story goes live.',
+                        title: 'Thank you for submitting your story!',
+                        subtitle: null,
+                        isReadbyUser: false,
+                        isReadByOtherUser: true,
+                        docID: null,
+                        request: null,
+                        status: 'noreply'
+                    }
+                }
+            ))
 
             setIsPublishing(false);
             navigation.goBack();

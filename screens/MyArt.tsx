@@ -426,7 +426,7 @@ const MyArt = ({navigation} : any) => {
 
         return (
             <TouchableWithoutFeedback onPress={() => {setData({...data, sharedUserID: id, sharedUserName: pseudonym, messageid: messageid}); showConfirmModal();}}>
-                <View style={{width: Dimensions.get('window').width - 60, paddingVertical: 10}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', width: Dimensions.get('window').width - 80, paddingVertical: 10}}>
                     <View style={{flexDirection: 'row'}}>
                         <Image 
                             source={{uri: imageU}}
@@ -449,6 +449,15 @@ const MyArt = ({navigation} : any) => {
                                 </Text>
                             </View>
                         </View>
+                    </View>
+                    <View style={{justifyContent: 'center'}}>
+                        <FontAwesome5 
+                            name='chevron-right'
+                            size={17}
+                            color='cyan'
+                            style={{paddingHorizontal: 30}}
+                            onPress={() => navigation.navigate('ViewMessage', {messageid: messageid})}
+                        />
                     </View>
                 </View>
             </TouchableWithoutFeedback>
