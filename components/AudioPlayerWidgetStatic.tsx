@@ -139,7 +139,8 @@ const AudioPlayer  = () => {
 
     const animatedBoxHeight = animation.y.interpolate({
         inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [SCREEN_HEIGHT - (Platform.OS === 'ios' ? 240 : 240), 60],
+        //outputRange: [SCREEN_HEIGHT - (Platform.OS === 'ios' ? 240 : 240), 60],
+        outputRange: [SCREEN_HEIGHT - 100, 60],
         extrapolate: 'clamp',
       });
 
@@ -496,12 +497,12 @@ const AddToHistory = async () => {
                     },
                 ]}>
                     <LinearGradient 
-                        colors={[isExpanded ? '#165C5C' : '#3B6980', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000']}
+                        colors={[isExpanded ? '#165C5C' : '#3B6980', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : 'transparent' ]}
                         style={{ borderTopRightRadius: 15, borderTopLeftRadius: 15, flex: 1}}
                         start={{ x: 0, y: 1 }}
                         end={{ x: 0, y: 0 }}
                     >
-                        <Animated.View style={{ height: animatedHeaderHeightSmall, flexDirection: 'row', alignItems: 'center', }}>
+                        <Animated.View style={{ height: animatedHeaderHeightSmall, flexDirection: 'row', alignItems: 'center', marginTop: isExpanded ? 0 : 180}}>
                             { isExpanded === true ? (
                                 <TouchableWithoutFeedback onPress={onChangeHandler}>
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
