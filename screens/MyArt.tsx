@@ -455,7 +455,7 @@ const MyArt = ({navigation} : any) => {
                             name='chevron-right'
                             size={17}
                             color='cyan'
-                            style={{paddingHorizontal: 30}}
+                            style={{paddingHorizontal: 20}}
                             onPress={() => navigation.navigate('ViewMessage', {messageid: messageid})}
                         />
                     </View>

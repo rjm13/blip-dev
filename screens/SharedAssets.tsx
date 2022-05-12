@@ -559,7 +559,7 @@ const SharedAssets = ({navigation} : any) => {
             const responseAudio = await fetch(localAudioUri);
             const blob = await responseAudio.blob();
             const filename = uuid.v4().toString();
-            //let extension = "audio/" + localAudioUri.split('.').pop()
+            let extension = "audio/" + localAudioUri.split('.').pop()
             const s3ResponseAudio = await Storage.put(filename, blob, {
                 progressCallback(uploadProgress) {
                     setProgressText(
