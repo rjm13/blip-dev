@@ -499,11 +499,11 @@ const AddToHistory = async () => {
                     <LinearGradient 
                         colors={[isExpanded ? '#165C5C' : '#3B6980', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : 'transparent' ]}
                         style={{ borderTopRightRadius: 15, borderTopLeftRadius: 15, flex: 1}}
-                        locations={[0.0, 0.2, 0.5, 0.7, 1.0]}
+                        locations={[0.0, 0.2, 0.5, 0.73, 1.0]}
                         start={{ x: 0, y: 1 }}
                         end={{ x: 0, y: 0 }}
                     >
-                        <Animated.View style={{ height: animatedHeaderHeightSmall, flexDirection: 'row', alignItems: 'center', marginTop: isExpanded ? 0 : (Platform.OS === 'ios' ? 80 : 180)}}>
+                        <Animated.View style={{ height: animatedHeaderHeightSmall, flexDirection: 'row', alignItems: 'center', marginTop: isExpanded ? 0 : (Platform.OS === 'ios' ? 80 : 160)}}>
                             { isExpanded === true ? (
                                 <TouchableWithoutFeedback onPress={onChangeHandler}>
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
