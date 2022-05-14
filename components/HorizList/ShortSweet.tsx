@@ -52,7 +52,7 @@ const ShortSweet = () => {
                                     },
                                     time: {
                                         //under 30 minutes
-                                        lt: 1800000
+                                        lt: 2400000
                                     },
                                     imageUri: {
                                         attributeExists: true
