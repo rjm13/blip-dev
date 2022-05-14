@@ -78,6 +78,7 @@ const AudioStoryHome = ({navigation} : any) => {
               <LinearGradient 
                 //colors={[PrimaryColor, PrimaryColor, PrimaryColor, PrimaryColor + '80']}
                 colors={[PrimaryColor, PrimaryColor, PrimaryColor, 'transparent']}
+                locations={[0.0, 0.33, 0.66, 1.0]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 style={[styles.genrebox]}
