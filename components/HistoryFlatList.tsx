@@ -24,13 +24,15 @@ const HistoryList = () => {
 //update trigger for fetching the pinned stories
     const [didUpdate, setDidUpdate] = useState(false);
 
+    const [nextToken, setNextToken] = useState()
+
     useEffect(() => {
+
+        const History = []
 
         const fetchStories = async () => {
 
             setIsLoading(true);
-
-            const History = []
 
             const userInfo = await Auth.currentAuthenticatedUser();
 
@@ -39,7 +41,7 @@ const HistoryList = () => {
             try {
 
                 const historyData = await API.graphql(graphqlOperation(
-                    getUser, {id: userInfo.attributes.sub}))
+                    getUser, {nextToken, id: userInfo.attributes.sub}))
 
                 if (historyData.data.getUser.Finished.items.length > 0) {
                     for (let i = 0; i < historyData.data.getUser.Finished.items.length; i++) {
@@ -47,6 +49,12 @@ const HistoryList = () => {
                             History.push(historyData.data.getUser.Finished.items[i].story)
                         }
                     } 
+                    console.log(historyData.data.getUser.Finished.nextToken)
+                    if (historyData.data.getUser.Finished.nextToken) {
+                        setNextToken(historyData.data.getUser.Finished.nextToken)
+                        fetchStories();
+                        return;
+                    }
                 }
                    
                 setFinishedStories(History);

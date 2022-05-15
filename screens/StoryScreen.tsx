@@ -405,9 +405,9 @@ const StoryScreen  = ({navigation} : any) => {
                     }
                 }
 
-                if (isRated === false && isFinished === true ) {
-                    showRatingModal();
-                }
+                // if (isRated === false && isFinished === true ) {
+                //     showRatingModal();
+                // }
                 
                 const UserImage = await Storage.get(userData.data.getUser.imageUri)
                 setUserImage(UserImage)
@@ -415,6 +415,14 @@ const StoryScreen  = ({navigation} : any) => {
         fetchUser();
         
         }, [update])
+
+        useEffect(() => {
+            if (isRated === false && isFinished === true ) {
+                showRatingModal();
+            } else {
+                hideRatingModal();
+            }
+        }, [isRated, isFinished])
         
         const renderItem = ({ item } : any) => (
     
