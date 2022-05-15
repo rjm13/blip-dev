@@ -1,44 +1,27 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
     View, 
     Text, 
-    TouchableOpacity, 
     TouchableWithoutFeedback,
-    Image,
-    Dimensions,
     StyleSheet,
     ImageBackground
 } from'react-native';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
-import { getUser, listPinnedStories, listRatings, listFinishedStories } from '../src/graphql/queries';
-import { updateStory } from '../src/graphql/mutations';
+import { listRatings, listFinishedStories } from '../src/graphql/queries';
 
 import {useNavigation} from '@react-navigation/native';
-
-import PinStory from '../components/functions/PinStory';
-import unPinStory from '../components/functions/UnPinStory';
-
-import { AppContext } from '../AppContext';
 
 const HorzStoryTile = ({
     title, 
     genreName, 
-    summary, 
     imageUri, 
-    nsfw, 
-    audioUri, 
-    author, 
-    narrator, 
-    time, 
     id,
     ratingAvg,
-    ratingAmt,
     icon
 } : any) => {
         
@@ -57,116 +40,53 @@ const HorzStoryTile = ({
 //navigation hook
     const navigation = useNavigation();
 
-// //expanding list item
-//     const [isVisible, setIsVisible] = useState(false);
-
-//liking the item state
-    // const [isLiked, setIsLiked] = useState(false);
-    
-    // const onLikePress = () => {
-    //     if ( isLiked === false ) {
-    //         setIsLiked(true);
-    //     }
-    //     if ( isLiked === true ) {
-    //         setIsLiked(false);
-    //     }  
-    // };
-
-//queueing the item state when pressed
-// const [isQ, setQd] = useState(false);
-        
-// const onQPress = () => {
-//     if ( isQ === false ) {
-//         setQd(true);
-//         PinStory({storyID: id})
-//     }
-//     if ( isQ === true ) {
-//         setQd(false);
-//         unPinStory({storyID: id});
-//     }  
-// };
-
-//on render, determine if the story in alraedy pinned or not
-// useEffect(() => {
-//     const fetchPin = async () => {
-
-//         const userInfo = await Auth.currentAuthenticatedUser();
-
-//         try {
-//             let getPin = await API.graphql(graphqlOperation(
-//                 listPinnedStories, {
-//                     filter: {
-//                         userID: {
-//                             eq: userInfo.attributes.sub
-//                         },
-//                         storyID: {
-//                             eq: id
-//                         }
-//                     }
-//                 }
-//             ))
-
-//             if (getPin.data.listPinnedStories.items.length === 1) {
-//                 setQd(true);
-//             }
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     }
-//     fetchPin();
-// }, [])
-
-//play the audio story by setting the global context to the story id
-    //const { setStoryID } = useContext(AppContext);
-    //const onPlay = () => {setStoryID(id);}
-
     //determine if this user has rated this story or not. If rated, the star will appear gold
-    const [isRated, setIsRated] = useState(false);
+    const [isRated, setIsRated] = useState(true);
 
     //if item is finished state
-    const [isFinished, setIsFinished] = useState(false);
+    const [isFinished, setIsFinished] = useState(true);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const fetchRating = async () => {
+    //     const fetchRating = async () => {
 
-            let userInfo = await Auth.currentAuthenticatedUser();
+    //         let userInfo = await Auth.currentAuthenticatedUser();
 
-            let Rating = await API.graphql(graphqlOperation(
-                listRatings, {filter: {
-                    userID: {
-                        eq: userInfo.attributes.sub
-                    },
-                    storyID: {
-                        eq: id
-                    }
-                }}
-            ))
+    //         let Rating = await API.graphql(graphqlOperation(
+    //             listRatings, {filter: {
+    //                 userID: {
+    //                     eq: userInfo.attributes.sub
+    //                 },
+    //                 storyID: {
+    //                     eq: id
+    //                 }
+    //             }}
+    //         ))
 
-            let storyCheck = await API.graphql(graphqlOperation(
-                listFinishedStories, {filter: {
-                    userID: {
-                        eq: userInfo.attributes.sub
-                        },
-                    storyID: {
-                        eq: id
-                    }
-                    }
-                }
-            ));
+    //         let storyCheck = await API.graphql(graphqlOperation(
+    //             listFinishedStories, {filter: {
+    //                 userID: {
+    //                     eq: userInfo.attributes.sub
+    //                     },
+    //                 storyID: {
+    //                     eq: id
+    //                 }
+    //                 }
+    //             }
+    //         ));
 
-            if (storyCheck.data.listFinishedStories.items.length === 1) {
-                setIsFinished(true);
-            }
-            if (Rating.data.listRatings.items.length === 1) {
-                setIsRated(true);
-            } else {
-                setIsRated(false);
-            }
+    //         if (storyCheck.data.listFinishedStories.items.length === 1) {
+    //             setIsFinished(true);
+    //         }
+    //         if (Rating.data.listRatings.items.length === 1) {
+    //             setIsRated(true);
+    //         } else {
+    //             setIsRated(false);
+    //         }
 
-        }
-        fetchRating();
-    }, [])
+    //     }
+    //     fetchRating();
+    // }, [])
 
     return (
         <View style={styles.container}>

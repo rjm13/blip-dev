@@ -44,7 +44,7 @@ const StoryScreen  = ({navigation} : any) => {
 
 //recieve story ID as props
     const route = useRoute();
-    const {storyID, path} = route.params;
+    const {storyID, update} = route.params;
 
 //ref to scroll to comment section
     const scrollRef = useRef();
@@ -414,7 +414,7 @@ const StoryScreen  = ({navigation} : any) => {
             }
         fetchUser();
         
-        }, [])
+        }, [update])
         
         const renderItem = ({ item } : any) => (
     

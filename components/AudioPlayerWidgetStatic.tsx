@@ -201,6 +201,8 @@ const AudioPlayer  = () => {
             setUser(UserData.data.getUser)
 
             for (let i = 0; i < UserData.data.getUser.Rated.items.length; i++) {
+                // console.log(UserData.data.getUser.Rated.items[i].storyID)
+                // console.log(storyID)
                 if (UserData.data.getUser.Rated.items[i].storyID === storyID) {
                     setIsRated(true);
                 }
@@ -211,7 +213,6 @@ const AudioPlayer  = () => {
                     setIsFinished(true);
                 }
             }
-
         }
 
         fetchStory();
@@ -297,13 +298,13 @@ const AddToHistory = async () => {
         unPinStory();
 
         //navigate to the story page and open the ratings modal, if not already rated
-            RootNavigation.navigate('StoryScreen', { storyID: storyID });
+            RootNavigation.navigate('StoryScreen', { storyID: storyID, update: Math.random() });
             onClose();
     } else {
         await API.graphql(graphqlOperation(
             updateStory, {input: {id: storyID, numListens: Story?.numListens + 1}}
         ))
-        RootNavigation.navigate('StoryScreen', { storyID: storyID });
+        RootNavigation.navigate('StoryScreen', { storyID: storyID, update: Math.random() });
         onClose();
     }
     
