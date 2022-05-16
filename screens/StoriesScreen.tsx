@@ -15,6 +15,7 @@ from 'react-native';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {LinearGradient} from 'expo-linear-gradient';
+import PromptCarousel from '../components/HorizList/PromptCarousel';
 
 import { AppContext } from '../AppContext';
 
@@ -199,6 +200,17 @@ const AudioStoryHome = ({navigation} : any) => {
                     />
                   </View>
                 </TouchableWithoutFeedback>
+            </View>
+
+            <View style={{marginHorizontal: 0}}>
+              <Text style={[styles.header, {marginHorizontal: 20}]}>
+                Prompts
+              </Text>
+              <View style={{marginTop: 20}}>
+                <PromptCarousel />
+              </View>
+              
+
             </View>
 
             <View style={{ marginHorizontal: 20, height: '100%'}}>

@@ -37,6 +37,7 @@ export const onCreateUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -66,6 +67,7 @@ export const onCreateUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -153,6 +155,7 @@ export const onCreateUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -269,6 +272,18 @@ export const onCreateUser = /* GraphQL */ `
           docID
           updatedAt
           status
+        }
+        nextToken
+      }
+      prompts {
+        items {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
         nextToken
       }
@@ -312,6 +327,7 @@ export const onUpdateUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -341,6 +357,7 @@ export const onUpdateUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -428,6 +445,7 @@ export const onUpdateUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -544,6 +562,18 @@ export const onUpdateUser = /* GraphQL */ `
           docID
           updatedAt
           status
+        }
+        nextToken
+      }
+      prompts {
+        items {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
         nextToken
       }
@@ -587,6 +617,7 @@ export const onDeleteUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -616,6 +647,7 @@ export const onDeleteUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -703,6 +735,7 @@ export const onDeleteUser = /* GraphQL */ `
           createdAt
           updatedAt
           numListens
+          promptID
         }
         nextToken
       }
@@ -819,6 +852,18 @@ export const onDeleteUser = /* GraphQL */ `
           docID
           updatedAt
           status
+        }
+        nextToken
+      }
+      prompts {
+        items {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
         nextToken
       }
@@ -901,6 +946,9 @@ export const onCreateFollowingConn = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -969,6 +1017,9 @@ export const onCreateFollowingConn = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -1053,6 +1104,9 @@ export const onUpdateFollowingConn = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1121,6 +1175,9 @@ export const onUpdateFollowingConn = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -1205,6 +1262,9 @@ export const onDeleteFollowingConn = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1273,6 +1333,9 @@ export const onDeleteFollowingConn = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -1356,6 +1419,9 @@ export const onCreatePinnedStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1490,6 +1556,16 @@ export const onCreatePinnedStory = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       createdAt
@@ -1570,6 +1646,9 @@ export const onUpdatePinnedStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1704,6 +1783,16 @@ export const onUpdatePinnedStory = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       createdAt
@@ -1784,6 +1873,9 @@ export const onDeletePinnedStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1918,6 +2010,16 @@ export const onDeletePinnedStory = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       createdAt
@@ -1998,6 +2100,9 @@ export const onCreateFinishedStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2132,6 +2237,16 @@ export const onCreateFinishedStory = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       createdAt
@@ -2227,6 +2342,9 @@ export const onUpdateFinishedStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2361,6 +2479,16 @@ export const onUpdateFinishedStory = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       createdAt
@@ -2456,6 +2584,9 @@ export const onDeleteFinishedStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2590,6 +2721,16 @@ export const onDeleteFinishedStory = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       createdAt
@@ -2687,6 +2828,9 @@ export const onCreateStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2761,6 +2905,9 @@ export const onCreateStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2831,6 +2978,9 @@ export const onCreateStory = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -2911,6 +3061,47 @@ export const onCreateStory = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      promptID
+      prompt {
+        id
+        type
+        stories {
+          nextToken
+        }
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        prompt
+        nsfw
+        createdAt
+        updatedAt
       }
     }
   }
@@ -2990,6 +3181,9 @@ export const onUpdateStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3064,6 +3258,9 @@ export const onUpdateStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3134,6 +3331,9 @@ export const onUpdateStory = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -3214,6 +3414,47 @@ export const onUpdateStory = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      promptID
+      prompt {
+        id
+        type
+        stories {
+          nextToken
+        }
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        prompt
+        nsfw
+        createdAt
+        updatedAt
       }
     }
   }
@@ -3293,6 +3534,9 @@ export const onDeleteStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3367,6 +3611,9 @@ export const onDeleteStory = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3437,6 +3684,9 @@ export const onDeleteStory = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -3517,6 +3767,47 @@ export const onDeleteStory = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      promptID
+      prompt {
+        id
+        type
+        stories {
+          nextToken
+        }
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        prompt
+        nsfw
+        createdAt
+        updatedAt
       }
     }
   }
@@ -3668,6 +3959,9 @@ export const onCreateImageAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3737,6 +4031,9 @@ export const onCreateImageAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -3823,6 +4120,9 @@ export const onUpdateImageAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3892,6 +4192,9 @@ export const onUpdateImageAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -3978,6 +4281,9 @@ export const onDeleteImageAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4047,6 +4353,9 @@ export const onDeleteImageAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -4132,6 +4441,9 @@ export const onCreateDocumentAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4202,6 +4514,9 @@ export const onCreateDocumentAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -4286,6 +4601,9 @@ export const onUpdateDocumentAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4356,6 +4674,9 @@ export const onUpdateDocumentAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -4440,6 +4761,9 @@ export const onDeleteDocumentAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4510,6 +4834,9 @@ export const onDeleteDocumentAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -4596,6 +4923,9 @@ export const onCreateAudioAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4666,6 +4996,9 @@ export const onCreateAudioAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -4752,6 +5085,9 @@ export const onUpdateAudioAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4822,6 +5158,9 @@ export const onUpdateAudioAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -4908,6 +5247,9 @@ export const onDeleteAudioAsset = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4978,6 +5320,9 @@ export const onDeleteAudioAsset = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -5125,6 +5470,16 @@ export const onCreateFlag = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       flagTypes
       user {
@@ -5192,6 +5547,9 @@ export const onCreateFlag = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -5341,6 +5699,16 @@ export const onUpdateFlag = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       flagTypes
       user {
@@ -5408,6 +5776,9 @@ export const onUpdateFlag = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -5557,6 +5928,16 @@ export const onDeleteFlag = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       flagTypes
       user {
@@ -5624,6 +6005,9 @@ export const onDeleteFlag = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -5773,6 +6157,16 @@ export const onCreateComment = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       content
       user {
@@ -5840,6 +6234,9 @@ export const onCreateComment = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -5989,6 +6386,16 @@ export const onUpdateComment = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       content
       user {
@@ -6056,6 +6463,9 @@ export const onUpdateComment = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -6205,6 +6615,16 @@ export const onDeleteComment = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       content
       user {
@@ -6272,6 +6692,9 @@ export const onDeleteComment = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -6520,6 +6943,16 @@ export const onCreateRating = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       userID
       user {
@@ -6587,6 +7020,9 @@ export const onCreateRating = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -6750,6 +7186,16 @@ export const onUpdateRating = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       userID
       user {
@@ -6817,6 +7263,9 @@ export const onUpdateRating = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -6980,6 +7429,16 @@ export const onDeleteRating = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       userID
       user {
@@ -7047,6 +7506,9 @@ export const onDeleteRating = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -7148,6 +7610,9 @@ export const onCreateMessage = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -7218,6 +7683,9 @@ export const onCreateMessage = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -7387,6 +7855,9 @@ export const onUpdateMessage = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -7457,6 +7928,9 @@ export const onUpdateMessage = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -7626,6 +8100,9 @@ export const onDeleteMessage = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -7696,6 +8173,9 @@ export const onDeleteMessage = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -7951,6 +8431,9 @@ export const onCreateReply = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -8118,6 +8601,9 @@ export const onUpdateReply = /* GraphQL */ `
           nextToken
         }
         messageRec {
+          nextToken
+        }
+        prompts {
           nextToken
         }
         createdAt
@@ -8289,10 +8775,361 @@ export const onDeleteReply = /* GraphQL */ `
         messageRec {
           nextToken
         }
+        prompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       userID
+      updatedAt
+    }
+  }
+`;
+export const onCreatePrompt = /* GraphQL */ `
+  subscription OnCreatePrompt {
+    onCreatePrompt {
+      id
+      type
+      stories {
+        items {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
+        nextToken
+      }
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      prompt
+      nsfw
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePrompt = /* GraphQL */ `
+  subscription OnUpdatePrompt {
+    onUpdatePrompt {
+      id
+      type
+      stories {
+        items {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
+        nextToken
+      }
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      prompt
+      nsfw
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePrompt = /* GraphQL */ `
+  subscription OnDeletePrompt {
+    onDeletePrompt {
+      id
+      type
+      stories {
+        items {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
+        nextToken
+      }
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      prompt
+      nsfw
+      createdAt
       updatedAt
     }
   }
@@ -8433,6 +9270,16 @@ export const onCreateStoryTag = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       tag {
@@ -8592,6 +9439,16 @@ export const onUpdateStoryTag = /* GraphQL */ `
         flag {
           nextToken
         }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+        }
       }
       tag {
         id
@@ -8749,6 +9606,16 @@ export const onDeleteStoryTag = /* GraphQL */ `
         numListens
         flag {
           nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
         }
       }
       tag {

@@ -43,6 +43,7 @@ type User @model @auth(rules: [{ allow: private, operations: [create, delete, up
   plan: String
   messageSent: [Message] @hasMany(indexName: "byUser", fields: "id")
   messageRec: [Message] @hasMany(indexName: "byOtherUser", fields: "id")
+  prompts: [Prompt] @hasMany(indexName: "byUser", fields: "id")
 }
 
 type FollowingConn @model @auth(rules: [{ allow: private, operations: [create, delete, update, read]}])
@@ -119,6 +120,8 @@ type Story @model @auth(rules: [{ allow: private, operations: [create, delete, u
   updatedAt: String
   numListens: Int
   flag: [Flag] @hasMany (indexName: "byFlag", fields: ["id"])
+  promptID: ID @index(name: "byPrompt", sortKeyFields: ["id"])
+  prompt: Prompt @hasOne (fields: ["promptID"])
   }
 
 type Genre @model @auth(rules: [{ allow: private, operations: [create, delete, update, read]}])
@@ -265,4 +268,20 @@ type Reply @model @auth(rules: [{ allow: private, operations: [create, delete, u
     message: Message @hasOne (fields: ["messageID"])
     user: User @hasOne (fields: ["userID"])
     userID: ID @index(name: "byUser", sortKeyFields: ["id"])
+}
+
+  type Prompt @model @auth(rules: [{ allow: private, operations: [create, delete, update, read]}])
+  {
+    id: ID!
+    type: String 
+      @index(name: "promptsByDate", queryField: "promptsByDate", sortKeyFields: ["createdAt"]  )
+      @index(name: "promptsByUpdated", queryField: "promptsByUpdated", sortKeyFields: ["updatedAt"]  )
+    stories: [Story] @hasMany (indexName: "byPrompt", fields: ["id"])
+    userID: ID! @index(name: "byUser", sortKeyFields: ["id"])
+    user: User @hasOne (fields: ["userID"])
+    prompt: String
+    nsfw: Boolean
+    createdAt: String
+    updatedAt: String
+    count: Int
 }

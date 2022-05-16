@@ -56,7 +56,7 @@ import TagSearchStack from '../screens/TagSearchScreen';
 import UserScreenStack from '../screens/UserScreen';
 import BrowseGenre from '../screens/BrowseGenre';
 import ViewGenreTags from '../screens/ViewGenreTags';
-
+import PromptsHome from '../screens/PromptsHome';
 
 
 import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList } from '../types';
@@ -355,7 +355,12 @@ function StoriesNavigator() {
         component={BrowseGenre}
         options={{ headerShown: false }}
       />
-      <HomeStack.Screen 
+      <StoriesStack.Screen 
+        name="PromptsHome" 
+        component={PromptsHome} 
+        options={{ headerShown: false }} 
+      />
+      <StoriesStack.Screen 
         name="ViewGenreTags" 
         component={ViewGenreTags} 
         options={{ headerShown: false }} 

@@ -63,7 +63,7 @@ export type TabOneParamList = {
   PendingStories: undefined;
   FlaggedStories: undefined;
   NewComments: undefined;
-  ViewGenreTags: undefined;
+
 };
 
 export type TabTwoParamList = {
@@ -75,6 +75,8 @@ export type TabTwoParamList = {
   TagSearchStack: undefined;
   UserScreenStack: undefined;
   BrowseGenre: undefined;
+  PromptsHome: undefined;
+  ViewGenreTags: undefined;
 };
 
 export type TabThreeParamList = {
