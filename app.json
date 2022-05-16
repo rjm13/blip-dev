@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/blankprofile.png",
     "splash": {
-      "image": "./assets/images/adaptive-icon.png",
+      "image": "./assets/images/blankprofile.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
