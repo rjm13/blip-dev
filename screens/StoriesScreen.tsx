@@ -202,10 +202,18 @@ const AudioStoryHome = ({navigation} : any) => {
                 </TouchableWithoutFeedback>
             </View>
 
-            <View style={{marginHorizontal: 0}}>
-              <Text style={[styles.header, {marginHorizontal: 20}]}>
-                Prompts
-              </Text>
+            <View style={{marginTop: 20}}>
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                <Text style={[styles.header, {marginHorizontal: 20}]}>
+                  Recent Prompts
+                </Text>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome')}>
+                  <Text style={{color: '#ffffffa5', marginTop: 0, marginHorizontal: 20}}>
+                        See more
+                    </Text> 
+                </TouchableWithoutFeedback>
+              </View>
+              
               <View style={{marginTop: 20}}>
                 <PromptCarousel />
               </View>
@@ -224,7 +232,7 @@ const AudioStoryHome = ({navigation} : any) => {
                     ListHeaderComponent={ () => {
 
                         return (
-                            <View style={{ marginTop: 20}}>
+                            <View style={{ marginTop: 10}}>
                                 <View>
                                   <Text style={styles.header}>
                                       Authors

@@ -4443,6 +4443,8 @@ export const getPrompt = /* GraphQL */ `
       }
       prompt
       nsfw
+      count
+      upvote
       createdAt
       updatedAt
     }
@@ -6552,6 +6554,8 @@ export const promptsByDate = /* GraphQL */ `
         }
         prompt
         nsfw
+        count
+        upvote
         createdAt
         updatedAt
       }
@@ -6613,6 +6617,8 @@ export const promptsByUpdated = /* GraphQL */ `
         }
         prompt
         nsfw
+        count
+        upvote
         createdAt
         updatedAt
       }

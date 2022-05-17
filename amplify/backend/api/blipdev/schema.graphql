@@ -284,4 +284,5 @@ type Reply @model @auth(rules: [{ allow: private, operations: [create, delete, u
     createdAt: String
     updatedAt: String
     count: Int
+    upvote: Int
 }

@@ -9035,6 +9035,8 @@ export const createPrompt = /* GraphQL */ `
       }
       prompt
       nsfw
+      count
+      upvote
       createdAt
       updatedAt
     }
@@ -9154,6 +9156,8 @@ export const updatePrompt = /* GraphQL */ `
       }
       prompt
       nsfw
+      count
+      upvote
       createdAt
       updatedAt
     }
