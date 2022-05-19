@@ -95,20 +95,14 @@ useEffect(() => {
 
         try {
             let getPin = await API.graphql(graphqlOperation(
-                listPinnedStories, {
-                    filter: {
-                        userID: {
-                            eq: userInfo.attributes.sub
-                        },
-                        storyID: {
-                            eq: id
-                        }
-                    }
+                getUser, {id: userInfo.attributes.sub
                 }
             ))
 
-            if (getPin.data.listPinnedStories.items.length === 1) {
-                setQd(true);
+            for (let i = 0; i < getPin.data.getUser.Pinned.items.length; i++) {
+                if (getPin.data.getUser.Pinned.items[i].storyID === id) {
+                    setQd(true);
+                }
             }
         } catch (error) {
             console.log(error)
@@ -127,47 +121,47 @@ useEffect(() => {
     //if item is finished state
     const [isFinished, setIsFinished] = useState(false);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const fetchRating = async () => {
+    //     const fetchRating = async () => {
 
-            let userInfo = await Auth.currentAuthenticatedUser();
+    //         let userInfo = await Auth.currentAuthenticatedUser();
 
-            let Rating = await API.graphql(graphqlOperation(
-                listRatings, {filter: {
-                    userID: {
-                        eq: userInfo.attributes.sub
-                    },
-                    storyID: {
-                        eq: id
-                    }
-                }}
-            ))
+    //         // let Rating = await API.graphql(graphqlOperation(
+    //         //     listRatings, {filter: {
+    //         //         userID: {
+    //         //             eq: userInfo.attributes.sub
+    //         //         },
+    //         //         storyID: {
+    //         //             eq: id
+    //         //         }
+    //         //     }}
+    //         // ))
 
-            let storyCheck = await API.graphql(graphqlOperation(
-                listFinishedStories, {filter: {
-                    userID: {
-                        eq: userInfo.attributes.sub
-                        },
-                    storyID: {
-                        eq: id
-                    }
-                    }
-                }
-            ));
+    //         let storyCheck = await API.graphql(graphqlOperation(
+    //             listFinishedStories, {filter: {
+    //                 userID: {
+    //                     eq: userInfo.attributes.sub
+    //                     },
+    //                 storyID: {
+    //                     eq: id
+    //                 }
+    //                 }
+    //             }
+    //         ));
 
-            if (storyCheck.data.listFinishedStories.items.length === 1) {
-                setIsFinished(true);
-            }
-            if (Rating.data.listRatings.items.length === 1) {
-                setIsRated(true);
-            } else {
-                setIsRated(false);
-            }
+    //         if (storyCheck.data.listFinishedStories.items.length === 1) {
+    //             setIsFinished(true);
+    //         }
+    //         // if (Rating.data.listRatings.items.length === 1) {
+    //         //     setIsRated(true);
+    //         // } else {
+    //         //     setIsRated(false);
+    //         // }
 
-        }
-        fetchRating();
-    }, [])
+    //     }
+    //     fetchRating();
+    // }, [])
 
     return (
         <View>
@@ -259,9 +253,11 @@ useEffect(() => {
                                             ({ratingAmt})
                                         </Text>
                                        <FontAwesome
-                                            name={isRated ? 'star' : 'star-o'}
+                                            //name={isRated ? 'star' : 'star-o'}
+                                            name='star'
                                             size={17}
-                                            color={isRated === true || isFinished === true ? 'gold' : 'white'}
+                                            //color={isRated === true || isFinished === true ? 'gold' : 'white'}
+                                            color='gold'
                                             style={{paddingHorizontal: 10}}
                                         /> 
                                         
