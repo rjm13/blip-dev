@@ -20,8 +20,8 @@ import { Modal, Portal, Provider } from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native'
 
 import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
-import { storiesByDate, getStory } from '../src/graphql/queries';
-import { updateStory, createMessage, deleteStory, updateTag } from '../src/graphql/mutations';
+import { storiesByDate, getStory, getPrompt } from '../src/graphql/queries';
+import { updateStory, createMessage, updatePrompt, updateTag } from '../src/graphql/mutations';
 import TimeConversion from '../components/functions/TimeConversion';
 
 const PendingStories = ({navigation} : any) => {
@@ -82,7 +82,7 @@ const PendingStories = ({navigation} : any) => {
 
     const [pending, setPending] = useState(false)
 
-    const ApproveStory = async ({id, authorID, title, NSFW, nsfw} : any) => {
+    const ApproveStory = async ({id, authorID, title, NSFW, nsfw, promptID, promptCount} : any) => {
 
         setPending(true)
 
@@ -97,6 +97,24 @@ const PendingStories = ({navigation} : any) => {
                     nsfw: NSFW === nsfw ? nsfw : NSFW
                 }}
             ))
+
+            if (promptID) {
+                
+                let res = await API.graphql(graphqlOperation(
+                    getPrompt, {
+                        id: promptID,
+                    }
+                ))
+
+               await API.graphql(graphqlOperation(
+                    updatePrompt, {input: {
+                        id: promptID,
+                        count: res.data.getPrompt.count + 1,
+                        updatedAt: new Date()
+                    }}
+                ))
+            }
+            
 
             let storyresponse = await API.graphql(graphqlOperation(
                 getStory, {id : id}
@@ -221,7 +239,7 @@ const PendingStories = ({navigation} : any) => {
 
     
 
-    const Item = ({title, genreName, summary, imageUri, nsfw, audioUri, author, authorID, narrator, time, id,ratingAvg,ratingAmt,icon} : any) => {
+    const Item = ({title, genreName, summary, imageUri, nsfw, audioUri, author, authorID, narrator, time, id,ratingAvg,ratingAmt,icon, promptID, promptCount} : any) => {
 
         //temporary signed image uri
         const [imageU, setImageU] = useState('')
@@ -353,7 +371,7 @@ const PendingStories = ({navigation} : any) => {
                             {pending===true ? (
                                 <ActivityIndicator size='small' color='cyan'/>
                             ) : (
-                                <TouchableOpacity onLongPress={() => ApproveStory({id, title, authorID, NSFW, nsfw})}>
+                                <TouchableOpacity onLongPress={() => ApproveStory({id, title, authorID, NSFW, nsfw, promptID})}>
                                     <Text style={{color: '#000', backgroundColor: 'cyan', borderRadius: 15, paddingHorizontal: 20, paddingVertical: 6}}>
                                         Approve
                                     </Text>
@@ -396,12 +414,17 @@ const PendingStories = ({navigation} : any) => {
         let icon = ''
         let genreName = ''
         let primary = ''
+        let promptCount = ''
         //let flags = item.flag?.items.length
 
         if (item.genre) {
             icon = item.genre.icon
             genreName = item.genre.genre
             primary = item.genre.PrimaryColor
+        }
+
+        if (item.prompt) {
+            promptCount = item.prompt.count
         }
 
         return  (
@@ -420,6 +443,8 @@ const PendingStories = ({navigation} : any) => {
                 id={item.id}
                 ratingAvg={item.ratingAvg}
                 ratingAmt={item.ratingAmt}
+                promptID={item.promptID}
+                promptCount={promptCount}
                 //flags={flags}
             />
         )

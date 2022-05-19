@@ -100,16 +100,26 @@ const SavedPromptList = () => {
         createdAt: new Date(),
     })
         
-    const [promptStories, setPromptStories] = useState();
+    const [promptStories, setPromptStories] = useState([]);
 
     const FetchPrompt = async ({pid, upvoted} : any) => {
+
+        let prstories = []
+
         if (upvoted === true) {setIsUpVoted(true)}
+
         let response = await API.graphql(graphqlOperation(
             getPrompt, {id: pid }
         ))
 
       setPromptData(response.data.getPrompt);
-      setPromptStories(response.data.getPrompt.stories.items)
+
+      for (let i = 0; i < response.data.getPrompt.stories.items.length; i++) {
+         if (response.data.getPrompt.stories.items[i].approved === 'approved' && response.data.getPrompt.stories.items[i].hidden === false) {
+             prstories.push(response.data.getPrompt.stories.items[i])
+         }
+      }
+      setPromptStories(prstories)
     }
 
     const [isUpVoted, setIsUpVoted] = useState(false)

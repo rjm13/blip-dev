@@ -150,11 +150,13 @@ const PromptsHome = ({navigation} : any) => {
 
     const [savedID, setSavedID] = useState()
 
-      const [promptStories, setPromptStories] = useState();
+      const [promptStories, setPromptStories] = useState([]);
 
       const [isPub, setIsPub] = useState(false)
 
       const FetchPrompt = async ({id, upvoted} : any) => {
+
+        let prstories = []
 
         if (upvoted === true) {setIsUpVoted(true)}
 
@@ -180,7 +182,13 @@ const PromptsHome = ({navigation} : any) => {
         }
 
         setPromptData(response.data.getPrompt);
-        setPromptStories(response.data.getPrompt.stories.items)
+
+        for (let i = 0; i < response.data.getPrompt.stories.items.length; i++) {
+            if (response.data.getPrompt.stories.items[i].approved === 'approved' && response.data.getPrompt.stories.items[i].hidden === false) {
+                prstories.push(response.data.getPrompt.stories.items[i])
+            }
+         }
+        setPromptStories(prstories)
       }
 
       const [isUpVoted, setIsUpVoted] = useState(false)

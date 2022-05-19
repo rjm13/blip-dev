@@ -1811,6 +1811,8 @@ export const getStory = /* GraphQL */ `
       prompt {
         id
         type
+        count
+        upvote
         stories {
           nextToken
         }
