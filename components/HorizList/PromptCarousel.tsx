@@ -28,36 +28,7 @@ const PromptCarousel = () => {
 
     
 
-    const [prompts, setPrompts] = useState([
-    {
-        prompt: 'A story about a guy who gets a super power to fart mustard gas at will and with deadly force. A story about a guy who gets a super power to fart mustard gas at will and with deadly force.',
-        count: 1,
-        user: {name: 'Martin Short'},
-        upvote: 2,
-        color: '#007676a5'
-    },
-    {
-        prompt: 'A story about a mouse who lives in a soda can.',
-        count: 1,
-        user: {name: 'Martin Short'},
-        upvote: 2,
-        color: '#3B4B80'
-    },
-    {
-        prompt: 'A story about about killer peas',
-        count: 3,
-        user: {name: 'Martin Short'},
-        upvote: 2,
-        color: '#703232'
-    },
-    {
-        prompt: 'A tale about Paul Bunons bunyons',
-        count: 2,
-        user: {name: 'Martin Short'},
-        upvote: 2,
-        color: '#706A32'
-    },
-])
+    const [prompts, setPrompts] = useState([])
 
     useEffect(() => {
         const fetchPrompts = async () => {
@@ -73,34 +44,36 @@ const PromptCarousel = () => {
         fetchPrompts()
     }, [])
 
-    const Item = ({prompt, user, count, upvote} : any) => {
+    const Item = ({prompt, user, count, upvote, id} : any) => {
 
         const colors = ['#3B4B80', '#007676a5', '#703232', '#706A32']
         const color = colors[Math.floor(Math.random()*colors.length)]
-        
+
         return (
-            <View style={{width: Dimensions.get('window').width - 40, backgroundColor: color, borderRadius: 15, overflow: 'hidden', padding: 20}}>
-                <Text numberOfLines={5} style={{color: '#fff', marginBottom: 20}}>
-                    {prompt}
-                </Text>
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                    <Text style={{color: '#fff', fontWeight: 'bold'}}>
-                        {count} {count === 1 ? 'Story' : 'Stories'}
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome', {promptID: id})}>
+                <View style={{width: Dimensions.get('window').width - 40, backgroundColor: color, borderRadius: 15, overflow: 'hidden', padding: 20}}>
+                    <Text numberOfLines={5} style={{color: '#fff', marginBottom: 20}}>
+                        {prompt}
                     </Text>
-                    <View style={{flexDirection: 'row'}}>
-                        <FontAwesome 
-                            name='thumbs-up'
-                            color='#fff'
-                            size={17}
-                            style={{marginRight: 10}}
-                        />
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                         <Text style={{color: '#fff', fontWeight: 'bold'}}>
-                            {upvote}
+                            {count} {count === 1 ? 'Story' : 'Stories'}
                         </Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <FontAwesome 
+                                name='thumbs-up'
+                                color='#fff'
+                                size={17}
+                                style={{marginRight: 10}}
+                            />
+                            <Text style={{color: '#fff', fontWeight: 'bold'}}>
+                                {upvote}
+                            </Text>
+                        </View>
+                        
                     </View>
-                    
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
         )
     }
 
@@ -114,6 +87,7 @@ const PromptCarousel = () => {
         
         return (
         <Item 
+            id={item.id}
           prompt={item?.prompt}
           user={user}
           nsfw={item.nsfw}

@@ -44,6 +44,7 @@ type User @model @auth(rules: [{ allow: private, operations: [create, delete, up
   messageSent: [Message] @hasMany(indexName: "byUser", fields: "id")
   messageRec: [Message] @hasMany(indexName: "byOtherUser", fields: "id")
   prompts: [Prompt] @hasMany(indexName: "byUser", fields: "id")
+  savedPrompts: [SavedPrompt] @hasMany(indexName: "byUser", fields: "id")
 }
 
 type FollowingConn @model @auth(rules: [{ allow: private, operations: [create, delete, update, read]}])
@@ -285,4 +286,15 @@ type Reply @model @auth(rules: [{ allow: private, operations: [create, delete, u
     updatedAt: String
     count: Int
     upvote: Int
+}
+
+type SavedPrompt @model @auth(rules: [{ allow: private, operations: [create, delete, update, read]}])
+{
+    id: ID!
+    type: String @index(name: "savedPromptByDate", queryField: "savedPromptByDate", sortKeyFields: ["createdAt"])
+    userID: ID @index(name: "byUser", sortKeyFields: ["id"])
+    user: User @hasOne (fields: ["userID"])
+    promptID: ID @index(name: "byPrompt", sortKeyFields: ["id"])
+    prompt: Prompt @hasOne (fields: ["promptID"])
+    createdAt: String
 }

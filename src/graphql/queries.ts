@@ -80,19 +80,7 @@ export const getUser = /* GraphQL */ `
           time
           isSample
           userID
-          user {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           sharedUserID
-          sharedUser {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           updatedAt
         }
@@ -106,19 +94,7 @@ export const getUser = /* GraphQL */ `
           imageUri
           isSample
           userID
-          user {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           sharedUserID
-          sharedUser {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           updatedAt
         }
@@ -133,19 +109,7 @@ export const getUser = /* GraphQL */ `
           time
           isSample
           userID
-          user {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           sharedUserID
-          sharedUser {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           updatedAt
         }
@@ -159,19 +123,7 @@ export const getUser = /* GraphQL */ `
           imageUri
           isSample
           userID
-          user {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           sharedUserID
-          sharedUser {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           updatedAt
         }
@@ -221,19 +173,7 @@ export const getUser = /* GraphQL */ `
           id
           type
           followerID
-          follower {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           authorID
-          author {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           updatedAt
         }
@@ -244,19 +184,7 @@ export const getUser = /* GraphQL */ `
           id
           type
           followerID
-          follower {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           authorID
-          author {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           updatedAt
         }
@@ -268,38 +196,6 @@ export const getUser = /* GraphQL */ `
           type
           userID
           storyID
-          story {
-          id
-          type
-          title
-          imageUri
-          audioUri
-          userID
-          author
-          authorID
-          narrator
-          narratorID
-          artistName
-          artistID
-          time
-          summary
-          description
-          nsfw
-          ratingAvg
-          ratingAmt
-          genreID
-          genre {
-            id
-            genre
-            PrimaryColor
-          }
-          hidden
-          approved
-          createdAt
-          updatedAt
-          numListens
-          promptID
-        }
           createdAt
           updatedAt
         }
@@ -310,38 +206,6 @@ export const getUser = /* GraphQL */ `
           id
           type
           storyID
-          story {
-          id
-          type
-          title
-          imageUri
-          audioUri
-          userID
-          author
-          authorID
-          narrator
-          narratorID
-          artistName
-          artistID
-          time
-          summary
-          description
-          nsfw
-          ratingAvg
-          ratingAmt
-          genreID
-          genre {
-            id
-            genre
-            PrimaryColor
-          }
-          hidden
-          approved
-          createdAt
-          updatedAt
-          numListens
-          promptID
-        }
           userID
           rating
           nsfw
@@ -357,38 +221,6 @@ export const getUser = /* GraphQL */ `
           type
           userID
           storyID
-          story {
-          id
-          type
-          title
-          imageUri
-          audioUri
-          userID
-          author
-          authorID
-          narrator
-          narratorID
-          artistName
-          artistID
-          time
-          summary
-          description
-          nsfw
-          ratingAvg
-          ratingAmt
-          genreID
-          genre {
-            id
-            genre
-            PrimaryColor
-          }
-          hidden
-          approved
-          createdAt
-          updatedAt
-          numListens
-          promptID
-        }
           createdAt
           nsfw
           genreID
@@ -413,19 +245,7 @@ export const getUser = /* GraphQL */ `
           subtitle
           content
           userID
-          user {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           otherUserID
-          otherUser {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           isReadbyUser
           isReadByOtherUser
@@ -444,19 +264,7 @@ export const getUser = /* GraphQL */ `
           subtitle
           content
           userID
-          user {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           otherUserID
-          otherUser {
-            id
-            artistPseudo
-            narratorPseudo
-            pseudonym
-          }
           createdAt
           isReadbyUser
           isReadByOtherUser
@@ -474,6 +282,26 @@ export const getUser = /* GraphQL */ `
           userID
           prompt
           nsfw
+          createdAt
+          updatedAt
+          count
+          upvote
+        }
+        nextToken
+      }
+      savedPrompts {
+        items {
+          id
+          type
+          userID
+          promptID
+          prompt {
+            id
+            prompt
+            createdAt
+            count
+            upvote
+          }
           createdAt
           updatedAt
         }
@@ -561,6 +389,9 @@ export const listUsers = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -645,6 +476,9 @@ export const getFollowingConn = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -716,6 +550,9 @@ export const getFollowingConn = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -877,6 +714,9 @@ export const getPinnedStory = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1021,6 +861,8 @@ export const getPinnedStory = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       createdAt
@@ -1178,6 +1020,9 @@ export const getFinishedStory = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1322,6 +1167,8 @@ export const getFinishedStory = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       createdAt
@@ -1508,6 +1355,9 @@ export const getStory = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1585,6 +1435,9 @@ export const getStory = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1660,6 +1513,9 @@ export const getStory = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1686,15 +1542,6 @@ export const getStory = /* GraphQL */ `
           id
           storyID
           tagID
-          tag {
-            id
-            type
-            tagName
-            nsfw
-            count
-            updatedAt
-            createdAt
-          }
           createdAt
           updatedAt
         }
@@ -1788,6 +1635,8 @@ export const getStory = /* GraphQL */ `
         nsfw
         createdAt
         updatedAt
+        count
+        upvote
       }
     }
   }
@@ -1939,6 +1788,8 @@ export const listStories = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       nextToken
@@ -1959,14 +1810,6 @@ export const getGenre = /* GraphQL */ `
           id
           genreID
           tagID
-          tag {
-            id
-            tagName
-            nsfw
-            updatedAt
-            createdAt
-            count
-          }
           createdAt
           updatedAt
         }
@@ -2079,6 +1922,9 @@ export const getImageAsset = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2151,6 +1997,9 @@ export const getImageAsset = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -2317,6 +2166,9 @@ export const getDocumentAsset = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2390,6 +2242,9 @@ export const getDocumentAsset = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -2556,6 +2411,9 @@ export const getAudioAsset = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2629,6 +2487,9 @@ export const getAudioAsset = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -2864,6 +2725,8 @@ export const getFlag = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       flagTypes
@@ -2935,6 +2798,9 @@ export const getFlag = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -3169,6 +3035,8 @@ export const getComment = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       content
@@ -3240,6 +3108,9 @@ export const getComment = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -3349,43 +3220,6 @@ export const getTag = /* GraphQL */ `
         items {
           id
           storyID
-          story {
-          id
-          type
-          title
-          imageUri
-          audioUri
-          userID
-          author
-          authorID
-          narrator
-          narratorID
-          artistName
-          artistID
-          time
-          summary
-          description
-          nsfw
-          ratingAvg
-          ratingAmt
-          genreID
-          genre {
-            id
-            genre
-            icon
-            PrimaryColor
-            SecondaryColor
-            imageUri
-            createdAt
-            updatedAt
-          }
-          hidden
-          approved
-          createdAt
-          updatedAt
-          numListens
-          promptID
-        }
           tagID
           createdAt
           updatedAt
@@ -3570,6 +3404,8 @@ export const getRating = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       userID
@@ -3641,6 +3477,9 @@ export const getRating = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -3832,6 +3671,9 @@ export const getMessage = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3905,6 +3747,9 @@ export const getMessage = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -4259,6 +4104,9 @@ export const getReply = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4438,15 +4286,18 @@ export const getPrompt = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
       prompt
       nsfw
-      count
-      upvote
       createdAt
       updatedAt
+      count
+      upvote
     }
   }
 `;
@@ -4494,6 +4345,196 @@ export const listPrompts = /* GraphQL */ `
         }
         prompt
         nsfw
+        createdAt
+        updatedAt
+        count
+        upvote
+      }
+      nextToken
+    }
+  }
+`;
+export const getSavedPrompt = /* GraphQL */ `
+  query GetSavedPrompt($id: ID!) {
+    getSavedPrompt(id: $id) {
+      id
+      type
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        savedPrompts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      promptID
+      prompt {
+        id
+        type
+        stories {
+          nextToken
+        }
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        prompt
+        nsfw
+        createdAt
+        updatedAt
+        count
+        upvote
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSavedPrompts = /* GraphQL */ `
+  query ListSavedPrompts(
+    $filter: ModelSavedPromptFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSavedPrompts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+          count
+          upvote
+        }
         createdAt
         updatedAt
       }
@@ -4647,6 +4688,8 @@ export const getStoryTag = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       tag {
@@ -4886,6 +4929,9 @@ export const usersByNarratorActiveAt = /* GraphQL */ `
         prompts {
           nextToken
         }
+        savedPrompts {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4978,6 +5024,9 @@ export const usersByArtistActiveAt = /* GraphQL */ `
           nextToken
         }
         prompts {
+          nextToken
+        }
+        savedPrompts {
           nextToken
         }
         createdAt
@@ -5142,16 +5191,6 @@ export const pinnedStoryByDate = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
-          genre {
-            id
-            genre
-            icon
-            PrimaryColor
-            SecondaryColor
-            imageUri
-            createdAt
-            updatedAt
-          }
           hidden
           approved
           createdAt
@@ -5236,16 +5275,6 @@ export const finishedStoriesByDate = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
-          genre {
-            id
-            genre
-            icon
-            PrimaryColor
-            SecondaryColor
-            imageUri
-            createdAt
-            updatedAt
-          }
           hidden
           approved
           createdAt
@@ -5429,6 +5458,8 @@ export const storiesByDate = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       nextToken
@@ -5592,6 +5623,8 @@ export const storiesByUpdated = /* GraphQL */ `
           nsfw
           createdAt
           updatedAt
+          count
+          upvote
         }
       }
       nextToken
@@ -6147,16 +6180,6 @@ export const ratingsByDate = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
-          genre {
-            id
-            genre
-            icon
-            PrimaryColor
-            SecondaryColor
-            imageUri
-            createdAt
-            updatedAt
-          }
           hidden
           approved
           createdAt
@@ -6554,10 +6577,10 @@ export const promptsByDate = /* GraphQL */ `
         }
         prompt
         nsfw
-        count
-        upvote
         createdAt
         updatedAt
+        count
+        upvote
       }
       nextToken
     }
@@ -6617,8 +6640,76 @@ export const promptsByUpdated = /* GraphQL */ `
         }
         prompt
         nsfw
+        createdAt
+        updatedAt
         count
         upvote
+      }
+      nextToken
+    }
+  }
+`;
+export const savedPromptByDate = /* GraphQL */ `
+  query SavedPromptByDate(
+    $type: String!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSavedPromptFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    savedPromptByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+          count
+          upvote
+        }
         createdAt
         updatedAt
       }

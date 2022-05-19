@@ -38,6 +38,7 @@ import SharedAssets from '../screens/SharedAssets';
 import FindNarrator from '../screens/FindNarrator';
 import FindArtist from '../screens/FindArtist';
 import AllSharedAssets from '../screens/AllSharedAssets';
+import SavedPrompts from '../screens/SavedPrompts';
 
 import MyStories from '../screens/MyStories';
 import Terms from '../screens/Terms';
@@ -302,6 +303,11 @@ function HomeNavigator() {
       <HomeStack.Screen 
         name="NewComments" 
         component={NewComments} 
+        options={{ headerShown: false }} 
+      />
+      <StoriesStack.Screen 
+        name="SavedPrompts" 
+        component={SavedPrompts} 
         options={{ headerShown: false }} 
       />
       

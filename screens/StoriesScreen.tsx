@@ -207,7 +207,7 @@ const AudioStoryHome = ({navigation} : any) => {
                 <Text style={[styles.header, {marginHorizontal: 20}]}>
                   Recent Prompts
                 </Text>
-                <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome')}>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome', {promptID: null})}>
                   <Text style={{color: '#ffffffa5', marginTop: 0, marginHorizontal: 20}}>
                         See more
                     </Text> 

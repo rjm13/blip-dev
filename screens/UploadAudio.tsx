@@ -36,8 +36,12 @@ import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
 import { createStory, createStoryTag, createTag, updateUser, createGenreTag, createMessage  } from '../src/graphql/mutations';
 import { listTags, getUser, listGenres, listGenreTags } from '../src/graphql/queries';
 
+import { useRoute } from '@react-navigation/native';
 
 const UploadAudio = ({navigation} : any) => {   
+
+    const route = useRoute();
+    const {promptID} = route.params
 
     //set the current user state
     const [user, setUser] = useState()
@@ -222,7 +226,8 @@ const UploadAudio = ({navigation} : any) => {
                         nsfw: data.genreID === '1108a619-1c0e-4064-8fce-41f1f6262070' ? true : data.nsfw,
                         ratingAvg: 0,
                         ratingAmt: 0,
-                        type: 'Story'
+                        type: 'Story',
+                        promptID: promptID
                     }
             }))
 
@@ -325,7 +330,8 @@ const UploadAudio = ({navigation} : any) => {
                             nsfw: data.genreID === '1108a619-1c0e-4064-8fce-41f1f6262070' ? true : data.nsfw,
                             ratingAvg: 0,
                             ratingAmt: 0,
-                            type: 'Story'
+                            type: 'Story',
+                            promptID: promptID
                         }
                 }))
 
@@ -438,7 +444,8 @@ const UploadAudio = ({navigation} : any) => {
                             nsfw: data.genreID === '1108a619-1c0e-4064-8fce-41f1f6262070' ? true : data.nsfw,
                             ratingAvg: 0,
                             ratingAmt: 0,
-                            type: 'Story'
+                            type: 'Story',
+                            promptID: promptID
                         }
                 }))
 
@@ -538,7 +545,8 @@ const UploadAudio = ({navigation} : any) => {
                             nsfw: data.genreID === '1108a619-1c0e-4064-8fce-41f1f6262070' ? true : data.nsfw,
                             ratingAvg: 0,
                             ratingAmt: 0,
-                            type: 'Story'
+                            type: 'Story',
+                            promptID: promptID
                         }
                 }))
 

@@ -22,11 +22,16 @@ import { Modal, Portal, Provider } from 'react-native-paper';
 import StoryTile from '../components/StoryTile';
 import { AppContext } from '../AppContext';
 
-import { promptsByDate, getPrompt } from '../src/graphql/queries';
-import { createPrompt, updatePrompt } from '../src/graphql/mutations';
+import { promptsByDate, getPrompt, getUser } from '../src/graphql/queries';
+import { createPrompt, updatePrompt, createSavedPrompt, deleteSavedPrompt } from '../src/graphql/mutations';
 import {graphqlOperation, API, Auth} from 'aws-amplify';
 
+import { useRoute } from '@react-navigation/native';
+
 const PromptsHome = ({navigation} : any) => {
+
+    const route = useRoute();
+    const {promptID} = route.params
 
     const [prompts, setPrompts] = useState([])
 
@@ -68,6 +73,12 @@ const PromptsHome = ({navigation} : any) => {
 
     }, [didUpdate])
 
+    useEffect(() => {
+        if (promptID) {
+            show2Modal({id: promptID})
+        }
+    }, [promptID])
+
     const [viewPrompt, setViewPrompt] = useState()
 
     const containerStyle = {
@@ -88,7 +99,7 @@ const PromptsHome = ({navigation} : any) => {
         FetchPrompt(id)
         setVisible2(true);
     }
-    const hide2Modal = () => setVisible2(false);
+    const hide2Modal = () => {setVisible2(false); setIsSaved(false);}
 
     const [data, setData] = useState()
 
@@ -133,15 +144,41 @@ const PromptsHome = ({navigation} : any) => {
         count: 0,
         upvote: 0,
         createdAt: new Date(),
-
     })
+
+    const [saved, setIsSaved] = useState(false);
+
+    const [savedID, setSavedID] = useState()
+
       const [promptStories, setPromptStories] = useState();
 
+      const [isPub, setIsPub] = useState(false)
+
       const FetchPrompt = async ({id, upvoted} : any) => {
-          if (upvoted === true) {setIsUpVoted(true)}
+
+        if (upvoted === true) {setIsUpVoted(true)}
+
+        let userInfo = await Auth.currentAuthenticatedUser()
+
         let response = await API.graphql(graphqlOperation(
             getPrompt, {id: id }
         ))
+
+        let userResponse = await API.graphql(graphqlOperation(
+            getUser, {id: userInfo.attributes.sub }
+        ))
+
+        if (userResponse.data.getUser.isPublisher === true) {
+            setIsPub(true)
+        }
+
+        for (let i = 0; i < userResponse.data.getUser.savedPrompts.items.length; i++) {
+            if (userResponse.data.getUser.savedPrompts.items[i].prompt.id === id) {
+                setIsSaved(true);
+                setSavedID(userResponse.data.getUser.savedPrompts.items[i].id)
+            }
+        }
+
         setPromptData(response.data.getPrompt);
         setPromptStories(response.data.getPrompt.stories.items)
       }
@@ -265,7 +302,48 @@ const PromptsHome = ({navigation} : any) => {
         />
       );}
 
-      
+      const SavePrompt = async (id: any) => {
+
+        let userInfo = await Auth.currentAuthenticatedUser();
+
+        console.log(id.id)
+
+        let response = await API.graphql(graphqlOperation(
+            createSavedPrompt, {
+                input: {
+                    type: 'SavedPrompt',
+                    userID: userInfo.attributes.sub,
+                    promptID: id.id,
+                    createdAt: new Date()
+                }
+            }
+        ))
+        if (response) {
+            setIsSaved(true)
+            alert('Prompt saved!')
+        }
+      }
+
+      const UnSavePrompt = async (id: any) => {
+
+        let response = await API.graphql(graphqlOperation(
+            deleteSavedPrompt, {
+                input: {id: savedID
+                }
+            }
+        ))
+
+        setIsSaved(false);
+        setSavedID(null)
+
+        if (response) {
+            alert('Prompt removed from saved.')
+        }
+      }
+
+      const AddStory = ({id}: any) => {
+        navigation.navigate('UploadAudio', {promptID: id})
+      }
 
     return (
         <Provider>
@@ -305,35 +383,57 @@ const PromptsHome = ({navigation} : any) => {
                 </Modal>
 
                 <Modal visible={visible2} onDismiss={hide2Modal} contentContainerStyle={containerStyle}>
-                    <View style={{height: Dimensions.get('window').height - 80}}>
-                        <Text style={{paddingHorizontal: 10, paddingVertical: 20, borderRadius: 15, overflow: 'hidden', color: '#fff', textAlign: 'center', backgroundColor: color}}>
-                            {promptData.prompt}
-                        </Text>
-                        <View style={{marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                            <Text style={{color: '#fff', fontWeight: 'bold'}}>
-                                {promptData.count} {promptData.count === 1 ? 'Story' : 'Stories'}
-                            </Text>
-                            <TouchableWithoutFeedback onPress={UpVote}>
-                                <View style={{flexDirection: 'row'}}>
-                                    <FontAwesome 
-                                        name='thumbs-up'
-                                        color='#fff'
-                                        size={17}
-                                        style={{marginRight: 10}}
-                                    />
-                                    <Text style={{color: '#fff', fontWeight: 'bold'}}>
-                                        {isUpVoted === true ? promptData.upvote + 1 : promptData.upvote}
-                                    </Text>
-                                </View>
-                            </TouchableWithoutFeedback>
+                    <View style={{height: Dimensions.get('window').height - 220}}>
+                        <View style={{borderRadius: 15, overflow: 'hidden', backgroundColor: color}}>
+                           <Text style={{paddingHorizontal: 10, paddingVertical: 20, color: '#fff', textAlign: 'center'}}>
+                                {promptData.prompt}
+                            </Text> 
+                            <View style={{marginVertical: 10, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
+                                <Text style={{color: '#fff', fontWeight: 'bold'}}>
+                                    {promptData.count} {promptData.count === 1 ? 'Story' : 'Stories'}
+                                </Text>
+                                <TouchableWithoutFeedback onPress={UpVote}>
+                                    <View style={{flexDirection: 'row'}}>
+                                        <FontAwesome 
+                                            name='thumbs-up'
+                                            color='#fff'
+                                            size={17}
+                                            style={{marginRight: 10}}
+                                        />
+                                        <Text style={{color: '#fff', fontWeight: 'bold'}}>
+                                            {isUpVoted === true ? promptData.upvote + 1 : promptData.upvote}
+                                        </Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            </View>
                         </View>
-                        <View style={{height: '90%'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                                <TouchableWithoutFeedback onPress={() => {saved === false ? SavePrompt({id: promptData.id}) : UnSavePrompt({id: promptData.id})}}>
+                                    <Text style={{color: '#ffffffa5', padding: 10}}>
+                                        {saved === true ? 'Unsave' : 'Save'}
+                                    </Text>
+                                </TouchableWithoutFeedback>
+                       
+                            {isPub === true ? (
+                                <TouchableWithoutFeedback onPress={() => AddStory({id: promptData.id})}>
+                                    <Text style={{color: '#ffffffa5', padding: 10}}>
+                                        Add Story
+                                    </Text>
+                                </TouchableWithoutFeedback>
+                            ) : null
+
+                            }
+                                
+                            </View>
+                        
+                        <View style={{height: '90%', marginHorizontal: -20}}>
                             <FlatList 
                                 data={promptStories}
                                 keyExtractor={item => item.id}
                                 renderItem={renderStoryTile}
                                 maxToRenderPerBatch={10}
                                 showsVerticalScrollIndicator={false}
+                                ListFooterComponent={<View style={{height: 120}} />}
                                 
                             />
                         </View>
@@ -362,7 +462,7 @@ const PromptsHome = ({navigation} : any) => {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{marginTop: 20, }}>
+                <View style={{marginTop: 20}}>
                     <FlatList 
                         data={prompts}
                         renderItem={renderItem}

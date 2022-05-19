@@ -180,6 +180,21 @@ const ProfileScreen = ({navigation} : any) => {
                         </View>
                     </TouchableWithoutFeedback>
 
+                    <TouchableWithoutFeedback 
+                        onPress={ () => navigation.navigate( user?.isPublisher === true || user?.isNarrator === true || user?.isArtist === true ? 'Publisher' : 'BecomeSomething', {update: null})}
+                    >
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40, paddingVertical: 20}}>
+                            <Text style={{ color: '#fff', fontSize: 16}}>
+                                Publishing
+                            </Text>
+                            <FontAwesome5 
+                                name='chevron-right'
+                                color='#fff'
+                                size={15}
+                            />
+                        </View>
+                    </TouchableWithoutFeedback>
+
                     <TouchableWithoutFeedback onPress={ () => navigation.navigate('Inbox')}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 40, marginVertical: 20}}>
                             <View style={{flexDirection: 'row'}}>
@@ -227,12 +242,10 @@ const ProfileScreen = ({navigation} : any) => {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <TouchableWithoutFeedback 
-                        onPress={ () => navigation.navigate( user?.isPublisher === true || user?.isNarrator === true || user?.isArtist === true ? 'Publisher' : 'BecomeSomething', {update: null})}
-                    >
+                    <TouchableWithoutFeedback onPress={ () => navigation.navigate('SavedPrompts')}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40, paddingVertical: 20}}>
                             <Text style={{ color: '#fff', fontSize: 16}}>
-                                Publishing
+                                Saved Prompts
                             </Text>
                             <FontAwesome5 
                                 name='chevron-right'
@@ -241,6 +254,8 @@ const ProfileScreen = ({navigation} : any) => {
                             />
                         </View>
                     </TouchableWithoutFeedback>
+
+                    
 
                     <TouchableWithoutFeedback onPress={ () => navigation.navigate('NotificationSetting')}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 40, marginVertical: 20}}>
