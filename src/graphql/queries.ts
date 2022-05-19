@@ -32,6 +32,10 @@ export const getUser = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
+          genre {
+            id
+            genre
+          }
           hidden
           approved
           createdAt
@@ -62,6 +66,10 @@ export const getUser = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
+          genre {
+            id
+            genre
+          }
           hidden
           approved
           createdAt
@@ -80,7 +88,19 @@ export const getUser = /* GraphQL */ `
           time
           isSample
           userID
+          user {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           sharedUserID
+          sharedUser {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           updatedAt
         }
@@ -94,7 +114,19 @@ export const getUser = /* GraphQL */ `
           imageUri
           isSample
           userID
+          user {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           sharedUserID
+          sharedUser {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           updatedAt
         }
@@ -109,7 +141,19 @@ export const getUser = /* GraphQL */ `
           time
           isSample
           userID
+          user {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           sharedUserID
+          sharedUser {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           updatedAt
         }
@@ -123,7 +167,19 @@ export const getUser = /* GraphQL */ `
           imageUri
           isSample
           userID
+          user {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           sharedUserID
+          sharedUser {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           updatedAt
         }
@@ -150,6 +206,10 @@ export const getUser = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
+          genre {
+            id
+            genre
+          }
           hidden
           approved
           createdAt
@@ -173,7 +233,19 @@ export const getUser = /* GraphQL */ `
           id
           type
           followerID
+          follower {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           authorID
+          author {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           updatedAt
         }
@@ -184,7 +256,19 @@ export const getUser = /* GraphQL */ `
           id
           type
           followerID
+          follower {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           authorID
+          author {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           updatedAt
         }
@@ -196,6 +280,37 @@ export const getUser = /* GraphQL */ `
           type
           userID
           storyID
+          story {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          genre {
+            id
+            genre
+          }
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
           createdAt
           updatedAt
         }
@@ -206,6 +321,37 @@ export const getUser = /* GraphQL */ `
           id
           type
           storyID
+          story {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          genre {
+            id
+            genre
+          }
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
           userID
           rating
           nsfw
@@ -221,6 +367,37 @@ export const getUser = /* GraphQL */ `
           type
           userID
           storyID
+          story {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          genre {
+            id
+            genre
+          }
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
           createdAt
           nsfw
           genreID
@@ -245,7 +422,19 @@ export const getUser = /* GraphQL */ `
           subtitle
           content
           userID
+          user {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           otherUserID
+          otherUser {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           isReadbyUser
           isReadByOtherUser
@@ -264,7 +453,19 @@ export const getUser = /* GraphQL */ `
           subtitle
           content
           userID
+          user {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           otherUserID
+          otherUser {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+          }
           createdAt
           isReadbyUser
           isReadByOtherUser
@@ -1531,6 +1732,11 @@ export const getStory = /* GraphQL */ `
           storyID
           content
           userID
+          user {
+            id
+            name
+            imageUri
+          }
           createdAt
           approved
           updatedAt
@@ -1542,6 +1748,12 @@ export const getStory = /* GraphQL */ `
           id
           storyID
           tagID
+          tag {
+            id
+            type
+            tagName
+            nsfw
+          }
           createdAt
           updatedAt
         }
@@ -1810,6 +2022,14 @@ export const getGenre = /* GraphQL */ `
           id
           genreID
           tagID
+          tag {
+            tagName
+            id
+            nsfw
+            count
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
         }
@@ -3220,6 +3440,38 @@ export const getTag = /* GraphQL */ `
         items {
           id
           storyID
+          story {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          genre {
+            id
+            genre
+            PrimaryColor
+          }
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
           tagID
           createdAt
           updatedAt
@@ -5191,6 +5443,11 @@ export const pinnedStoryByDate = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
+          genre {
+            id
+            genre
+            PrimaryColor
+          }
           hidden
           approved
           createdAt
@@ -5275,6 +5532,12 @@ export const finishedStoriesByDate = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
+          genre {
+            id
+            genre
+            PrimaryColor
+            icon
+          }
           hidden
           approved
           createdAt
@@ -6180,6 +6443,11 @@ export const ratingsByDate = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
+          genre {
+            id
+            genre
+            PrimaryColor
+          }
           hidden
           approved
           createdAt
