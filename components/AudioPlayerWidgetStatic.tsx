@@ -8,7 +8,8 @@ import {
     Animated, 
     TouchableOpacity, 
     TouchableWithoutFeedback,
-    Platform
+    Platform,
+    SafeAreaView
 } from 'react-native';
 
 import { Audio } from 'expo-av';
@@ -407,7 +408,7 @@ const AddToHistory = async () => {
 
 
     return (
-
+        <SafeAreaView>
         <View>
             <Animated.View style={{height: animatedImageHeight, width: animatedImageWidth, position: 'absolute', bottom: Platform.OS === 'ios' ? 360 : 460,}}>
                 <ImageBackground
@@ -668,6 +669,7 @@ const AddToHistory = async () => {
             </LinearGradient>
         </Animated.View>
     </View>
+    </SafeAreaView>
     );
 }
 
