@@ -391,7 +391,20 @@ const PromptsHome = ({navigation} : any) => {
                 </Modal>
 
                 <Modal visible={visible2} onDismiss={hide2Modal} contentContainerStyle={containerStyle}>
-                    <View style={{height: Dimensions.get('window').height - 220}}>
+                    <View style={{height: Dimensions.get('window').height - 90}}>
+                        <TouchableOpacity onPress={hide2Modal}>
+                            <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 20, marginTop: 30}}>
+                                <FontAwesome 
+                                    name='close'
+                                    color='white'
+                                    size={17}
+                                />
+                                <Text style={{color: '#fff', marginLeft: 10}}>
+                                    Close
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        
                         <View style={{borderRadius: 15, overflow: 'hidden', backgroundColor: color}}>
                            <Text style={{paddingHorizontal: 10, paddingVertical: 20, color: '#fff', textAlign: 'center'}}>
                                 {promptData.prompt}
@@ -434,7 +447,7 @@ const PromptsHome = ({navigation} : any) => {
                                 
                             </View>
                         
-                        <View style={{height: '90%', marginHorizontal: -20}}>
+                        <View style={{height: '67%', marginHorizontal: -20}}>
                             <FlatList 
                                 data={promptStories}
                                 keyExtractor={item => item.id}
@@ -470,17 +483,23 @@ const PromptsHome = ({navigation} : any) => {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{marginTop: 20}}>
+                <View style={{height: '80%', marginTop: 20}}>
                     <FlatList 
                         data={prompts}
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
-                        scrollEnabled={false}
                         maxToRenderPerBatch={15}
                         showsVerticalScrollIndicator={false}
                         style={{marginBottom: 20}}
                         ListFooterComponent={
-                            <View style={{height: 120}}/>
+                            <View style={{height: 120, alignItems: 'center'}}>
+                                {/* <TouchableWithoutFeedback>
+                                    <Text style={{color: '#ffffffa5', paddingTop: 20}}>
+                                        See more
+                                    </Text>
+                                </TouchableWithoutFeedback> */}
+                                
+                            </View>
                         }
                     />
                 </View>

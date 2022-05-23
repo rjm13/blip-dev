@@ -411,6 +411,7 @@ const SavedPromptList = () => {
 const styles = StyleSheet.create({
     container: {
        width: Dimensions.get('window').width, 
+       height: '99%'
     },
     tile: {
         backgroundColor: '#363636a5',

@@ -44,16 +44,16 @@ const PromptCarousel = () => {
         fetchPrompts()
     }, [])
 
-    const Item = ({prompt, user, count, upvote, id} : any) => {
+    const Item = ({prompt, user, count, upvote, id, index } : any) => {
 
-        const colors = ['#3B4B80', '#007676a5', '#703232', '#706A32']
-        const color = colors[Math.floor(Math.random()*colors.length)]
+        const colors = ['#3B4B80', '#007676a5', '#703232', '#706A32', '#47274E']
+        //const color = colors[Math.floor(Math.random()*colors.length)]
 
         return (
             <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome', {promptID: id})}>
-                <View style={{width: Dimensions.get('window').width - 40, backgroundColor: color, borderRadius: 15, overflow: 'hidden', padding: 20}}>
+                <View style={{width: Dimensions.get('window').width - 40, backgroundColor: (index - 3) > colors.length ? colors[0] : colors[index - 3], borderRadius: 15, overflow: 'hidden', padding: 20}}>
                     <Text numberOfLines={5} style={{color: '#fff', marginBottom: 20}}>
-                        {prompt}
+                        {prompt}{index}
                     </Text>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                         <Text style={{color: '#fff', fontWeight: 'bold'}}>
@@ -77,7 +77,7 @@ const PromptCarousel = () => {
         )
     }
 
-    const renderItem = ({ item }: any) => {
+    const renderItem = ({ item, index }: any) => {
 
         let user = ''
 
@@ -87,13 +87,14 @@ const PromptCarousel = () => {
         
         return (
         <Item 
+        index={index}
             id={item.id}
           prompt={item?.prompt}
           user={user}
           nsfw={item.nsfw}
           createdAt={item.createdAt}
           count={item.count}
-          //color={item.color}
+          //color={color}
           upvote={item.upvote}
         />
       );}
@@ -105,7 +106,7 @@ const PromptCarousel = () => {
             <Carousel
               data={prompts}
               renderItem={renderItem}
-              extraData={true}
+              //extraData={true}
               sliderWidth={Dimensions.get('window').width}
               itemWidth={Dimensions.get('window').width-40}
               layout={'default'} 
