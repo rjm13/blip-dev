@@ -53,7 +53,7 @@ const PromptCarousel = () => {
             <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome', {promptID: id})}>
                 <View style={{width: Dimensions.get('window').width - 40, backgroundColor: (index - 3) > colors.length ? colors[0] : colors[index - 3], borderRadius: 15, overflow: 'hidden', padding: 20}}>
                     <Text numberOfLines={5} style={{color: '#fff', marginBottom: 20}}>
-                        {prompt}{index}
+                        {prompt}
                     </Text>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                         <Text style={{color: '#fff', fontWeight: 'bold'}}>
