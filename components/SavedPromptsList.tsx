@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { 
     View, 
     StyleSheet, 
@@ -7,10 +7,12 @@ import {
     Dimensions, 
     RefreshControl, 
     ActivityIndicator,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    TouchableOpacity
 } from 'react-native';
 
 import StoryTile from '../components/StoryTile';
+import { AppContext } from '../AppContext';
 
 import { Modal, Portal, Provider } from 'react-native-paper';
 
@@ -25,6 +27,9 @@ import {useNavigation} from '@react-navigation/native'
 
 
 const SavedPromptList = () => {
+
+    const { nsfwOn } = useContext(AppContext);
+    const { ADon } = useContext(AppContext);
 
     const navigation = useNavigation()
 
@@ -115,7 +120,13 @@ const SavedPromptList = () => {
       setPromptData(response.data.getPrompt);
 
       for (let i = 0; i < response.data.getPrompt.stories.items.length; i++) {
-         if (response.data.getPrompt.stories.items[i].approved === 'approved' && response.data.getPrompt.stories.items[i].hidden === false) {
+         if (
+            response.data.getPrompt.stories.items[i].approved === 'approved' && 
+            response.data.getPrompt.stories.items[i].hidden === false &&
+            response.data.getPrompt.stories.items[i].genreID !== (ADon === true ? '1108a619-1c0e-4064-8fce-41f1f6262070' : null) &&
+            response.data.getPrompt.stories.items[i].nsfw !== (nsfwOn === true ? true : null)
+
+             ) {
              prstories.push(response.data.getPrompt.stories.items[i])
          }
       }
@@ -163,7 +174,7 @@ const SavedPromptList = () => {
 
         return (
             <TouchableWithoutFeedback onPress={() => show2Modal({pid, upvoted: isUpVoted})}>
-                <View>
+                <View style={{marginBottom: 20, }}>
                     <View style={{alignSelf: 'center', marginVertical: 10, width: Dimensions.get('window').width - 40, backgroundColor: color, borderRadius: 15, overflow: 'hidden', padding: 20}}>
                         <Text numberOfLines={5} style={{color: '#fff', marginBottom: 20}}>
                             {prompt}
@@ -317,7 +328,19 @@ const SavedPromptList = () => {
         <Provider>
             <Portal>
             <Modal visible={visible2} onDismiss={hide2Modal} contentContainerStyle={containerStyle}>
-                    <View style={{height: Dimensions.get('window').height - 220}}>
+                    <View style={{height: Dimensions.get('window').height - 90}}>
+                    <TouchableOpacity onPress={hide2Modal}>
+                            <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 20, marginTop: 30}}>
+                                <FontAwesome 
+                                    name='close'
+                                    color='white'
+                                    size={17}
+                                />
+                                <Text style={{color: '#fff', marginLeft: 10}}>
+                                    Close
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
                         <View style={{borderRadius: 15, overflow: 'hidden', backgroundColor: color}}>
                            <Text style={{paddingHorizontal: 10, paddingVertical: 20, color: '#fff', textAlign: 'center'}}>
                                 {promptData.prompt}
