@@ -30,6 +30,9 @@ import { useRoute } from '@react-navigation/native';
 
 const PromptsHome = ({navigation} : any) => {
 
+    const { nsfwOn } = useContext(AppContext);
+    const { ADon } = useContext(AppContext);
+
     const route = useRoute();
     const {promptID} = route.params
 
@@ -184,7 +187,13 @@ const PromptsHome = ({navigation} : any) => {
         setPromptData(response.data.getPrompt);
 
         for (let i = 0; i < response.data.getPrompt.stories.items.length; i++) {
-            if (response.data.getPrompt.stories.items[i].approved === 'approved' && response.data.getPrompt.stories.items[i].hidden === false) {
+            if (
+                response.data.getPrompt.stories.items[i].approved === 'approved' && 
+                response.data.getPrompt.stories.items[i].hidden === false &&
+                response.data.getPrompt.stories.items[i].genreID !== (ADon === true ? '1108a619-1c0e-4064-8fce-41f1f6262070' : null) &&
+                response.data.getPrompt.stories.items[i].nsfw !== (nsfwOn === true ? true : null)
+
+                ) {
                 prstories.push(response.data.getPrompt.stories.items[i])
             }
          }

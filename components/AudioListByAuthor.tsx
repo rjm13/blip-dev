@@ -130,7 +130,7 @@ const AudioListByAuthor = ({user, status} : any) => {
                         if (response.data.getUser.narrated.items[i].hidden === false && 
                             response.data.getUser.narrated.items[i].approved === 'approved' &&
                             response.data.getUser.narrated.items[i].genreID !== (ADon === true ? '1108a619-1c0e-4064-8fce-41f1f6262070' : null) &&
-                            response.data.getUser.narrated.items[i].genreID !== (nsfwOn === true ? true : null)
+                            response.data.getUser.narrated.items[i].nsfw !== (nsfwOn === true ? true : null)
                             ) {
                             narrstories.push(response.data.getUser.narrated.items[i])
                         }
