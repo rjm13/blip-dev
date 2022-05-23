@@ -5,7 +5,6 @@ import {
     StyleSheet, 
     Dimensions, 
     ImageBackground, 
-    Animated, 
     TouchableOpacity, 
     TouchableWithoutFeedback,
     Platform,
@@ -16,6 +15,7 @@ import { Audio } from 'expo-av';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -26,7 +26,7 @@ import { deletePinnedStory, createFinishedStory, updateStory } from '../src/grap
 
 import { AppContext } from '../AppContext';
 import * as RootNavigation from '../navigation/RootNavigation';
-import ShareStory from '../components/functions/ShareStory';
+import ShareStory from './functions/ShareStory';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -52,8 +52,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const AudioPlayer  = () => {
 
-
-
 //get the global page state for the audio player
     const { isRootScreen } = useContext(AppContext);
 
@@ -62,106 +60,15 @@ const AudioPlayer  = () => {
     const { setStoryID } = useContext(AppContext);
 
 //minimize the player with animations
-    const [isExpanded, setIsExpanded] = useState(true);
-
-    const animation = useRef(new Animated.ValueXY({ x: 0, y: SCREEN_HEIGHT - 90 })).current;
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const onChangeHandler = () => {
         if (isExpanded) {
             setIsExpanded(false);
-            Animated.spring(animation.y, {
-                toValue: -SCREEN_HEIGHT + 120,
-                tension: 1,
-                //duration: 200,
-                useNativeDriver: false,
-            }).start();
         } else if (!isExpanded) {
             setIsExpanded(true);
-            Animated.spring(animation.y, {
-                toValue: SCREEN_HEIGHT - 90,
-                tension: 1,
-                //duration: 200,
-                useNativeDriver: false,
-            }).start();
         } 
     }
-
-    const animatedHeight = {
-        transform: animation.getTranslateTransform(),
-    };
-  
-    const animatedImageHeight = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [SCREEN_WIDTH/1.2, 0],
-        extrapolate: 'clamp',
-        });
-        
-    const animatedImageWidth = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [SCREEN_WIDTH, 0],
-        extrapolate: 'clamp',
-        });
-
-    const animatedSongTitleOpacity = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 500, SCREEN_HEIGHT - 90],
-        outputRange: [0, 0, 1],
-        extrapolate: 'clamp',
-    });
-
-    const animatedImageMarginLeft = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [SCREEN_WIDTH / 2 - 100, 10],
-        extrapolate: 'clamp',
-    });
-
-    const animatedHeaderHeightMinimized = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [SCREEN_HEIGHT, 0],
-        extrapolate: 'clamp',
-    });
-
-    const animatedButtonLeft = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [0, -80],
-        extrapolate: 'clamp',
-    });
-
-    const animatedButtonRight = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [0, -300],
-        extrapolate: 'clamp',
-    });
-
-    const animatedHeaderHeightSmall = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: [0, 60],
-        extrapolate: 'clamp',
-    });
-
-    const animatedBoxHeight = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        //outputRange: [SCREEN_HEIGHT - (Platform.OS === 'ios' ? 240 : 240), 60],
-        outputRange: [SCREEN_HEIGHT - 100, 60],
-        extrapolate: 'clamp',
-      });
-
-    const animatedBottom = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - (isRootScreen === true ? (Platform.OS === 'ios' ? 34 : 60 ) : (Platform.OS === 'ios' ? 60 : 90 ))],
-        outputRange: [-610, 690],
-        extrapolate: 'clamp',
-      });
-
-    const animatedSongDetailsOpacity = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 500, SCREEN_HEIGHT - 90],
-        outputRange: [1, 0.5, 0.5],
-        extrapolate: 'clamp',
-    });
-
-    const animatedBackgroundColor = animation.y.interpolate({
-        inputRange: [0, SCREEN_HEIGHT - 90],
-        outputRange: ['rgba(0,0,0,0.5)', 'white'],
-        extrapolate: 'clamp',
-    });
 
 //use storyID to retrieve Story from AWS
     const [Story, setStory] = useState(null);
@@ -409,149 +316,154 @@ const AddToHistory = async () => {
 
     return (
         <SafeAreaView>
-        <View>
-            <Animated.View style={{
-                height: animatedImageHeight, width: animatedImageWidth, position: 'absolute', 
-                bottom: Platform.OS === 'ios' ? 360 : 460,
+        <View style={{}}>
+            <View style={{
+                flex: 1,
+                height: isExpanded === true ? SCREEN_WIDTH*0.75 : 0, 
+                width: isExpanded === true ? SCREEN_WIDTH : 0, 
+                position: 'absolute', 
+                bottom: Platform.OS === 'android' ? SCREEN_HEIGHT + 30 : SCREEN_HEIGHT - getStatusBarHeight() + 20,
                 }}>
                 <ImageBackground
+                resizeMode='cover'
                     style={{
                         //flex: 1,
-                        //width: null,
-                        width: isExpanded === false ? Dimensions.get('window').width : 0,
-                        height: isExpanded === false ? (Dimensions.get('window').width*0.75) : 0,
-                        //height: null,
+                        width: isExpanded === false ? SCREEN_WIDTH : 0,
+                        height: isExpanded === false ? (SCREEN_WIDTH*0.75) : 0,
                         backgroundColor: '#363636',
+                        
                     }}
                     source={{uri: imageU}}
                 >
-                { isExpanded === false ? (
-                    <Animated.View style={{ flexDirection: 'row', marginTop: 40, justifyContent: 'space-between', marginHorizontal: 20}}>
-                        {Story.imageUri ? (null) : (
-                            <View style={{ position: 'absolute', left: Dimensions.get('window').width/2 - 40, top: 80, backgroundColor: 'transparent'}}>
-                                <FontAwesome5 
-                                    name={Story?.genre?.icon}
-                                    color='#ffffffa5'
-                                    size={50}
-                                />
-                            </View>
-                        )}
-                        
-                        <View>
-                           <TouchableOpacity onPress={onClose}>
-                                <Animated.View style={ [styles.button, {left: -20}]}>
-                                    <AntDesign 
-                                        name='close'
-                                        size={22}
-                                        color='#fff'
-                                    />
-                                </Animated.View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={onChangeHandler}>
-                                <Animated.View style={ [styles.button, {left: -20}]}>
-                                    <FontAwesome5 
-                                        name='chevron-down'
-                                        size={22}
-                                        color='#fff'
-                                    />
-                                </Animated.View>
-                            </TouchableOpacity> 
-                        </View>
-                        
-                        
-                        <View>
-                            
-                            <Animated.View style={ [styles.button, {right: -20}]}>
-                                <FontAwesome 
-                                    name='commenting-o'
-                                    size={22}
-                                    color='#fff'
-                                    onPress={() => {RootNavigation.navigate('StoryScreen', { storyID: storyID, path: 'commenting' });
-                                        onChangeHandler();}
-                                    }
-                                    style={{ }}
-                                />
-                            </Animated.View>
-                            
-                            <Animated.View style={ [styles.button, {right: -20}]}>
-                                <FontAwesome 
-                                    name='share'
-                                    size={22}
-                                    color='white'
-                                    onPress={() => ShareStory({id: Story?.id, title: Story?.title})}
-                                    style={{ }}
-                                />
-                            </Animated.View>
-                        </View>  
-                    </Animated.View>
-                ) : null } 
                 </ImageBackground>
-            </Animated.View>
+            </View>
 
-            <Animated.View
+            <View
                 style={[
-                    animatedHeight, {
+                    //animatedHeight, 
+                    {
                         position: 'absolute',
                         left: 0,
                         right: 0,
-                        bottom: animatedBottom,
-                        //zIndex: 10,
-                        height: animatedBoxHeight,
                         borderTopRightRadius: 15,
                         borderTopLeftRadius: 15,
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        bottom: isRootScreen === true ? 0 : 55 ,
+                        //zIndex: 10,
+                        height: isExpanded === false ? (Platform.OS === 'ios' ? SCREEN_HEIGHT  : SCREEN_HEIGHT ) : 60,
                     },
                 ]}>
                     <LinearGradient 
-                        colors={[isExpanded ? '#165C5C' : '#3B6980', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : 'transparent' ]}
-                        style={{ borderTopRightRadius: 15, borderTopLeftRadius: 15, flex: 1}}
-                        locations={[0.0, 0.2, 0.5, 0.73, 1.0]}
+                        colors={[isExpanded ? '#165C5C' : '#3B6980', isExpanded ? '#165C5C' : '#0E3F3F', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : '#000', isExpanded ? '#165C5C' : 'transparent' ]}
+                        style={{ flex: 1}}
+                        locations={[0.0, 0.2, 0.4, 0.65, 0.9]}
                         start={{ x: 0, y: 1 }}
                         end={{ x: 0, y: 0 }}
                     >
-                        <Animated.View style={{ height: animatedHeaderHeightSmall, flexDirection: 'row', alignItems: 'center', marginTop: isExpanded ? 0 : (Platform.OS === 'ios' ? 80 : 160)}}>
+                        <View style={{ height: isExpanded === false ? 0 : 60, flexDirection: 'row', alignItems: 'center', 
+                            //marginTop: isExpanded ? 0 : (Platform.OS === 'ios' ? 80 : 160)
+                        }}>
                             { isExpanded === true ? (
                                 <TouchableWithoutFeedback onPress={onChangeHandler}>
                                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
                                     
-                                        <Animated.Text
+                                        <Text
                                             numberOfLines={1}
                                             style={{
-                                                opacity: animatedSongTitleOpacity,
+                                                opacity: isExpanded ? 1 : 0,
                                                 fontSize: 18,
                                                 paddingLeft: 20,
                                                 color: '#fff',
                                                 width: '75%'
                                         }}>
                                             {Story?.title}
-                                        </Animated.Text>
+                                        </Text>
                                     
                                         <TouchableOpacity onPress={PlayPause}>
-                                            <Animated.View style={{opacity: animatedSongTitleOpacity, }}>
+                                            <View style={{opacity: isExpanded ? 1 : 0, }}>
                                                 <FontAwesome5 
                                                     name={isPlaying === true ? 'pause' : 'play'}
                                                     color='#ffffffCC'
                                                     size={20}
                                                     style={{ paddingHorizontal: 40,}}
                                                 />
-                                        </Animated.View>
+                                        </View>
                                         </TouchableOpacity>
                                         
                                     </View> 
                                 </TouchableWithoutFeedback>
                             ) : null } 
-                        </Animated.View>
+                        </View>
                         
     {/* Expanded View elements */}
-                <Animated.View
+                <View
                     style={{
-                        height: animatedHeaderHeightMinimized,
-                        opacity: animatedSongDetailsOpacity,
+                        marginTop: 0, 
+                        opacity: 1,
+                        justifyContent:'flex-end',
                     }}>
                     { isExpanded === false ? (
-                        <View style={{ justifyContent: 'space-between', height: '50%'}}>
+                        <View style={{ justifyContent: 'space-around', marginBottom: 50, height: '100%', backgroundColor: 'transparent', paddingTop: 60}}>
+                            
                             <View>
+                                <View>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, paddingBottom: 100, marginTop: Platform.OS === 'android' ? -20 : 0}}>
+                                    {Story.imageUri ? (null) : (
+                                        <View style={{ position: 'absolute', left: Dimensions.get('window').width/2 - 40, top: 80, backgroundColor: 'transparent'}}>
+                                            <FontAwesome5 
+                                                name={Story?.genre?.icon}
+                                                color='#ffffffa5'
+                                                size={50}
+                                            />
+                                        </View>
+                                    )}
+                                        <View>
+                                            <TouchableOpacity onPress={onClose}>
+                                                <View style={ [styles.button, {left: -20}]}>
+                                                    <AntDesign 
+                                                        name='close'
+                                                        size={22}
+                                                        color='#fff'
+                                                    />
+                                                </View>
+                                            </TouchableOpacity>
+
+                                            <TouchableOpacity onPress={onChangeHandler}>
+                                                <View style={ [styles.button, {left: -20}]}>
+                                                    <FontAwesome5 
+                                                        name='chevron-down'
+                                                        size={22}
+                                                        color='#fff'
+                                                    />
+                                                </View>
+                                            </TouchableOpacity> 
+                                        </View>
+                                        <View>
+                                            <View style={ [styles.button, {right: -20}]}>
+                                                <FontAwesome 
+                                                    name='commenting-o'
+                                                    size={22}
+                                                    color='#fff'
+                                                    onPress={() => {RootNavigation.navigate('StoryScreen', { storyID: storyID, path: 'commenting' });
+                                                        onChangeHandler();}
+                                                    }
+                                                    style={{ }}
+                                                />
+                                            </View>
+                            
+                                            <View style={ [styles.button, {right: -20}]}>
+                                                <FontAwesome 
+                                                    name='share'
+                                                    size={22}
+                                                    color='white'
+                                                    onPress={() => ShareStory({id: Story?.id, title: Story?.title})}
+                                                    style={{ }}
+                                                />
+                                            </View>
+                                        </View>  
+                                    </View>
+                                </View>
+
                                 <TouchableWithoutFeedback 
                                     onPress={
                                         () => {RootNavigation.navigate('StoryScreen', { storyID: storyID });
@@ -619,7 +531,7 @@ const AddToHistory = async () => {
                                             </View>
                                         </View>
                                     </View>
-                                    {Platform.OS === 'android' ? (
+                                    {Platform.OS === 'android' || 'ios' ? (
                                         <View style={{ height: 110, marginTop: 20, marginHorizontal: -20 }}>
                                         <Text style={[styles.highlight, {textAlign: 'center'}]}>
                                             {Story?.summary}
@@ -641,38 +553,38 @@ const AddToHistory = async () => {
                                     </View>
                                 </TouchableOpacity>
                                 
+                                
+                                    <View style={{ marginTop: 20, width: '90%', alignSelf: 'center', flexDirection: 'row', justifyContent: 'space-between',}}>
+                                        <Text style={{ fontSize: 18, marginBottom: 5, textAlign: 'center', color: 'white'}}>
+                                            {millisToMinutesAndSeconds()}
+                                        </Text>
+                                        <Text style={{ fontSize: 18, marginBottom: 5, textAlign: 'center', color: 'white'}}>
+                                            {convertToTime()}
+                                        </Text>
+                                    </View>
 
-                                <View style={{ marginTop: 20, width: '90%', alignSelf: 'center', flexDirection: 'row', justifyContent: 'space-between',}}>
-                                    <Text style={{ fontSize: 18, marginBottom: 5, textAlign: 'center', color: 'white'}}>
-                                        {millisToMinutesAndSeconds()}
-                                    </Text>
-                                    <Text style={{ fontSize: 18, marginBottom: 5, textAlign: 'center', color: 'white'}}>
-                                        {convertToTime()}
-                                    </Text>
-                                </View>
+                                    <View style={{ alignItems: 'center', marginTop: Platform.OS === 'ios' ? 20 : 0}}>
+                                        <Slider
+                                            style={{width: 320, height: 10}}
+                                            minimumTrackTintColor="cyan"
+                                            maximumTrackTintColor="#ffffffa5"
+                                            thumbTintColor='#fff'
+                                            //tapToSeek={true}
+                                            value={position}
+                                            step={1000}
 
-                                <View style={{ alignItems: 'center', marginTop: Platform.OS === 'ios' ? 20 : 0}}>
-                                    <Slider
-                                        style={{width: 320, height: 10}}
-                                        minimumTrackTintColor="cyan"
-                                        maximumTrackTintColor="#ffffffa5"
-                                        thumbTintColor='#fff'
-                                        //tapToSeek={true}
-                                        value={position}
-                                        step={1000}
-
-                                        minimumValue={0}
-                                        maximumValue={slideLength} //function set to the length of the audio file
-                                        onValueChange={SetPosition} //function: when slider changes, slider value = SetPosition
-                                        onSlidingComplete={StoryPosition}
-                                    />
-                                </View>
+                                            minimumValue={0}
+                                            maximumValue={slideLength} //function set to the length of the audio file
+                                            onValueChange={SetPosition} //function: when slider changes, slider value = SetPosition
+                                            onSlidingComplete={StoryPosition}
+                                        />
+                                    </View>
                             </View>
                         </View>
                     ) : null } 
-                </Animated.View>
+                </View>
             </LinearGradient>
-        </Animated.View>
+        </View>
     </View>
     </SafeAreaView>
     );

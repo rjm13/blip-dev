@@ -18,6 +18,9 @@ Amplify.configure(config);
 import { AppContext } from './AppContext';
 
 import AudioPlayerWidgetStatic from './components/AudioPlayerWidgetStatic';
+import AudioPlayerWidget from './components/AudioPlayerWidget';
+
+
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -157,7 +160,7 @@ export default function App() {
         }}>
             <Navigation colorScheme='dark'/>
             <StatusBar style='light' backgroundColor='#0000004D'/>
-            <AudioPlayerWidgetStatic />
+            <AudioPlayerWidget />
           </AppContext.Provider>
       </SafeAreaProvider>
 
