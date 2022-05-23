@@ -443,7 +443,7 @@ const Publisher = ({navigation} : any) => {
 
                     {isPublisher === true ? (
                         <View>
-                            <TouchableWithoutFeedback onPress={() => {navigation.navigate('UploadAudio')}}>
+                            <TouchableWithoutFeedback onPress={() => {navigation.navigate('UploadAudio', {promptID: null})}}>
                                 <View style={[styles.button, {backgroundColor: 'cyan'}]}>
                                     <Text style={styles.buttontext}>
                                         Publish a Story
