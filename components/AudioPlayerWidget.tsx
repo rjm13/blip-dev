@@ -348,7 +348,7 @@ const AddToHistory = async () => {
                         borderTopRightRadius: 15,
                         borderTopLeftRadius: 15,
                         overflow: 'hidden',
-                        bottom: isRootScreen === true ? 0 : 55 ,
+                        bottom: isRootScreen === true || isExpanded === false ? 0 : 55 ,
                         //zIndex: 10,
                         height: isExpanded === false ? (Platform.OS === 'ios' ? SCREEN_HEIGHT  : SCREEN_HEIGHT ) : 60,
                     },
