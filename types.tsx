@@ -64,6 +64,7 @@ export type TabOneParamList = {
   FlaggedStories: undefined;
   NewComments: undefined;
   SavedPrompts: undefined;
+  InProgress: undefined;
 
 };
 

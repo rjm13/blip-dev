@@ -286,6 +286,7 @@ export const onCreateUser = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
         nextToken
       }
@@ -297,6 +298,18 @@ export const onCreateUser = /* GraphQL */ `
           promptID
           createdAt
           updatedAt
+        }
+        nextToken
+      }
+      inProgressStories {
+        items {
+          id
+          type
+          userID
+          storyID
+          createdAt
+          updatedAt
+          time
         }
         nextToken
       }
@@ -589,6 +602,7 @@ export const onUpdateUser = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
         nextToken
       }
@@ -600,6 +614,18 @@ export const onUpdateUser = /* GraphQL */ `
           promptID
           createdAt
           updatedAt
+        }
+        nextToken
+      }
+      inProgressStories {
+        items {
+          id
+          type
+          userID
+          storyID
+          createdAt
+          updatedAt
+          time
         }
         nextToken
       }
@@ -892,6 +918,7 @@ export const onDeleteUser = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
         nextToken
       }
@@ -903,6 +930,18 @@ export const onDeleteUser = /* GraphQL */ `
           promptID
           createdAt
           updatedAt
+        }
+        nextToken
+      }
+      inProgressStories {
+        items {
+          id
+          type
+          userID
+          storyID
+          createdAt
+          updatedAt
+          time
         }
         nextToken
       }
@@ -991,6 +1030,9 @@ export const onCreateFollowingConn = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1065,6 +1107,9 @@ export const onCreateFollowingConn = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -1155,6 +1200,9 @@ export const onUpdateFollowingConn = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1229,6 +1277,9 @@ export const onUpdateFollowingConn = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -1319,6 +1370,9 @@ export const onDeleteFollowingConn = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1393,6 +1447,9 @@ export const onDeleteFollowingConn = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -1482,6 +1539,9 @@ export const onCreatePinnedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1628,6 +1688,7 @@ export const onCreatePinnedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -1714,6 +1775,9 @@ export const onUpdatePinnedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1860,6 +1924,7 @@ export const onUpdatePinnedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -1946,6 +2011,9 @@ export const onDeletePinnedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2092,6 +2160,7 @@ export const onDeletePinnedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -2178,6 +2247,9 @@ export const onCreateFinishedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2324,6 +2396,7 @@ export const onCreateFinishedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -2425,6 +2498,9 @@ export const onUpdateFinishedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2571,6 +2647,7 @@ export const onUpdateFinishedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -2672,6 +2749,9 @@ export const onDeleteFinishedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2818,6 +2898,7 @@ export const onDeleteFinishedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -2921,6 +3002,9 @@ export const onCreateStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3001,6 +3085,9 @@ export const onCreateStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3077,6 +3164,9 @@ export const onCreateStory = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -3200,6 +3290,7 @@ export const onCreateStory = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
     }
   }
@@ -3285,6 +3376,9 @@ export const onUpdateStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3365,6 +3459,9 @@ export const onUpdateStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3441,6 +3538,9 @@ export const onUpdateStory = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -3564,6 +3664,7 @@ export const onUpdateStory = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
     }
   }
@@ -3649,6 +3750,9 @@ export const onDeleteStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3729,6 +3833,9 @@ export const onDeleteStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -3805,6 +3912,9 @@ export const onDeleteStory = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -3928,6 +4038,7 @@ export const onDeleteStory = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
     }
   }
@@ -4085,6 +4196,9 @@ export const onCreateImageAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4160,6 +4274,9 @@ export const onCreateImageAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -4252,6 +4369,9 @@ export const onUpdateImageAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4327,6 +4447,9 @@ export const onUpdateImageAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -4419,6 +4542,9 @@ export const onDeleteImageAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4494,6 +4620,9 @@ export const onDeleteImageAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -4585,6 +4714,9 @@ export const onCreateDocumentAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4661,6 +4793,9 @@ export const onCreateDocumentAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -4751,6 +4886,9 @@ export const onUpdateDocumentAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4827,6 +4965,9 @@ export const onUpdateDocumentAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -4917,6 +5058,9 @@ export const onDeleteDocumentAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4993,6 +5137,9 @@ export const onDeleteDocumentAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -5085,6 +5232,9 @@ export const onCreateAudioAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -5161,6 +5311,9 @@ export const onCreateAudioAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -5253,6 +5406,9 @@ export const onUpdateAudioAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -5329,6 +5485,9 @@ export const onUpdateAudioAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -5421,6 +5580,9 @@ export const onDeleteAudioAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -5497,6 +5659,9 @@ export const onDeleteAudioAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -5655,6 +5820,7 @@ export const onCreateFlag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       flagTypes
@@ -5729,6 +5895,9 @@ export const onCreateFlag = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -5889,6 +6058,7 @@ export const onUpdateFlag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       flagTypes
@@ -5963,6 +6133,9 @@ export const onUpdateFlag = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -6123,6 +6296,7 @@ export const onDeleteFlag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       flagTypes
@@ -6197,6 +6371,9 @@ export const onDeleteFlag = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -6357,6 +6534,7 @@ export const onCreateComment = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       content
@@ -6431,6 +6609,9 @@ export const onCreateComment = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -6591,6 +6772,7 @@ export const onUpdateComment = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       content
@@ -6665,6 +6847,9 @@ export const onUpdateComment = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -6825,6 +7010,7 @@ export const onDeleteComment = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       content
@@ -6899,6 +7085,9 @@ export const onDeleteComment = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -7158,6 +7347,7 @@ export const onCreateRating = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       userID
@@ -7232,6 +7422,9 @@ export const onCreateRating = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -7406,6 +7599,7 @@ export const onUpdateRating = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       userID
@@ -7480,6 +7674,9 @@ export const onUpdateRating = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -7654,6 +7851,7 @@ export const onDeleteRating = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       userID
@@ -7728,6 +7926,9 @@ export const onDeleteRating = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -7835,6 +8036,9 @@ export const onCreateMessage = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -7911,6 +8115,9 @@ export const onCreateMessage = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -8086,6 +8293,9 @@ export const onUpdateMessage = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -8162,6 +8372,9 @@ export const onUpdateMessage = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -8337,6 +8550,9 @@ export const onDeleteMessage = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -8413,6 +8629,9 @@ export const onDeleteMessage = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -8674,6 +8893,9 @@ export const onCreateReply = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -8847,6 +9069,9 @@ export const onUpdateReply = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -9024,6 +9249,9 @@ export const onDeleteReply = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -9141,6 +9369,9 @@ export const onCreatePrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -9150,6 +9381,7 @@ export const onCreatePrompt = /* GraphQL */ `
       updatedAt
       count
       upvote
+      approved
     }
   }
 `;
@@ -9262,6 +9494,9 @@ export const onUpdatePrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -9271,6 +9506,7 @@ export const onUpdatePrompt = /* GraphQL */ `
       updatedAt
       count
       upvote
+      approved
     }
   }
 `;
@@ -9383,6 +9619,9 @@ export const onDeletePrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -9392,6 +9631,7 @@ export const onDeletePrompt = /* GraphQL */ `
       updatedAt
       count
       upvote
+      approved
     }
   }
 `;
@@ -9474,6 +9714,9 @@ export const onCreateSavedPrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -9519,6 +9762,7 @@ export const onCreateSavedPrompt = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
       createdAt
       updatedAt
@@ -9604,6 +9848,9 @@ export const onUpdateSavedPrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -9649,6 +9896,7 @@ export const onUpdateSavedPrompt = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
       createdAt
       updatedAt
@@ -9734,6 +9982,9 @@ export const onDeleteSavedPrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -9779,9 +10030,721 @@ export const onDeleteSavedPrompt = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateInProgressStory = /* GraphQL */ `
+  subscription OnCreateInProgressStory {
+    onCreateInProgressStory {
+      id
+      type
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        savedPrompts {
+          nextToken
+        }
+        inProgressStories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      storyID
+      story {
+        id
+        type
+        title
+        imageUri
+        audioUri
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        userID
+        author
+        authorID
+        narrator
+        narratorUser {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        narratorID
+        artistName
+        artist {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        artistID
+        time
+        summary
+        description
+        nsfw
+        comments {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        ratingAvg
+        ratingAmt
+        rated {
+          nextToken
+        }
+        genreID
+        genre {
+          id
+          genre
+          icon
+          PrimaryColor
+          SecondaryColor
+          imageUri
+          createdAt
+          updatedAt
+        }
+        hidden
+        approved
+        createdAt
+        updatedAt
+        numListens
+        flag {
+          nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+          count
+          upvote
+          approved
+        }
+      }
+      createdAt
+      updatedAt
+      time
+    }
+  }
+`;
+export const onUpdateInProgressStory = /* GraphQL */ `
+  subscription OnUpdateInProgressStory {
+    onUpdateInProgressStory {
+      id
+      type
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        savedPrompts {
+          nextToken
+        }
+        inProgressStories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      storyID
+      story {
+        id
+        type
+        title
+        imageUri
+        audioUri
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        userID
+        author
+        authorID
+        narrator
+        narratorUser {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        narratorID
+        artistName
+        artist {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        artistID
+        time
+        summary
+        description
+        nsfw
+        comments {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        ratingAvg
+        ratingAmt
+        rated {
+          nextToken
+        }
+        genreID
+        genre {
+          id
+          genre
+          icon
+          PrimaryColor
+          SecondaryColor
+          imageUri
+          createdAt
+          updatedAt
+        }
+        hidden
+        approved
+        createdAt
+        updatedAt
+        numListens
+        flag {
+          nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+          count
+          upvote
+          approved
+        }
+      }
+      createdAt
+      updatedAt
+      time
+    }
+  }
+`;
+export const onDeleteInProgressStory = /* GraphQL */ `
+  subscription OnDeleteInProgressStory {
+    onDeleteInProgressStory {
+      id
+      type
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        savedPrompts {
+          nextToken
+        }
+        inProgressStories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      storyID
+      story {
+        id
+        type
+        title
+        imageUri
+        audioUri
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        userID
+        author
+        authorID
+        narrator
+        narratorUser {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        narratorID
+        artistName
+        artist {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        artistID
+        time
+        summary
+        description
+        nsfw
+        comments {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        ratingAvg
+        ratingAmt
+        rated {
+          nextToken
+        }
+        genreID
+        genre {
+          id
+          genre
+          icon
+          PrimaryColor
+          SecondaryColor
+          imageUri
+          createdAt
+          updatedAt
+        }
+        hidden
+        approved
+        createdAt
+        updatedAt
+        numListens
+        flag {
+          nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+          count
+          upvote
+          approved
+        }
+      }
+      createdAt
+      updatedAt
+      time
     }
   }
 `;
@@ -9933,6 +10896,7 @@ export const onCreateStoryTag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       tag {
@@ -10103,6 +11067,7 @@ export const onUpdateStoryTag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       tag {
@@ -10273,6 +11238,7 @@ export const onDeleteStoryTag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       tag {

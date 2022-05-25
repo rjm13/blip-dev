@@ -39,6 +39,7 @@ import FindNarrator from '../screens/FindNarrator';
 import FindArtist from '../screens/FindArtist';
 import AllSharedAssets from '../screens/AllSharedAssets';
 import SavedPrompts from '../screens/SavedPrompts';
+import InProgress from '../screens/InProgress';
 
 import MyStories from '../screens/MyStories';
 import Terms from '../screens/Terms';
@@ -305,9 +306,14 @@ function HomeNavigator() {
         component={NewComments} 
         options={{ headerShown: false }} 
       />
-      <StoriesStack.Screen 
+      <HomeStack.Screen 
         name="SavedPrompts" 
         component={SavedPrompts} 
+        options={{ headerShown: false }} 
+      />
+       <HomeStack.Screen 
+        name="InProgress" 
+        component={InProgress} 
         options={{ headerShown: false }} 
       />
       

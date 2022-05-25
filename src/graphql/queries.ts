@@ -91,15 +91,15 @@ export const getUser = /* GraphQL */ `
           user {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           sharedUserID
           sharedUser {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           updatedAt
@@ -117,15 +117,15 @@ export const getUser = /* GraphQL */ `
           user {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           sharedUserID
           sharedUser {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           updatedAt
@@ -144,15 +144,15 @@ export const getUser = /* GraphQL */ `
           user {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           sharedUserID
           sharedUser {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           updatedAt
@@ -170,15 +170,15 @@ export const getUser = /* GraphQL */ `
           user {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           sharedUserID
           sharedUser {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           updatedAt
@@ -236,15 +236,15 @@ export const getUser = /* GraphQL */ `
           follower {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           authorID
           author {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           updatedAt
@@ -259,15 +259,15 @@ export const getUser = /* GraphQL */ `
           follower {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           authorID
           author {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           updatedAt
@@ -425,15 +425,15 @@ export const getUser = /* GraphQL */ `
           user {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           otherUserID
           otherUser {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           isReadbyUser
@@ -456,15 +456,15 @@ export const getUser = /* GraphQL */ `
           user {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           otherUserID
           otherUser {
             id
             pseudonym
-            artistPseudo
             narratorPseudo
+            artistPseudo
           }
           createdAt
           isReadbyUser
@@ -487,6 +487,7 @@ export const getUser = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
         nextToken
       }
@@ -497,14 +498,60 @@ export const getUser = /* GraphQL */ `
           userID
           promptID
           prompt {
+            approved
             id
-            prompt
-            createdAt
             count
             upvote
+            createdAt
+            updatedAt
+            nsfw
+            prompt
           }
           createdAt
           updatedAt
+        }
+        nextToken
+      }
+      inProgressStories {
+        items {
+          id
+          type
+          userID
+          storyID
+          story {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          genre {
+            id
+            genre
+          }
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
+          createdAt
+          updatedAt
+          time
         }
         nextToken
       }
@@ -591,6 +638,9 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -680,6 +730,9 @@ export const getFollowingConn = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -754,6 +807,9 @@ export const getFollowingConn = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -918,6 +974,9 @@ export const getPinnedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1064,6 +1123,7 @@ export const getPinnedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -1131,6 +1191,10 @@ export const listPinnedStories = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
+          genre {
+            id
+            genre
+          }
           hidden
           approved
           createdAt
@@ -1224,6 +1288,9 @@ export const getFinishedStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1370,6 +1437,7 @@ export const getFinishedStory = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       createdAt
@@ -1559,6 +1627,9 @@ export const getStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1639,6 +1710,9 @@ export const getStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1717,6 +1791,9 @@ export const getStory = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -1734,8 +1811,9 @@ export const getStory = /* GraphQL */ `
           userID
           user {
             id
-            name
-            imageUri
+            pseudonym
+            narratorPseudo
+            artistPseudo
           }
           createdAt
           approved
@@ -1750,9 +1828,10 @@ export const getStory = /* GraphQL */ `
           tagID
           tag {
             id
-            type
             tagName
             nsfw
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -1811,8 +1890,6 @@ export const getStory = /* GraphQL */ `
       prompt {
         id
         type
-        count
-        upvote
         stories {
           nextToken
         }
@@ -1851,6 +1928,7 @@ export const getStory = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
     }
   }
@@ -2004,6 +2082,7 @@ export const listStories = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       nextToken
@@ -2025,12 +2104,12 @@ export const getGenre = /* GraphQL */ `
           genreID
           tagID
           tag {
-            tagName
             id
+            tagName
             nsfw
-            count
             createdAt
             updatedAt
+            count
           }
           createdAt
           updatedAt
@@ -2147,6 +2226,9 @@ export const getImageAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2222,6 +2304,9 @@ export const getImageAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -2391,6 +2476,9 @@ export const getDocumentAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2467,6 +2555,9 @@ export const getDocumentAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -2636,6 +2727,9 @@ export const getAudioAsset = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -2712,6 +2806,9 @@ export const getAudioAsset = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -2949,6 +3046,7 @@ export const getFlag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       flagTypes
@@ -3023,6 +3121,9 @@ export const getFlag = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -3259,6 +3360,7 @@ export const getComment = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       content
@@ -3333,6 +3435,9 @@ export const getComment = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -3465,7 +3570,12 @@ export const getTag = /* GraphQL */ `
           genre {
             id
             genre
+            icon
             PrimaryColor
+            SecondaryColor
+            imageUri
+            createdAt
+            updatedAt
           }
           hidden
           approved
@@ -3660,6 +3770,7 @@ export const getRating = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       userID
@@ -3734,6 +3845,9 @@ export const getRating = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -3928,6 +4042,9 @@ export const getMessage = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4004,6 +4121,9 @@ export const getMessage = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -4361,6 +4481,9 @@ export const getReply = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4547,6 +4670,9 @@ export const getPrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4556,6 +4682,7 @@ export const getPrompt = /* GraphQL */ `
       updatedAt
       count
       upvote
+      approved
     }
   }
 `;
@@ -4607,6 +4734,7 @@ export const listPrompts = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
       nextToken
     }
@@ -4691,6 +4819,9 @@ export const getSavedPrompt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -4736,6 +4867,7 @@ export const getSavedPrompt = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
       createdAt
       updatedAt
@@ -4792,9 +4924,326 @@ export const listSavedPrompts = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getInProgressStory = /* GraphQL */ `
+  query GetInProgressStory($id: ID!) {
+    getInProgressStory(id: $id) {
+      id
+      type
+      userID
+      user {
+        type
+        id
+        name
+        email
+        imageUri
+        bio
+        authored {
+          nextToken
+        }
+        narrated {
+          nextToken
+        }
+        sharedAssets {
+          nextToken
+        }
+        sharedImageAssets {
+          nextToken
+        }
+        sharedWithAssets {
+          nextToken
+        }
+        sharedWithImageAssets {
+          nextToken
+        }
+        art {
+          nextToken
+        }
+        numAuthored
+        pseudonym
+        narratorPseudo
+        artistPseudo
+        birthdate
+        isPublisher
+        isNarrator
+        isArtist
+        topthree
+        following {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+        Pinned {
+          nextToken
+        }
+        Rated {
+          nextToken
+        }
+        Finished {
+          nextToken
+        }
+        sampleUri
+        narratorText
+        accents
+        voice
+        artistText
+        artStyles
+        narratorActiveAt
+        artistActiveAt
+        plan
+        messageSent {
+          nextToken
+        }
+        messageRec {
+          nextToken
+        }
+        prompts {
+          nextToken
+        }
+        savedPrompts {
+          nextToken
+        }
+        inProgressStories {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      storyID
+      story {
+        id
+        type
+        title
+        imageUri
+        audioUri
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        userID
+        author
+        authorID
+        narrator
+        narratorUser {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        narratorID
+        artistName
+        artist {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        artistID
+        time
+        summary
+        description
+        nsfw
+        comments {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        ratingAvg
+        ratingAmt
+        rated {
+          nextToken
+        }
+        genreID
+        genre {
+          id
+          genre
+          icon
+          PrimaryColor
+          SecondaryColor
+          imageUri
+          createdAt
+          updatedAt
+        }
+        hidden
+        approved
+        createdAt
+        updatedAt
+        numListens
+        flag {
+          nextToken
+        }
+        promptID
+        prompt {
+          id
+          type
+          userID
+          prompt
+          nsfw
+          createdAt
+          updatedAt
+          count
+          upvote
+          approved
+        }
+      }
+      createdAt
+      updatedAt
+      time
+    }
+  }
+`;
+export const listInProgressStories = /* GraphQL */ `
+  query ListInProgressStories(
+    $filter: ModelInProgressStoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInProgressStories(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        storyID
+        story {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
+        createdAt
+        updatedAt
+        time
       }
       nextToken
     }
@@ -4948,6 +5397,7 @@ export const getStoryTag = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       tag {
@@ -5190,6 +5640,9 @@ export const usersByNarratorActiveAt = /* GraphQL */ `
         savedPrompts {
           nextToken
         }
+        inProgressStories {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -5285,6 +5738,9 @@ export const usersByArtistActiveAt = /* GraphQL */ `
           nextToken
         }
         savedPrompts {
+          nextToken
+        }
+        inProgressStories {
           nextToken
         }
         createdAt
@@ -5453,6 +5909,7 @@ export const pinnedStoryByDate = /* GraphQL */ `
             id
             genre
             PrimaryColor
+            icon
           }
           hidden
           approved
@@ -5541,8 +5998,12 @@ export const finishedStoriesByDate = /* GraphQL */ `
           genre {
             id
             genre
-            PrimaryColor
             icon
+            PrimaryColor
+            SecondaryColor
+            imageUri
+            createdAt
+            updatedAt
           }
           hidden
           approved
@@ -5729,6 +6190,7 @@ export const storiesByDate = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       nextToken
@@ -5894,6 +6356,7 @@ export const storiesByUpdated = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
       }
       nextToken
@@ -6449,11 +6912,6 @@ export const ratingsByDate = /* GraphQL */ `
           ratingAvg
           ratingAmt
           genreID
-          genre {
-            id
-            genre
-            PrimaryColor
-          }
           hidden
           approved
           createdAt
@@ -6855,6 +7313,7 @@ export const promptsByDate = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
       nextToken
     }
@@ -6918,6 +7377,7 @@ export const promptsByUpdated = /* GraphQL */ `
         updatedAt
         count
         upvote
+        approved
       }
       nextToken
     }
@@ -6983,9 +7443,95 @@ export const savedPromptByDate = /* GraphQL */ `
           updatedAt
           count
           upvote
+          approved
         }
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const inProgressStoriesByUpdated = /* GraphQL */ `
+  query InProgressStoriesByUpdated(
+    $type: String!
+    $updatedAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelInProgressStoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    inProgressStoriesByUpdated(
+      type: $type
+      updatedAt: $updatedAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        userID
+        user {
+          type
+          id
+          name
+          email
+          imageUri
+          bio
+          numAuthored
+          pseudonym
+          narratorPseudo
+          artistPseudo
+          birthdate
+          isPublisher
+          isNarrator
+          isArtist
+          topthree
+          sampleUri
+          narratorText
+          accents
+          voice
+          artistText
+          artStyles
+          narratorActiveAt
+          artistActiveAt
+          plan
+          createdAt
+          updatedAt
+        }
+        storyID
+        story {
+          id
+          type
+          title
+          imageUri
+          audioUri
+          userID
+          author
+          authorID
+          narrator
+          narratorID
+          artistName
+          artistID
+          time
+          summary
+          description
+          nsfw
+          ratingAvg
+          ratingAmt
+          genreID
+          hidden
+          approved
+          createdAt
+          updatedAt
+          numListens
+          promptID
+        }
+        createdAt
+        updatedAt
+        time
       }
       nextToken
     }
