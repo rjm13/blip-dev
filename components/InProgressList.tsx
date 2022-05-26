@@ -6,7 +6,7 @@ import {
     FlatList, 
     Dimensions, 
     RefreshControl, 
-    ActivityIndicator 
+    ActivityIndicator,
 } from 'react-native';
 
 import StoryTile from '../components/StoryTile';
@@ -28,7 +28,7 @@ const InProgressList = () => {
 
     useEffect(() => {
 
-        const History = []
+        const InProgress = []
 
         const fetchStories = async () => {
 
@@ -40,24 +40,24 @@ const InProgressList = () => {
 
             try {
 
-                const historyData = await API.graphql(graphqlOperation(
+                const progressData = await API.graphql(graphqlOperation(
                     getUser, {nextToken, id: userInfo.attributes.sub}))
 
-                if (historyData.data.getUser.Finished.items.length > 0) {
-                    for (let i = 0; i < historyData.data.getUser.Finished.items.length; i++) {
-                        if (historyData.data.getUser.Finished.items[i].story.hidden === false && historyData.data.getUser.Finished.items[i].story.approved === 'approved') {
-                            History.push(historyData.data.getUser.Finished.items[i].story)
+                if (progressData.data.getUser.inProgressStories.items.length > 0) {
+                    for (let i = 0; i < progressData.data.getUser.inProgressStories.items.length; i++) {
+                        if (progressData.data.getUser.inProgressStories.items[i].story.hidden === false && progressData.data.getUser.inProgressStories.items[i].story.approved === 'approved') {
+                            InProgress.push(progressData.data.getUser.inProgressStories.items[i])
                         }
                     } 
-                    console.log(historyData.data.getUser.Finished.nextToken)
-                    if (historyData.data.getUser.Finished.nextToken) {
-                        setNextToken(historyData.data.getUser.Finished.nextToken)
+                    
+                    if (progressData.data.getUser.inProgressStories.nextToken) {
+                        setNextToken(progressData.data.getUser.inProgressStories.nextToken)
                         fetchStories();
                         return;
                     }
                 }
                    
-                setFinishedStories(History);
+                setInProgressStories(InProgress);
                 setIsLoading(false);
               
             } catch (e) {
@@ -66,51 +66,6 @@ const InProgressList = () => {
         }
            fetchStories(); 
       }, [didUpdate])
-
-//on render, get the user and then list the following connections for that user
-    // useEffect(() => {
-
-    //     const fetchStories = async () => {
-
-    //         setIsLoading(true);
-
-    //         const History = []
-
-    //         const userInfo = await Auth.currentAuthenticatedUser();
-
-    //         if (!userInfo) {return;}
-
-    //         try {
-
-    //             const historyData = await API.graphql(graphqlOperation(
-    //                 finishedStoriesByDate, {
-    //                     type: 'FinishedStory',
-    //                     sortDirection: 'DESC',
-    //                     filter: {
-    //                         userID: {
-    //                             eq: userInfo.attributes.sub
-    //                         },
-                           
-    //                     }
-    //             }))
-
-    //             if (historyData.data.finishedStoriesByDate.items.length > 0) {
-    //                 for (let i = 0; i < historyData.data.finishedStoriesByDate.items.length; i++) {
-    //                     if (historyData.data.finishedStoriesByDate.items[i].story.hidden === false && historyData.data.finishedStoriesByDate.items[i].story.approved === 'approved') {
-    //                         History.push(historyData.data.finishedStoriesByDate.items[i].story)
-    //                     }
-    //                 } 
-    //             }
-                   
-    //             setFinishedStories(History);
-    //             setIsLoading(false);
-              
-    //         } catch (e) {
-    //         console.log(e);
-    //       }
-    //     }
-    //        fetchStories(); 
-    //   }, [didUpdate])
 
 
     const [isFetching, setIsFetching] = useState(false);
@@ -125,32 +80,43 @@ const InProgressList = () => {
 
       const renderItem = ({ item }: any) => {
 
-        let icon = ''
-        let genreName = ''
-        let primary = ''
+        let percent = Math.ceil((item.time/item.story.time)).toString()
 
-        if (item.genre) {
-            icon = item.genre.icon
-            genreName = item.genre.genre
-            primary = item.genre.PrimaryColor
+        let genreName = ''
+
+        if (item.story.genre) {
+            genreName = item.story.genre.genre
         }
         
         return (
-        <StoryTile 
-          title={item.title}
-          imageUri={item.imageUri}
-          genreName={genreName}
-          icon={icon}
-          primary={primary}
-          audioUri={item.audioUri}
-          summary={item.summary}
-          author={item.author}
-          narrator={item.narrator}
-          time={item.time}
-          id={item.id}
-          ratingAvg={item.ratingAvg}
-          ratingAmt={item.ratingAmt}
-        />
+        <View style={{}}>
+           <StoryTile 
+                title={item.story.title}
+                imageUri={item.story.imageUri}
+                genreName={genreName}
+                audioUri={item.story.audioUri}
+                summary={item.story.summary}
+                author={item.story.author}
+                narrator={item.story.narrator}
+                time={item.story.time}
+                id={item.story.id}
+                ratingAvg={item.story.ratingAvg}
+                ratingAmt={item.story.ratingAmt}
+            /> 
+            <View style={{width: Dimensions.get('window').width - 50}}>
+                <View style={{width:  percent +'%', height: 1, backgroundColor: '#00ffff', marginLeft: 26, marginTop: -4, alignSelf: 'flex-start'}}/>
+               <View style={{marginHorizontal: 20, marginTop: 6, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={{color: 'gray'}}>
+                    {Math.floor((item.time/item.story.time)*100) + '%'} Complete
+                </Text>
+                <Text style={{color: 'gray', marginRight: -50}}>
+                    {Math.floor(((item.story.time-item.time)/60)/1000)} minutes left
+                </Text>
+            </View>
+            </View>
+            
+        </View>
+        
       );}
 
       const [isLoading, setIsLoading] = useState(false);
@@ -159,10 +125,10 @@ const InProgressList = () => {
             <View style={styles.container}>
 
                 <FlatList 
-                    data={finishedStories}
+                    data={inProgressStories}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
-                    extraData={finishedStories}
+                    extraData={inProgressStories}
                     maxToRenderPerBatch={20}
                     refreshControl={
                         <RefreshControl

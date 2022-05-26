@@ -22,7 +22,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {graphqlOperation, API, Storage, Auth} from 'aws-amplify';
 import { getStory, getUser } from '../src/graphql/queries';
-import { deletePinnedStory, createFinishedStory, updateStory } from '../src/graphql/mutations';
+import { deletePinnedStory, createFinishedStory, updateStory, createInProgressStory, updateInProgressStory, deleteInProgressStory } from '../src/graphql/mutations';
 
 import { AppContext } from '../AppContext';
 import * as RootNavigation from '../navigation/RootNavigation';
@@ -59,8 +59,17 @@ const AudioPlayer  = () => {
     const { storyID } = useContext(AppContext);
     const { setStoryID } = useContext(AppContext);
 
+//inprogress story id
+    const [inProgressID, setInProgressID] = useState(null)
+
 //minimize the player with animations
     const [isExpanded, setIsExpanded] = useState(false);
+
+//set the progress story ID
+useEffect(() => {
+    setInProgressID(null);
+
+}, [storyID])
 
     const onChangeHandler = () => {
         if (isExpanded) {
@@ -119,6 +128,12 @@ const AudioPlayer  = () => {
             for (let i = 0; i < UserData.data.getUser.Finished.items.length; i++) {
                 if (UserData.data.getUser.Finished.items[i].storyID === storyID) {
                     setIsFinished(true);
+                }
+            }
+            for (let i = 0; i < UserData.data.getUser.inProgressStories.items.length; i++) {
+                if (UserData.data.getUser.inProgressStories.items[i].storyID === storyID) {
+                    setInProgressID(UserData.data.getUser.inProgressStories.items[i].id);
+                    setPosition(UserData.data.getUser.inProgressStories.items[i].time)
                 }
             }
         }
@@ -205,6 +220,13 @@ const AddToHistory = async () => {
         //unpin the story, if pinned
         unPinStory();
 
+        //delete the inProgress story, if it exists
+        await API.graphql(graphqlOperation(
+            deleteInProgressStory, {id: inProgressID}
+        ))
+
+        setInProgressID(null);
+
         //navigate to the story page and open the ratings modal, if not already rated
             RootNavigation.navigate('StoryScreen', { storyID: storyID, update: Math.random() });
             onClose();
@@ -212,6 +234,12 @@ const AddToHistory = async () => {
         await API.graphql(graphqlOperation(
             updateStory, {input: {id: storyID, numListens: Story?.numListens + 1}}
         ))
+        //delete the inProgress story, if it exists
+        await API.graphql(graphqlOperation(
+            deleteInProgressStory, {id: inProgressID}
+        ))
+
+        setInProgressID(null);
         RootNavigation.navigate('StoryScreen', { storyID: storyID, update: Math.random() });
         onClose();
     }
@@ -219,6 +247,40 @@ const AddToHistory = async () => {
    
 }
 
+//add the story as in progress
+const AddProgress = async () => {
+    let userInfo = await Auth.currentAuthenticatedUser();
+
+    let response = await API.graphql(graphqlOperation(
+        createInProgressStory, {input: {
+            userID: userInfo.attributes.sub,
+            storyID: storyID,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            time: position
+        }}
+    ))
+    setInProgressID(response.data.createInProgressStory.id)
+}
+
+//update the story that is in progress
+const UpdateProgress = async () => {
+    await API.graphql(graphqlOperation(
+        updateInProgressStory, {input: {
+            id: inProgressID,
+            time: position,
+        }}
+    ))
+}
+
+//check if a progress story for this user already exists
+const ProgressCheck = () => {
+    if (inProgressID === null) {
+        AddProgress()
+    } else {
+        UpdateProgress()
+    }
+}
 
 //slider functions
     function SetPosition(value) {
@@ -280,10 +342,12 @@ const AddToHistory = async () => {
             await sound.playAsync(); 
             setIsPlaying(true);
             await sound.setPositionAsync(position);
+            ProgressCheck();
         }
         if (isPlaying === true) {
             await sound.pauseAsync();
             setIsPlaying (false);     
+            ProgressCheck();
         }    
     }
 

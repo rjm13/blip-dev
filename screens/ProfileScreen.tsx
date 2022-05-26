@@ -229,6 +229,19 @@ const ProfileScreen = ({navigation} : any) => {
                         </View>
                     </TouchableWithoutFeedback>
 
+                    <TouchableWithoutFeedback onPress={ () => navigation.navigate('InProgress')}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40, paddingVertical: 20}}>
+                            <Text style={{ color: '#fff', fontSize: 16}}>
+                                In Progress
+                            </Text>
+                            <FontAwesome5 
+                                name='chevron-right'
+                                color='#fff'
+                                size={15}
+                            />
+                        </View>
+                    </TouchableWithoutFeedback>
+
                     <TouchableWithoutFeedback onPress={ () => navigation.navigate('History')}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40, paddingVertical: 20}}>
                             <Text style={{ color: '#fff', fontSize: 16}}>
