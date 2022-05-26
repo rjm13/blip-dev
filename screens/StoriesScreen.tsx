@@ -19,8 +19,9 @@ import PromptCarousel from '../components/HorizList/PromptCarousel';
 
 import { AppContext } from '../AppContext';
 
-import { listGenres, tagsByUpdated } from '../src/graphql/queries';
-import {graphqlOperation, API} from 'aws-amplify';
+import { listGenres, tagsByUpdated, getUser } from '../src/graphql/queries';
+import {graphqlOperation, API, Auth, Storage} from 'aws-amplify';
+import { UserInterfaceIdiom } from 'expo-constants';
 
 
 
@@ -174,6 +175,24 @@ const AudioStoryHome = ({navigation} : any) => {
     />
   );
 
+  const [progressStory, setProgressStory] = useState()
+  const [imageU, setImageU] = useState('')
+  const [percent, setPercent] = useState('')
+
+  useEffect(() => {
+    const fetchProgressStory = async () => {
+      let userInfo = await Auth.currentAuthenticatedUser();
+      let response = await API.graphql(graphqlOperation(
+        getUser, {id: userInfo.attributes.sub}
+      ))
+      setProgressStory(response.data.getUser.inProgresStories.items[0].story)
+      let imageUri = await Storage.get(response.data.getUser.inProgresStories.items[0].story.imageUri)
+      setImageU(imageUri)
+      setPercent(Math.ceil(((response.data.getUser.inProgresStories.items[0].time)/(response.data.getUser.inProgresStories.items[0].story.time))).toString())
+    }
+    fetchProgressStory()
+  }, [])
+
 
 //return the primary function
     return (
@@ -200,6 +219,44 @@ const AudioStoryHome = ({navigation} : any) => {
                     />
                   </View>
                 </TouchableWithoutFeedback>
+            </View>
+
+            <View>
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                <Text style={[styles.header, {marginHorizontal: 20}]}>
+                  Continue Listening
+                </Text>
+              </View>
+              <View>
+                <View style={{flexDirection: 'row'}}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Image
+                      source={{ uri: imageU}}
+                      style={{width: 100, height: 100, borderRadius: 15, backgroundColor: 'gray'}}
+                    />
+                    <View>
+                      <View>
+                        <Text style={{color: '#fff', fontWeight: 'bold'}}>
+                          {progressStory.title}
+                        </Text>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                          <FontAwesome5 
+                            name='book-open'
+                            color='gray'
+                            size={12}
+                            style={{marginRight: 4}}
+                          />
+                          <Text style={{color: '#fff'}}>
+                            {progressStory.author}
+                          </Text>
+                        </View>
+                        
+                      </View>
+                      <View style={{alignSelf: 'flex-start', width: percent + '%', backgroundColor: 'cyan', height: 1}}/>
+                    </View>
+                  </View>
+                </View>
+              </View>
             </View>
 
             <View style={{marginTop: 20}}>

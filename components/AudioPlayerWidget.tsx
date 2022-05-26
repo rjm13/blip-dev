@@ -222,7 +222,9 @@ const AddToHistory = async () => {
 
         //delete the inProgress story, if it exists
         await API.graphql(graphqlOperation(
-            deleteInProgressStory, {id: inProgressID}
+            deleteInProgressStory, {input: {
+                id: inProgressID
+            }}
         ))
 
         setInProgressID(null);
@@ -236,7 +238,9 @@ const AddToHistory = async () => {
         ))
         //delete the inProgress story, if it exists
         await API.graphql(graphqlOperation(
-            deleteInProgressStory, {id: inProgressID}
+            deleteInProgressStory, {input: {
+                id: inProgressID
+            }}
         ))
 
         setInProgressID(null);

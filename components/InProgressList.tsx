@@ -80,7 +80,7 @@ const InProgressList = () => {
 
       const renderItem = ({ item }: any) => {
 
-        let percent = Math.ceil((item.time/item.story.time)).toString()
+        let percent = Math.ceil((item.time/item.story.time)*100).toString()
 
         let genreName = ''
 
