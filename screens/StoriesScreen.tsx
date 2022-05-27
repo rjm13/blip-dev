@@ -178,6 +178,10 @@ const AudioStoryHome = ({navigation} : any) => {
   const [progressStory, setProgressStory] = useState({})
   const [imageU, setImageU] = useState('')
   const [percent, setPercent] = useState('0')
+  const [timeLeft, setTimeLeft] = useState(0)
+
+  //send context to audio player
+  const { setStoryID } = useContext(AppContext);
 
   useEffect(() => {
     const fetchProgressStory = async () => {
@@ -189,7 +193,8 @@ const AudioStoryHome = ({navigation} : any) => {
         setProgressStory(response.data.getUser.inProgressStories.items[0].story)
         let imageUri = await Storage.get(response.data.getUser.inProgressStories.items[0].story.imageUri)
         setImageU(imageUri)
-        setPercent(Math.ceil(((response.data.getUser.inProgressStories.items[0].time)/(response.data.getUser.inProgressStories.items[0].story.time))).toString())
+        setPercent(Math.ceil(((response.data.getUser.inProgressStories.items[0].time)/(response.data.getUser.inProgressStories.items[0].story.time))*100).toString())
+        setTimeLeft(Math.ceil(((response.data.getUser.inProgressStories.items[0].story.time)-(response.data.getUser.inProgressStories.items[0].time))/6000))
       }
     }
     fetchProgressStory()
@@ -223,6 +228,7 @@ const AudioStoryHome = ({navigation} : any) => {
                 </TouchableWithoutFeedback>
             </View>
 
+            <TouchableWithoutFeedback onPress={() => setStoryID(progressStory.id)}>
             <View>
 
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
@@ -232,35 +238,49 @@ const AudioStoryHome = ({navigation} : any) => {
               </View>
 
               <View style={{margin: 20}}>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row', backgroundColor: '#5656564D', borderRadius: 15}}>
                   <View style={{flexDirection: 'row'}}>
                     <Image
                       source={{ uri: imageU}}
-                      style={{width: 80, height: 80, borderRadius: 15, backgroundColor: 'gray', marginRight: 20}}
+                      style={{width: 80, height: 80, borderTopLeftRadius: 15, borderBottomLeftRadius: 15, backgroundColor: 'gray', marginRight: 20}}
                     />
                     <View>
                       <View>
-                        <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
+                        <Text numberOfLines={1} style={{marginTop: 4, color: '#fff', fontWeight: 'bold', fontSize: 16}}>
                           {progressStory?.title}
                         </Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 6}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 4}}>
                           <FontAwesome5 
                             name='book-open'
                             color='gray'
                             size={12}
                             style={{marginRight: 6}}
                           />
-                          <Text style={{color: '#fff', textTransform: 'capitalize', fontSize: 11}}>
+                          <Text style={{color: 'gray', textTransform: 'capitalize', fontSize: 11}}>
                             {progressStory?.author}
                           </Text>
+
+                          <FontAwesome5 
+                            name='book-reader'
+                            color='gray'
+                            size={12}
+                            style={{marginRight: 6, marginLeft: 10}}
+                          />
+                          <Text style={{color: 'gray', textTransform: 'capitalize', fontSize: 11}}>
+                            {progressStory?.narrator}
+                          </Text>
                         </View>
+                        <Text style={{color: '#fff', fontSize: 11, marginTop: 12}}>
+                          {timeLeft} minutes left
+                        </Text>
                       </View>
-                      {/* <View style={{alignSelf: 'flex-start', width: percent + '%', backgroundColor: 'cyan', height: 1}}/> */}
+                      <View style={{alignSelf: 'flex-start', width: percent + '%', backgroundColor: 'cyan', height: 1, marginTop: 7, marginLeft: -20}}/>
                     </View>
                   </View>
                 </View>
               </View>
             </View>
+            </TouchableWithoutFeedback>
 
             <View style={{marginTop: 20}}>
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
