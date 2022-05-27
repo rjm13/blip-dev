@@ -51,9 +51,10 @@ const PromptCarousel = () => {
 
         return (
             <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome', {promptID: id})}>
-                <View style={{width: Dimensions.get('window').width - 40, backgroundColor: (index - 3) > colors.length ? colors[0] : colors[index - 3], borderRadius: 15, overflow: 'hidden', padding: 20}}>
+                <View style={{height: 160, width: Dimensions.get('window').width - 40, backgroundColor: (index - 3) > colors.length ? colors[0] : colors[index - 3], borderRadius: 15, overflow: 'hidden', padding: 20, justifyContent: 'space-between'}}>
                     <Text numberOfLines={5} style={{color: '#fff', marginBottom: 20}}>
-                        {prompt}
+                        
+                        {prompt.slice(0,1).toUpperCase() + prompt.slice(1, prompt.length)}
                     </Text>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                         <Text style={{color: '#fff', fontWeight: 'bold'}}>
