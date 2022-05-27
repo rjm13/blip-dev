@@ -175,9 +175,9 @@ const AudioStoryHome = ({navigation} : any) => {
     />
   );
 
-  const [progressStory, setProgressStory] = useState()
+  const [progressStory, setProgressStory] = useState({})
   const [imageU, setImageU] = useState('')
-  const [percent, setPercent] = useState('')
+  const [percent, setPercent] = useState('0')
 
   useEffect(() => {
     const fetchProgressStory = async () => {
@@ -185,10 +185,12 @@ const AudioStoryHome = ({navigation} : any) => {
       let response = await API.graphql(graphqlOperation(
         getUser, {id: userInfo.attributes.sub}
       ))
-      setProgressStory(response.data.getUser.inProgresStories.items[0].story)
-      let imageUri = await Storage.get(response.data.getUser.inProgresStories.items[0].story.imageUri)
-      setImageU(imageUri)
-      setPercent(Math.ceil(((response.data.getUser.inProgresStories.items[0].time)/(response.data.getUser.inProgresStories.items[0].story.time))).toString())
+      if (response.data.getUser.inProgressStories.items.length > 0) {
+        setProgressStory(response.data.getUser.inProgressStories.items[0].story)
+        let imageUri = await Storage.get(response.data.getUser.inProgressStories.items[0].story.imageUri)
+        setImageU(imageUri)
+        setPercent(Math.ceil(((response.data.getUser.inProgressStories.items[0].time)/(response.data.getUser.inProgressStories.items[0].story.time))).toString())
+      }
     }
     fetchProgressStory()
   }, [])
@@ -222,37 +224,38 @@ const AudioStoryHome = ({navigation} : any) => {
             </View>
 
             <View>
+
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                 <Text style={[styles.header, {marginHorizontal: 20}]}>
                   Continue Listening
                 </Text>
               </View>
-              <View>
+
+              <View style={{margin: 20}}>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flexDirection: 'row'}}>
                     <Image
                       source={{ uri: imageU}}
-                      style={{width: 100, height: 100, borderRadius: 15, backgroundColor: 'gray'}}
+                      style={{width: 80, height: 80, borderRadius: 15, backgroundColor: 'gray', marginRight: 20}}
                     />
                     <View>
                       <View>
-                        <Text style={{color: '#fff', fontWeight: 'bold'}}>
-                          {progressStory.title}
+                        <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
+                          {progressStory?.title}
                         </Text>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 6}}>
                           <FontAwesome5 
                             name='book-open'
                             color='gray'
                             size={12}
-                            style={{marginRight: 4}}
+                            style={{marginRight: 6}}
                           />
-                          <Text style={{color: '#fff'}}>
-                            {progressStory.author}
+                          <Text style={{color: '#fff', textTransform: 'capitalize', fontSize: 11}}>
+                            {progressStory?.author}
                           </Text>
                         </View>
-                        
                       </View>
-                      <View style={{alignSelf: 'flex-start', width: percent + '%', backgroundColor: 'cyan', height: 1}}/>
+                      {/* <View style={{alignSelf: 'flex-start', width: percent + '%', backgroundColor: 'cyan', height: 1}}/> */}
                     </View>
                   </View>
                 </View>
