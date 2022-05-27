@@ -175,6 +175,7 @@ const AudioStoryHome = ({navigation} : any) => {
     />
   );
 
+  const [progressExists, setProgressExists] = useState(false)
   const [progressStory, setProgressStory] = useState({})
   const [imageU, setImageU] = useState('')
   const [percent, setPercent] = useState('0')
@@ -195,6 +196,7 @@ const AudioStoryHome = ({navigation} : any) => {
         setImageU(imageUri)
         setPercent(Math.ceil(((response.data.getUser.inProgressStories.items[0].time)/(response.data.getUser.inProgressStories.items[0].story.time))*100).toString())
         setTimeLeft(Math.ceil(((response.data.getUser.inProgressStories.items[0].story.time)-(response.data.getUser.inProgressStories.items[0].time))/6000))
+        setProgressExists(true);
       }
     }
     fetchProgressStory()
@@ -228,15 +230,14 @@ const AudioStoryHome = ({navigation} : any) => {
                 </TouchableWithoutFeedback>
             </View>
 
+            {progressExists === true ? (
             <TouchableWithoutFeedback onPress={() => setStoryID(progressStory.id)}>
             <View>
-
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                 <Text style={[styles.header, {marginHorizontal: 20}]}>
                   Continue Listening
                 </Text>
               </View>
-
               <View style={{margin: 20}}>
                 <View style={{flexDirection: 'row', backgroundColor: '#5656564D', borderRadius: 15}}>
                   <View style={{flexDirection: 'row'}}>
@@ -281,6 +282,7 @@ const AudioStoryHome = ({navigation} : any) => {
               </View>
             </View>
             </TouchableWithoutFeedback>
+            ) : null}
 
             <View style={{marginTop: 20}}>
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
