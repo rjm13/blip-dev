@@ -827,6 +827,18 @@ const StoryScreen  = ({navigation} : any) => {
                                     />
                                 </View>
                                 
+                                {Story?.promptID ? (
+                                    <TouchableWithoutFeedback onPress={() => navigation.navigate('PromptsHome', {promptID: Story?.promptID})}>
+                                        <View style={{backgroundColor: '#3B4B80a5', borderRadius: 15, marginBottom: 20}}>
+                                            <Text numberOfLines={5} style={{color: '#fff', padding: 10}}>
+                                                {Story?.prompt?.prompt}
+                                            </Text>
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                    
+                                ) : null}
+                                
+                                
                                 <View>
                                     <TouchableOpacity onPress={onPlay}>
                                         <View style={{paddingVertical: 6, paddingHorizontal: 30, backgroundColor: '#00ffff', margin: 10, borderRadius: 30}}>

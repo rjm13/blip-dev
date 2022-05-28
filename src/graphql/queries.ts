@@ -1811,9 +1811,11 @@ export const getStory = /* GraphQL */ `
           userID
           user {
             id
+            name
             pseudonym
             narratorPseudo
             artistPseudo
+            imageUri
           }
           createdAt
           approved
