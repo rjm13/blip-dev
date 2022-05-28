@@ -195,7 +195,7 @@ const AudioStoryHome = ({navigation} : any) => {
         let imageUri = await Storage.get(response.data.getUser.inProgressStories.items[0].story.imageUri)
         setImageU(imageUri)
         setPercent(Math.ceil(((response.data.getUser.inProgressStories.items[0].time)/(response.data.getUser.inProgressStories.items[0].story.time))*100).toString())
-        setTimeLeft(Math.ceil(((response.data.getUser.inProgressStories.items[0].story.time)-(response.data.getUser.inProgressStories.items[0].time))/6000))
+        setTimeLeft(Math.ceil(((response.data.getUser.inProgressStories.items[0].story.time)-(response.data.getUser.inProgressStories.items[0].time))/60000))
         setProgressExists(true);
       }
     }
@@ -247,7 +247,7 @@ const AudioStoryHome = ({navigation} : any) => {
                     />
                     <View>
                       <View>
-                        <Text numberOfLines={1} style={{marginTop: 4, color: '#fff', fontWeight: 'bold', fontSize: 16}}>
+                        <Text numberOfLines={1} style={{marginTop: 4, color: '#fff', fontWeight: 'bold', fontSize: 16, width: '96%'}}>
                           {progressStory?.title}
                         </Text>
                         <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 4}}>
@@ -261,7 +261,7 @@ const AudioStoryHome = ({navigation} : any) => {
                             {progressStory?.author}
                           </Text>
 
-                          <FontAwesome5 
+                          {/* <FontAwesome5 
                             name='book-reader'
                             color='gray'
                             size={12}
@@ -269,7 +269,7 @@ const AudioStoryHome = ({navigation} : any) => {
                           />
                           <Text style={{color: 'gray', textTransform: 'capitalize', fontSize: 11}}>
                             {progressStory?.narrator}
-                          </Text>
+                          </Text> */}
                         </View>
                         <Text style={{color: '#fff', fontSize: 11, marginTop: 12}}>
                           {timeLeft} minutes left
@@ -314,29 +314,8 @@ const AudioStoryHome = ({navigation} : any) => {
                     ListHeaderComponent={ () => {
 
                         return (
-                            <View style={{ marginTop: 10}}>
-                                <View>
-                                  <Text style={styles.header}>
-                                      Authors
-                                  </Text>
-                                  <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20}}>
-
-                                      <TouchableWithoutFeedback onPress={() => navigation.navigate('BrowseAuthor')}>
-                                          <View style={[styles.box, { backgroundColor: '#15c7ca', flexDirection: 'row', paddingLeft: 20}]}>
-                                              <FontAwesome5 
-                                              name='book-open'
-                                              color='#000000'
-                                              size={22}
-                                              />
-                                              <Text style={{color: '#000', fontSize: 18, fontWeight: 'bold', marginLeft: 20}}>
-                                                  Browse Publishers
-                                              </Text>
-                                          </View>
-                                      </TouchableWithoutFeedback>
-                                  </View>
-                                </View>
-
-                                <View style={{marginTop: 20}}>
+                            <View style={{ marginTop: 0}}>
+                                <View style={{marginTop: 10}}>
                                   <Text style={styles.header}>
                                       Popular Tags
                                   </Text>
@@ -364,10 +343,30 @@ const AudioStoryHome = ({navigation} : any) => {
                     }}
                     ListFooterComponent={ () => {
                         return (
-                        <View style={{ height:  120}}/>
+                        <View style={{ height: 40}}/>
                         );
                     }}
                 />
+              </View>
+              <View style={{marginBottom: 120}}>
+                <Text style={styles.header}>
+                    Authors
+                </Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20}}>
+
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('BrowseAuthor')}>
+                        <View style={[styles.box, { backgroundColor: '#15c7ca', flexDirection: 'row', paddingLeft: 20}]}>
+                            <FontAwesome5 
+                            name='book-open'
+                            color='#000000'
+                            size={22}
+                            />
+                            <Text style={{color: '#000', fontSize: 18, fontWeight: 'bold', marginLeft: 20}}>
+                                Browse Publishers
+                            </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </View>
               </View>
             </View>
             <View>

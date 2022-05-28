@@ -240,7 +240,7 @@ const PromptsHome = ({navigation} : any) => {
             <TouchableWithoutFeedback onPress={() => show2Modal({id, upvoted: isUpVoted})}>
                 <View style={{alignSelf: 'center', marginVertical: 10, width: Dimensions.get('window').width - 40, backgroundColor: color, borderRadius: 15, overflow: 'hidden', padding: 20}}>
                     <Text numberOfLines={5} style={{color: '#fff', marginBottom: 20}}>
-                        {prompt}
+                    {prompt.slice(0,1).toUpperCase() + prompt.slice(1, prompt.length)}
                     </Text>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                         <Text style={{color: '#fff', fontWeight: 'bold'}}>
@@ -416,7 +416,7 @@ const PromptsHome = ({navigation} : any) => {
                         
                         <View style={{borderRadius: 15, overflow: 'hidden', backgroundColor: color}}>
                            <Text style={{paddingHorizontal: 10, paddingVertical: 20, color: '#fff', textAlign: 'center'}}>
-                                {promptData.prompt}
+                           {promptData.prompt.slice(0,1).toUpperCase() + promptData.prompt.slice(1, promptData.prompt.length)}
                             </Text> 
                             <View style={{marginVertical: 10, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
                                 <Text style={{color: '#fff', fontWeight: 'bold'}}>
