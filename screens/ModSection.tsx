@@ -2,26 +2,20 @@ import React, {useState, useEffect} from 'react';
 import {
     View, 
     Text, 
-    StyleSheet, 
-    ScrollView, 
-    Dimensions, 
     TouchableWithoutFeedback,
-    TouchableOpacity
 } from 'react-native';
-
-import { useRoute } from '@react-navigation/native';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import { API, graphqlOperation, Auth } from "aws-amplify";
-import { listStories, listComments, listFlags } from '../src/graphql/queries';
-import { updateUser } from '../src/graphql/mutations';
+import { listStories, listComments, listFlags, promptsByDate } from '../src/graphql/queries';
 
 const ModSection = ({navigation} : any) => {
 
     const [stories, setStories] = useState(0)
     const [flags, setFlags] = useState(0)
     const [comments, setComments] = useState(0)
+    const [prompts, setPrompts] = useState(0)
 
     useEffect(() => {
         const getUser = async () => {
@@ -75,6 +69,22 @@ const ModSection = ({navigation} : any) => {
             setComments(response.data.listComments.items.length)
         }
         fetchComments();
+
+        const fetchPrompts = async () => {
+            let response = await API.graphql(graphqlOperation(
+                promptsByDate, {
+                    sortDirection: 'ASC',
+                    type: 'Prompt',
+                    filter: {
+                        approved: {
+                            eq: false
+                        }
+                    }
+                }
+            ))
+            setPrompts(response.data.promptsByDate.items.length)
+        }
+        fetchComments();
     }, [])
 
 
@@ -123,6 +133,17 @@ const ModSection = ({navigation} : any) => {
                     </Text>
                     <Text style={{color: '#fff', fontWeight: 'bold'}}>
                         {comments}
+                    </Text>
+                </View>
+            </TouchableWithoutFeedback>
+
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('PendingPrompts')}>
+                <View style={{paddingHorizontal: 20, paddingVertical: 20, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={{color: '#fff'}}>
+                        Pending Prompts
+                    </Text>
+                    <Text style={{color: '#fff', fontWeight: 'bold'}}>
+                        {prompts}
                     </Text>
                 </View>
             </TouchableWithoutFeedback>

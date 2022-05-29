@@ -23,6 +23,7 @@ import ModSection from '../screens/ModSection';
 import PendingStories from '../screens/PendingStories';
 import FlaggedStories from '../screens/FlaggedStories';
 import NewComments from '../screens/NewComments';
+import PendingPrompts from '../screens/PendingPrompts';
 
 import PublishingMainScreen from '../screens/PublishingMain';
 import NarratorMain from '../screens/NarratorMain';
@@ -304,6 +305,11 @@ function HomeNavigator() {
       <HomeStack.Screen 
         name="NewComments" 
         component={NewComments} 
+        options={{ headerShown: false }} 
+      />
+      <HomeStack.Screen 
+        name="PendingPrompts" 
+        component={PendingPrompts} 
         options={{ headerShown: false }} 
       />
       <HomeStack.Screen 

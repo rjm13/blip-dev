@@ -143,6 +143,7 @@ const PromptsHome = ({navigation} : any) => {
 
     const [promptData, setPromptData] = useState({
         id: '',
+        type: 'Prompt',
         prompt: '',
         count: 0,
         upvote: 0,

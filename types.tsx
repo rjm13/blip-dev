@@ -65,6 +65,7 @@ export type TabOneParamList = {
   NewComments: undefined;
   SavedPrompts: undefined;
   InProgress: undefined;
+  PendingPrompts: undefined;
 
 };
 
