@@ -194,7 +194,7 @@ const AudioStoryHome = ({navigation} : any) => {
         setProgressStory(response.data.getUser.inProgressStories.items[0].story)
         let imageUri = await Storage.get(response.data.getUser.inProgressStories.items[0].story.imageUri)
         setImageU(imageUri)
-        setPercent(Math.ceil(((response.data.getUser.inProgressStories.items[0].time)/(response.data.getUser.inProgressStories.items[0].story.time))*100).toString())
+        setPercent((Math.ceil(((response.data.getUser.inProgressStories.items[0].time)/(response.data.getUser.inProgressStories.items[0].story.time))*100) + 10).toString())
         setTimeLeft(Math.ceil(((response.data.getUser.inProgressStories.items[0].story.time)-(response.data.getUser.inProgressStories.items[0].time))/60000))
         setProgressExists(true);
       }
@@ -245,9 +245,9 @@ const AudioStoryHome = ({navigation} : any) => {
                       source={{ uri: imageU}}
                       style={{width: 80, height: 80, borderTopLeftRadius: 15, borderBottomLeftRadius: 15, backgroundColor: 'gray', marginRight: 20}}
                     />
-                    <View>
+                    <View style={{width: '66%'}}>
                       <View>
-                        <Text numberOfLines={1} style={{marginTop: 4, color: '#fff', fontWeight: 'bold', fontSize: 16, width: '96%'}}>
+                        <Text numberOfLines={1} style={{marginTop: 4, color: '#fff', fontWeight: 'bold', fontSize: 16, width: '100%'}}>
                           {progressStory?.title}
                         </Text>
                         <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 4}}>

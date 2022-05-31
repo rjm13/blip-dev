@@ -238,6 +238,7 @@ export const getUser = /* GraphQL */ `
             pseudonym
             narratorPseudo
             artistPseudo
+            imageUri
           }
           authorID
           author {
@@ -245,6 +246,9 @@ export const getUser = /* GraphQL */ `
             pseudonym
             narratorPseudo
             artistPseudo
+            imageUri
+            bio
+            numAuthored
           }
           createdAt
           updatedAt

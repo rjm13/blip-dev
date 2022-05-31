@@ -20,7 +20,7 @@ const SavedPrompts = ({navigation} : any) => {
             >
             <View style={{marginHorizontal: 20, marginTop: 50}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center'}}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 20}}>
                         <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
                             <View style={{padding: 30, margin: -30}}>
                                 <FontAwesome5 
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
         marginBottom: 0,
         marginHorizontal: 40,
+
     },
 });
 
