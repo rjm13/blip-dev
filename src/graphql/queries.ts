@@ -431,6 +431,7 @@ export const getUser = /* GraphQL */ `
             pseudonym
             narratorPseudo
             artistPseudo
+            imageUri
           }
           otherUserID
           otherUser {
@@ -438,6 +439,7 @@ export const getUser = /* GraphQL */ `
             pseudonym
             narratorPseudo
             artistPseudo
+            imageUri
           }
           createdAt
           isReadbyUser
@@ -462,6 +464,7 @@ export const getUser = /* GraphQL */ `
             pseudonym
             narratorPseudo
             artistPseudo
+            imageUri
           }
           otherUserID
           otherUser {
@@ -469,6 +472,7 @@ export const getUser = /* GraphQL */ `
             pseudonym
             narratorPseudo
             artistPseudo
+            imageUri
           }
           createdAt
           isReadbyUser
@@ -4147,6 +4151,13 @@ export const getMessage = /* GraphQL */ `
           isRead
           messageID
           userID
+          user {
+            id
+            pseudonym
+            artistPseudo
+            narratorPseudo
+            imageUri
+          }
           updatedAt
         }
         nextToken

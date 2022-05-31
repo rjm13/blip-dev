@@ -205,7 +205,7 @@ const CreateMessage = ({navigation} : any) => {
                                 source={{uri: imageU2}}
                                 style={{marginBottom: 10, width: 50, height: 50, borderRadius: 25, backgroundColor: 'gray'}}
                             />
-                            <Text style={{color: '#00ffffa5', textAlign: 'center'}}>
+                            <Text style={{color: '#00ffffa5', textAlign: 'center', textTransform: 'capitalize'}}>
                                {type === 'narrator' ? otherUser?.narratorPseudo : type === 'artist' ? otherUser?.artistPseudo : null}
                             </Text>
                         </View>
