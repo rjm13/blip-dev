@@ -52,7 +52,7 @@ const PendingPrompts = ({navigation} : any) => {
                     type: 'Prompt',
                     filter: {
                         approved: {
-                            eq: false
+                            eq: 'pending'
                         }
                     }
                 }
@@ -82,7 +82,7 @@ const PendingPrompts = ({navigation} : any) => {
                 await API.graphql(graphqlOperation(
                     updatePrompt, {input: {
                         id: id,
-                        approved: true
+                        approved: 'approved'
                     }}
                 ))
             } catch {

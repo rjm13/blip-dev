@@ -62,7 +62,12 @@ const SavedPromptList = () => {
 
                 if (promptData.data.getUser.savedPrompts.items.length > 0) {
                     for (let i = 0; i < promptData.data.getUser.savedPrompts.items.length; i++) {
-                        Prompts.push(promptData.data.getUser.savedPrompts.items[i])
+                        if (
+                            promptData.data.getUser.savedPrompts.items[i].items.approved === 'approved'
+                        ) {
+                            Prompts.push(promptData.data.getUser.savedPrompts.items[i])
+                        }
+                        
                     } 
 
                     if (promptData.data.getUser.savedPrompts.nextToken) {

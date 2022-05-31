@@ -77,14 +77,14 @@ const ModSection = ({navigation} : any) => {
                     type: 'Prompt',
                     filter: {
                         approved: {
-                            eq: false
+                            eq: 'pending'
                         }
                     }
                 }
             ))
             setPrompts(response.data.promptsByDate.items.length)
         }
-        fetchComments();
+        fetchPrompts();
     }, [])
 
 

@@ -31,6 +31,9 @@ const PromptCarousel = () => {
     const [prompts, setPrompts] = useState([])
 
     useEffect(() => {
+
+        let promptsarr =[]
+
         const fetchPrompts = async () => {
             let response = await API.graphql(graphqlOperation(
                 promptsByUpdated, {
@@ -38,7 +41,13 @@ const PromptCarousel = () => {
                     sortDirection: 'DESC', 
                 }
             ))
-            setPrompts(response.data.promptsByUpdated.items)
+            
+            for(let i = 0; i < response.data.promptsByUpdated.items.length; i++) {
+                if (response.data.promptsByUpdated.items[i].approved === 'approved') {
+                    promptsarr.push(response.data.promptsByUpdated.items[i])
+                }
+            }
+            setPrompts(promptsarr)
         }
 
         fetchPrompts()

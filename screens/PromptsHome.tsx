@@ -64,7 +64,11 @@ const PromptsHome = ({navigation} : any) => {
                 return;
             } else {
                 for (let i = 0; i < response.data.promptsByDate.items.length; i++) {
-                    promptarr.push(response.data.promptsByDate.items[i])
+                    if (
+                        response.data.promptsByDate.items[i].approved === 'approved'
+                    ) {
+                        promptarr.push(response.data.promptsByDate.items[i])
+                    }
                 }
                 setPrompts(promptarr)
                 
@@ -125,6 +129,7 @@ const PromptsHome = ({navigation} : any) => {
                         upvote: 0, 
                         updatedAt: new Date(),
                         createdAt: new Date(),
+                        approved: 'pending',
                     }}
                 ))
 
