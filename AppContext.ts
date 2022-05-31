@@ -18,6 +18,9 @@ const context = {
 
     ADon: false,
     setADon: (val: boolean | null) => {},
+
+    progUpdate: false,
+    setProgUpdate: (val: boolean) => {},
 }
 
 export const AppContext = React.createContext(context);

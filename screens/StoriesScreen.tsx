@@ -30,6 +30,7 @@ const AudioStoryHome = ({navigation} : any) => {
   //nsfw and after dark global app context
   const { nsfwOn } = useContext(AppContext);
   const { ADon } = useContext(AppContext);
+  const { progUpdate } = useContext(AppContext);
 
   //genre array state
   const[genres, setGenres] = useState([]);
@@ -185,6 +186,8 @@ const AudioStoryHome = ({navigation} : any) => {
   const { setStoryID } = useContext(AppContext);
 
   useEffect(() => {
+
+    console.log(progUpdate)
     const fetchProgressStory = async () => {
       let userInfo = await Auth.currentAuthenticatedUser();
       let response = await API.graphql(graphqlOperation(
@@ -198,9 +201,16 @@ const AudioStoryHome = ({navigation} : any) => {
         setTimeLeft(Math.ceil(((response.data.getUser.inProgressStories.items[0].story.time)-(response.data.getUser.inProgressStories.items[0].time))/60000))
         setProgressExists(true);
       }
+      if (response.data.getUser.inProgressStories.items.length === 0) {
+        setProgressStory({})
+        setImageU('')
+        setPercent('0')
+        setTimeLeft(0);
+        setProgressExists(false)
+      }
     }
     fetchProgressStory()
-  }, [])
+  }, [progUpdate])
 
 
 //return the primary function

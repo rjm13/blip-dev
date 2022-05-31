@@ -59,6 +59,10 @@ const AudioPlayer  = () => {
     const { storyID } = useContext(AppContext);
     const { setStoryID } = useContext(AppContext);
 
+    //get context for storyID
+    const { progUpdate } = useContext(AppContext);
+    const { setProgUpdate } = useContext(AppContext);
+
 //inprogress story id
     const [inProgressID, setInProgressID] = useState(null)
 
@@ -227,6 +231,8 @@ const AddToHistory = async () => {
             }}
         ))
 
+        setProgUpdate(!progUpdate);
+
         setInProgressID(null);
 
         //navigate to the story page and open the ratings modal, if not already rated
@@ -242,6 +248,8 @@ const AddToHistory = async () => {
                 id: inProgressID
             }}
         ))
+
+        setProgUpdate(!progUpdate);
 
         setInProgressID(null);
         RootNavigation.navigate('StoryScreen', { storyID: storyID, update: Math.random() });
@@ -284,7 +292,9 @@ const ProgressCheck = () => {
     } else {
         UpdateProgress()
     }
+    setProgUpdate(!progUpdate)
 }
+    
 
 //slider functions
     function SetPosition(value) {

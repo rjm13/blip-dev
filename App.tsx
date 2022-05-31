@@ -68,6 +68,8 @@ export default function App() {
 
   const [ADon, setADon] = useState<boolean|null>(false);
 
+  const [progUpdate, setProgUpdate] = useState<boolean>(false);
+
   const [deepLink, setDeepLink] = useState(null);
 
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -156,6 +158,8 @@ export default function App() {
           setNSFWOn: (val: boolean) => setNSFWOn(val),
           ADon,
           setADon: (val: boolean) => setADon(val),
+          progUpdate,
+          setProgUpdate: (val: boolean) => setProgUpdate(val),
 
         }}>
             <Navigation colorScheme='dark'/>

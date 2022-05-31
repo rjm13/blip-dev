@@ -3,7 +3,7 @@
     "name": "BlipStories-dev",
     "scheme": "blip",
     "slug": "BlipStories-dev",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/blankprofile.png",
     "splash": {
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.martianmedia.blip",
-      "buildNumber": "1.0.3",
+      "buildNumber": "1.0.4",
       "infoPlist": {
         "UIBackgroundModes": [
           "audio"
@@ -30,7 +30,7 @@
     "android": {
       "package": "com.martianmedia.blip",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/blankprofile.png",
         "backgroundColor": "#000000"
