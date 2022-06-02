@@ -15,8 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { API, graphqlOperation, Auth, Storage } from "aws-amplify";
-import { getUser, listPinnedStories, listRatings, listFinishedStories } from '../src/graphql/queries';
-import { updateStory } from '../src/graphql/mutations';
+import { getUser } from '../src/graphql/queries';
 
 import {useNavigation} from '@react-navigation/native';
 
@@ -167,7 +166,22 @@ useEffect(() => {
         <View>
             <TouchableWithoutFeedback onPress={() => setIsVisible(!isVisible)}>
                 <View style={styles.tile}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View>
+                        <Image 
+                                source={{uri: imageU}}
+                                style={{
+                                    width: imageU && isVisible === false ? 70 : 0,
+                                    height: imageU && isVisible === false ? 70 : 0,
+                                    borderRadius: 15,
+                                    marginVertical: 0,
+                                    marginRight: 12,
+                                    marginLeft: -6,
+                                    backgroundColor: '#ffffffa5'
+                                }}
+                            />
+                        </View>
+                        
                         <View style={{ width: '78%'}}>
                                 <Text style={styles.name}>
                                     {title}
@@ -197,7 +211,8 @@ useEffect(() => {
                                 </Text> 
                             </View>
                         </View>
-                        <View>
+                        {isVisible ? (
+                            <View>
                             <TouchableOpacity onPress={onPlay}>
                                 <View style={{ 
                                     flexDirection: 'row', 
@@ -218,6 +233,10 @@ useEffect(() => {
                                 </View>
                             </TouchableOpacity>
                         </View>
+                        ) : null
+
+                        }
+                        
                         
                     </View> 
             

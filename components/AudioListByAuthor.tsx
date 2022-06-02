@@ -709,17 +709,17 @@ const AudioListByAuthor = ({user, status} : any) => {
 
                 <View style={{ alignItems: 'center', marginTop: 20, marginBottom: 10 }}>
                     {publisher ? (
-                        <Text style={{fontSize: 22, color: '#fff', fontWeight: 'bold'}}>
+                        <Text style={{fontSize: 22, color: '#fff', fontWeight: 'bold', textTransform: 'capitalize'}}>
                             {User?.pseudonym}
                         </Text>
                     ) : null}
                     {narrator ? (
-                        <Text style={{fontSize: 22, color: '#fff', fontWeight: 'bold'}}>
+                        <Text style={{fontSize: 22, color: '#fff', fontWeight: 'bold', textTransform: 'capitalize'}}>
                             {User?.narratorPseudo}
                         </Text>
                     ) : null}
                     {artist ? (
-                        <Text style={{fontSize: 22, color: '#fff', fontWeight: 'bold'}}>
+                        <Text style={{fontSize: 22, color: '#fff', fontWeight: 'bold', textTransform: 'capitalize'}}>
                             {User?.artistPseudo}
                         </Text>
                     ) : null}
