@@ -3,9 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, {useContext} from "react";
 
-
-import {graphqlOperation, API, Auth} from 'aws-amplify';
-
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 

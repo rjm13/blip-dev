@@ -5,15 +5,39 @@ import {
     StyleSheet, 
     Dimensions, 
     TouchableOpacity, 
-    TouchableWithoutFeedback
 } from 'react-native';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { useRoute } from '@react-navigation/native';
+import {graphqlOperation, API, Auth} from 'aws-amplify';
+import {updateUser} from '../src/graphql/mutations';
 
 const PremiumHome = ({navigation} : any) => {
+
+    const Subscribe = async () => {
+
+        //this function will need users to confrim subscription through
+        //Google Play Console and
+        //Apple Developer Account/itunes connect
+        //on confirmation of payment, a lambda function will trigger using
+        //AdminAddUserToGroup, that will add the user to the premium user pool
+        //for now, the user just has a field that updates in the DynamoDB table
+        //and sets the global context for 'premium'
+
+        let userInfo = await Auth.currentAuthenticatedUser();
+
+        let response = await API.graphql(graphqlOperation(
+            updateUser, {input: {
+                id: userInfo.attributes.sub,
+                plan: 'premium'
+            }}
+        ))
+
+        if (response.data.updateUser.plan === 'premium') {
+            navigation.navigate('Redirect', {trigger: Math.random()})
+        }
+    }
 
 
     return (
@@ -82,7 +106,7 @@ const PremiumHome = ({navigation} : any) => {
 
                     <TouchableOpacity 
                         style={{ backgroundColor: '#00ffff', borderRadius: 18, width: '50%', alignSelf: 'center'}}
-                        //onPress={() => {navigation.navigate('NarratorSetup', {user: User})}}
+                        onPress={Subscribe}
                     >
                         <Text style={{textAlign: 'center', fontSize: 18, fontWeight: 'bold', paddingVertical: 6,}}>
                             Get Premium
