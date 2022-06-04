@@ -72,6 +72,8 @@ export default function App() {
 
   const [deepLink, setDeepLink] = useState(null);
 
+  const [premium, setPremium] = useState<boolean>(false);
+
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
@@ -160,6 +162,8 @@ export default function App() {
           setADon: (val: boolean) => setADon(val),
           progUpdate,
           setProgUpdate: (val: boolean) => setProgUpdate(val),
+          premium,
+          setPremium: (val: boolean) => setPremium(val),
 
         }}>
             <Navigation colorScheme='dark'/>

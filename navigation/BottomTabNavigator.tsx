@@ -1,7 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import React, {useContext} from "react";
+
+
+import {graphqlOperation, API, Auth} from 'aws-amplify';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -61,12 +64,20 @@ import BrowseGenre from '../screens/BrowseGenre';
 import ViewGenreTags from '../screens/ViewGenreTags';
 import PromptsHome from '../screens/PromptsHome';
 
+import PremiumHome from '../screens/PremiumHome';
 
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList } from '../types';
+import { AppContext } from '../AppContext';
+
+
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList, TabFourParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
+
+  const { premium } = useContext(AppContext);
+  const { setPremium } = useContext(AppContext);
+
   const colorScheme = useColorScheme();
 
   return (
@@ -104,6 +115,19 @@ export default function BottomTabNavigator() {
           headerShown: false,
         }}
       />
+      {premium === false ? (
+        <BottomTab.Screen
+          name="Premium"
+          component={PremiumNavigator}
+          options={{
+            tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
+            headerShown: false,
+          }}
+        />
+      ) : null
+         }
+       
+      
       
     </BottomTab.Navigator>
   );
@@ -393,11 +417,25 @@ function PlaylistNavigator() {
   return (
     <PlaylistStack.Navigator>
       <PlaylistStack.Screen
-        name="StoriesScreen"
+        name="PlaylistScreen"
         component={PlaylistScreen}
         options={{ headerShown: false }}
       />
     </PlaylistStack.Navigator>
+  );
+}
+
+const PremiumStack = createStackNavigator<TabFourParamList>();
+
+function PremiumNavigator() {
+  return (
+    <PremiumStack.Navigator>
+      <PremiumStack.Screen
+        name="PremiumHome"
+        component={PremiumHome}
+        options={{ headerShown: false }}
+      />
+    </PremiumStack.Navigator>
   );
 }
 

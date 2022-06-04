@@ -23,6 +23,7 @@ export type BottomTabParamList = {
   Home: undefined;
   Stories: undefined;
   Playlist: undefined;
+  Premium: undefined;
 };
 
 export type TabOneParamList = {
@@ -87,6 +88,9 @@ export type TabThreeParamList = {
   StoriesScreen: undefined;
 };
 
+export type TabFourParamList = {
+  PremiumHome: undefined;
+};
 
 export type ItemParamList = {
   //title: string;

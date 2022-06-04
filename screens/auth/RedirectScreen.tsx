@@ -27,6 +27,9 @@ const Redirect = ({route, navigation} : any) => {
     const { ADon } = useContext(AppContext);
     const { setADon } = useContext(AppContext);
 
+    const { premium } = useContext(AppContext);
+    const { setPremium } = useContext(AppContext);
+
     useEffect(() => {
 
         setIsLoading(true);
@@ -60,6 +63,10 @@ const Redirect = ({route, navigation} : any) => {
 
                     const userData = await API.graphql(graphqlOperation(
                         getUser,{ id: userInfo.attributes.sub}))
+
+                    if (userData.data.getUser.plan === 'premium') {
+                        setPremium(true)
+                    }
         
                     if (userData.data.getUser) {
                         setUserID(userData.data.getUser);

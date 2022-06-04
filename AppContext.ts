@@ -21,6 +21,8 @@ const context = {
 
     progUpdate: false,
     setProgUpdate: (val: boolean) => {},
+    premium: false,
+    setPremium: (val: boolean) => {},
 }
 
 export const AppContext = React.createContext(context);
