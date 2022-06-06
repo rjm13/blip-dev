@@ -167,7 +167,7 @@ useEffect(() => {
             <TouchableWithoutFeedback onPress={() => setIsVisible(!isVisible)}>
                 <View style={styles.tile}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View>
+                    <View style={{marginLeft: isVisible === true ? -10 : 0}}>
                         <Image 
                                 source={{uri: imageU}}
                                 style={{
@@ -219,8 +219,10 @@ useEffect(() => {
                                     alignItems: 'center', 
                                     borderRadius: 30,
                                     paddingVertical: 2,
-                                    paddingHorizontal: 8,
+                                    paddingHorizontal: 10,
                                     backgroundColor: '#ffffff33',
+                                    marginLeft: -10
+                                    
                                 }}>
                                     <FontAwesome5 
                                         name='play'
@@ -330,8 +332,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#363636a5',
         marginHorizontal: 10,
         marginVertical: 5,
-        padding: 20,
+        paddingVertical: 14,
+        paddingHorizontal: 20, 
         borderRadius: 15,
+        
     },
     name: {
         fontSize: 16,
