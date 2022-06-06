@@ -182,6 +182,8 @@ const handleUpdateName = async () => {
         }
     }
 
+
+
     return (
         <Provider>
             <Portal>
@@ -410,7 +412,7 @@ const handleUpdateName = async () => {
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginVertical: 20}}>
                             <View style={styles.subblock}>
                                 <Text style={[styles.paragraph, {textTransform: 'capitalize'}]}>
-                                   {user?.plan}
+                                   {authUser?.signInUserSession.idToken.payload["cognito:groups"]}
                                 </Text>
                                 <Text style={styles.subparagraph}>
                                     Change your plan

@@ -1,0 +1,22 @@
+[
+  {
+    "groupName": "Basic",
+    "precedence": 1
+  },
+  {
+    "groupName": "Admin",
+    "precedence": 2
+  },
+  {
+    "groupName": "Premium",
+    "precedence": 3
+  },
+  {
+    "groupName": "Trial",
+    "precedence": 4
+  },
+  {
+    "groupName": "Student",
+    "precedence": 5
+  }
+]

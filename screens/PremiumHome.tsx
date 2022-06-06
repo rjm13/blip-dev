@@ -15,6 +15,32 @@ import {updateUser} from '../src/graphql/mutations';
 
 const PremiumHome = ({navigation} : any) => {
 
+    const GetInfo = async () => {
+        let userInfo = await Auth.currentAuthenticatedUser();
+        console.log(userInfo.signInUserSession.idToken.payload["cognito:groups"][0])
+    }
+
+    async function addToGroup() { 
+
+        let userInfo = await Auth.currentAuthenticatedUser();
+
+        let apiName = 'AdminQueries';
+        let path = '/addUserToGroup';
+        let myInit = {
+            body: {
+              "username" : userInfo.attributes.email,
+              "groupname": "Premium"
+            }, 
+            headers: {
+              'Content-Type' : 'application/json',
+              Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+            } 
+        }
+        return await API.post(apiName, path, myInit).then(
+                navigation.navigate('Redirect', {trigger: Math.random()})
+        )
+      }
+
     const Subscribe = async () => {
 
         //this function will need users to confrim subscription through
@@ -106,7 +132,7 @@ const PremiumHome = ({navigation} : any) => {
 
                     <TouchableOpacity 
                         style={{ backgroundColor: '#00ffff', borderRadius: 18, width: '50%', alignSelf: 'center'}}
-                        onPress={Subscribe}
+                        onPress={addToGroup}
                     >
                         <Text style={{textAlign: 'center', fontSize: 18, fontWeight: 'bold', paddingVertical: 6,}}>
                             Get Premium

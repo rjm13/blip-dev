@@ -64,8 +64,13 @@ const Redirect = ({route, navigation} : any) => {
                     const userData = await API.graphql(graphqlOperation(
                         getUser,{ id: userInfo.attributes.sub}))
 
-                    if (userData.data.getUser.plan === 'premium') {
+                    // if (userData.data.getUser.plan === 'premium') {
+                    //     setPremium(true)
+                    // }
+
+                    if (userInfo.signInUserSession.idToken.payload["cognito:groups"].includes('Premium') === true) {
                         setPremium(true)
+                        console.log(userInfo.signInUserSession.idToken.payload["cognito:groups"])
                     }
         
                     if (userData.data.getUser) {
