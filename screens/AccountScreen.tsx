@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { 
     View, 
     Text, 
@@ -18,10 +18,14 @@ import { API, graphqlOperation, Auth } from "aws-amplify";
 import { getUser } from '../src/graphql/queries';
 import { updateUser } from '../src/graphql/mutations';
 
+import { AppContext } from '../AppContext';
+
 import { Modal, Portal, Provider } from 'react-native-paper';
 
 const AccountScreen = ({navigation} : any) => {
 
+    const { premium } = useContext(AppContext);
+    const { setPremium } = useContext(AppContext);
 
 //Attribute states
     const [ Name, setName ] = useState('');
@@ -71,7 +75,8 @@ const handleUpdateName = async () => {
         
             const userInfo = await Auth.currentAuthenticatedUser();
 
-            console.log(userInfo.attributes)
+            console.log(userInfo.signInUserSession.idToken.payload["cognito:groups"])
+
 
             setAuthUser(userInfo);
 
@@ -175,6 +180,7 @@ const handleUpdateName = async () => {
     async function signOut() {
         try {
             await Auth.signOut()
+            .then(() => setPremium(false))
             .then(() => navigation.replace('SignIn'))
         } catch (error) {
             console.log('error signing out: ', error);
@@ -412,7 +418,7 @@ const handleUpdateName = async () => {
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginVertical: 20}}>
                             <View style={styles.subblock}>
                                 <Text style={[styles.paragraph, {textTransform: 'capitalize'}]}>
-                                   {authUser?.signInUserSession.idToken.payload["cognito:groups"]}
+                                   {authUser?.signInUserSession.idToken.payload["cognito:groups"][0]}
                                 </Text>
                                 <Text style={styles.subparagraph}>
                                     Change your plan

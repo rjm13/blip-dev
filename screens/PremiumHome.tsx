@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
     View, 
     Text, 
@@ -13,7 +13,24 @@ import { LinearGradient } from 'expo-linear-gradient';
 import {graphqlOperation, API, Auth} from 'aws-amplify';
 import {updateUser} from '../src/graphql/mutations';
 
+import { AppContext } from '../AppContext';
+
 const PremiumHome = ({navigation} : any) => {
+
+    const { premium } = useContext(AppContext);
+    const { setPremium } = useContext(AppContext);
+
+    //sign out function
+    async function signOut() {
+        try {
+            await Auth.signOut()
+            .then(() => setPremium(false))
+            .then(() => navigation.replace('SignIn'))
+        } catch (error) {
+            console.log('error signing out: ', error);
+            alert("error signing out")
+        }
+    }
 
     const GetInfo = async () => {
         let userInfo = await Auth.currentAuthenticatedUser();
@@ -36,9 +53,8 @@ const PremiumHome = ({navigation} : any) => {
               Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
             } 
         }
-        return await API.post(apiName, path, myInit).then(
-                navigation.navigate('Redirect', {trigger: Math.random()})
-        )
+        return await API.post(apiName, path, myInit).then(signOut)
+
       }
 
     const Subscribe = async () => {

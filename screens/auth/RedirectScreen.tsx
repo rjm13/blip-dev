@@ -45,6 +45,11 @@ const Redirect = ({route, navigation} : any) => {
 
                 else {
 
+                    if (userInfo.signInUserSession.idToken.payload["cognito:groups"].includes('Premium') === true) {
+                        setPremium(true)
+                        console.log(userInfo.signInUserSession.idToken.payload["cognito:groups"])
+                    }
+
                     const date = new Date();
                     const year = date.getFullYear();
                     const month = date.getMonth();
@@ -64,14 +69,8 @@ const Redirect = ({route, navigation} : any) => {
                     const userData = await API.graphql(graphqlOperation(
                         getUser,{ id: userInfo.attributes.sub}))
 
-                    // if (userData.data.getUser.plan === 'premium') {
-                    //     setPremium(true)
-                    // }
-
-                    if (userInfo.signInUserSession.idToken.payload["cognito:groups"].includes('Premium') === true) {
-                        setPremium(true)
-                        console.log(userInfo.signInUserSession.idToken.payload["cognito:groups"])
-                    }
+    
+                    
         
                     if (userData.data.getUser) {
                         setUserID(userData.data.getUser);

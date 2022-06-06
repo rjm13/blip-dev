@@ -13,12 +13,13 @@
     },
     "categories": {
       "auth": {
-        "blipdev0e2b1f16": {}
+        "blipdev0e2b1f16": {},
+        "userPoolGroups": {}
       },
       "function": {
         "AdminQueries50014f69": {
           "deploymentBucketName": "amplify-blipdev-dev-125143-deployment",
-          "s3Key": "amplify-builds/AdminQueries50014f69-6d765a79587269577844-build.zip"
+          "s3Key": "amplify-builds/AdminQueries50014f69-5052345a766231333568-build.zip"
         }
       }
     }
