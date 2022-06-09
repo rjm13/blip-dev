@@ -17,7 +17,6 @@ Amplify.configure(config);
 
 import { AppContext } from './AppContext';
 
-import AudioPlayerWidgetStatic from './components/AudioPlayerWidgetStatic';
 import AudioPlayerWidget from './components/AudioPlayerWidget';
 
 

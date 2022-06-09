@@ -3,6 +3,8 @@ export type AmplifyDependentResourcesAttributes = {
         "blipdev0e2b1f16": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
+            "HostedUIDomain": "string",
+            "OAuthMetadata": "string",
             "UserPoolId": "string",
             "UserPoolArn": "string",
             "UserPoolName": "string",

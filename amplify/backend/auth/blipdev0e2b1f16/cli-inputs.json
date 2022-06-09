@@ -36,7 +36,7 @@
     "sharedId": "0e2b1f16",
     "resourceName": "blipdev0e2b1f16",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "useDefault": "defaultSocial",
     "usernameAttributes": [
       "email"
     ],
@@ -64,6 +64,14 @@
     },
     "breakCircularDependency": true,
     "dependsOn": [],
-    "adminQueryGroup": "Basic"
+    "adminQueryGroup": "Basic",
+    "hostedUI": true,
+    "hostedUIDomainName": "blipdev0dbc86e8-0dbc86e8",
+    "authProvidersUserPool": [
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/\"]}",
+    "authProviders": []
   }
 }

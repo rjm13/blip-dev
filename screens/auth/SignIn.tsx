@@ -9,7 +9,8 @@ import {
     Linking,
     ActivityIndicator,
     Keyboard,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Image
 } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -109,6 +110,37 @@ const SignIn = ({navigation} : any) => {
         setSigningIn(false);
     }
 
+    async function signInWithGoogle() {
+        setSigningIn(true);
+        try {
+            await Auth.federatedSignIn({provider: "google"})
+            .then (CreateUser)
+        } 
+        catch (error) {
+            console.log('error signing in', error)
+            setIsErr(true);
+            setSigningIn(false);
+        }
+        setSigningIn(false);
+    }
+
+    async function signInWithApple() {
+        setSigningIn(true);
+        const {username, password} = data;
+        try {
+            await Auth.signIn(username.replace(/ /g, ''), password)
+            .then (CreateUser)
+        } 
+        catch (error) {
+            console.log('error signing in', error)
+            setIsErr(true);
+            setSigningIn(false);
+        }
+        setSigningIn(false);
+    }
+
+
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -191,12 +223,6 @@ const SignIn = ({navigation} : any) => {
 
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('SignUp') }>
-                    <Text style={{ fontSize: 14, color: '#fff', alignSelf: 'center', margin: 20}}>
-                        Create an account
-                    </Text>
-                </TouchableOpacity>
-
                 <TouchableOpacity onPress={signIn}>
                     <View style={styles.button}>
                         {signingIn === true ? (
@@ -208,6 +234,45 @@ const SignIn = ({navigation} : any) => {
                         )}
                     </View>
                 </TouchableOpacity>
+
+                <View>
+                    <Text style={{color: '#fff', alignSelf: 'center', marginBottom: 10}}>
+                        or
+                    </Text>
+                </View>
+
+                <TouchableOpacity>
+                    <View style={{width: '60%', flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 8, margin: 10, alignSelf: 'center', borderRadius: 17, borderWidth: 0.5, borderColor: '#fff'}}>
+                        <Image 
+                            source={require('../../assets/images/apple-logo.png')}
+                            style={{width: 16, height: 20, marginRight: 20}}
+                        />
+                        <Text style={{color: '#fff'}}>
+                            Continue with Apple
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                
+
+                <TouchableOpacity onPress={signInWithGoogle}>
+                    <View style={{width: '60%', flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 8, margin: 10, alignSelf: 'center', borderRadius: 17, borderWidth: 0.5, borderColor: '#fff'}}>
+                        <Image 
+                            source={require('../../assets/images/google-icon.png')}
+                            style={{width: 16, height: 20, marginRight: 20}}
+                        />
+                        <Text style={{color: '#fff'}}>
+                            Continue with Google
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => navigation.navigate('SignUp') }>
+                    <Text style={{ fontSize: 14, color: '#fff', alignSelf: 'center', margin: 20}}>
+                        Create an account
+                    </Text>
+                </TouchableOpacity>
+
+                
             </LinearGradient>
             <StatusBar style="light" backgroundColor ='transparent' />
         </View>
@@ -244,13 +309,14 @@ const styles = StyleSheet.create ({
     button: {
        alignItems: 'center',
        margin: 20,
+       alignSelf: 'center'
     },
     buttontext: {
         backgroundColor: 'cyan',
         borderRadius: 17,
-        paddingVertical: 10,
+        paddingVertical: 6,
         paddingHorizontal: 20,
-        overflow: 'hidden'
+        overflow: 'hidden',
     },
 });
 
