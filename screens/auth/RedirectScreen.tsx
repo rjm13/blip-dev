@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useLayoutEffect} from "react";
-import { View, Text, ActivityIndicator, Dimensions, TouchableWithoutFeedback } from "react-native";
+import { View, Text, ActivityIndicator, Dimensions, TouchableWithoutFeedback, Platform } from "react-native";
 import { AppContext } from '../../AppContext';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { getUser } from '../../src/graphql/queries';
@@ -30,6 +30,8 @@ const Redirect = ({route, navigation} : any) => {
     const { premium } = useContext(AppContext);
     const { setPremium } = useContext(AppContext);
 
+
+
     useEffect(() => {
 
         setIsLoading(true);
@@ -39,6 +41,7 @@ const Redirect = ({route, navigation} : any) => {
             try {
                 const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true }).catch(err=>err)
 
+            
                 if (userInfo === 'The user is not authenticated') {
                     navigation.navigate('SignIn')
                 }
