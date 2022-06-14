@@ -255,7 +255,7 @@ const ProfileScreen = ({navigation} : any) => {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <TouchableWithoutFeedback onPress={ () => navigation.navigate('SavedPrompts')}>
+                    {/* <TouchableWithoutFeedback onPress={ () => navigation.navigate('SavedPrompts')}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 40, paddingVertical: 20}}>
                             <Text style={{ color: '#fff', fontSize: 16}}>
                                 Saved Prompts
@@ -266,7 +266,7 @@ const ProfileScreen = ({navigation} : any) => {
                                 size={15}
                             />
                         </View>
-                    </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback> */}
 
                     
 

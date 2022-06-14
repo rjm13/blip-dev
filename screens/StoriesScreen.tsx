@@ -242,7 +242,7 @@ const AudioStoryHome = ({navigation} : any) => {
 
             {progressExists === true ? (
             <TouchableWithoutFeedback onPress={() => setStoryID(progressStory.id)}>
-            <View>
+            <View style={{marginTop: 20}}>
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                 <Text style={[styles.header, {marginHorizontal: 20}]}>
                   Continue Listening
@@ -294,7 +294,7 @@ const AudioStoryHome = ({navigation} : any) => {
             </TouchableWithoutFeedback>
             ) : null}
 
-            <View style={{marginTop: 20}}>
+            {/* <View style={{marginTop: 20}}>
               <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                 <Text style={[styles.header, {marginHorizontal: 20}]}>
                   Recent Prompts
@@ -309,9 +309,7 @@ const AudioStoryHome = ({navigation} : any) => {
               <View style={{marginTop: 20}}>
                 <PromptCarousel />
               </View>
-              
-
-            </View>
+            </View> */}
 
             <View style={{ marginHorizontal: 20, height: '100%'}}>
               <View>
