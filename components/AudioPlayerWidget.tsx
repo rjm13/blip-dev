@@ -89,6 +89,14 @@ useEffect(() => {
     const [imageU, setImageU] = useState('')
     const [user, setUser] = useState({})
 
+    useEffect(() => {
+        if (isPlaying === true) {
+            setPosition(0);
+            setIsPlaying(false);
+            ProgressCheck()
+        }
+    }, [storyID])
+
 //fetch the story attributes and audioUri from the s3 bucket
     useEffect(() => {
 
@@ -142,8 +150,18 @@ useEffect(() => {
             }
         }
 
-        fetchStory();
-        fetchUser();
+        if (isPlaying === true) {
+            setPosition(0);
+            setIsPlaying(false);
+            ProgressCheck()
+            fetchStory();
+            fetchUser();
+        } else {
+            fetchStory();
+            fetchUser();
+        }
+    
+        
 
     }, [storyID])
 
@@ -163,6 +181,7 @@ useEffect(() => {
         setStory(null);
         setPosition(0);
         setIsPlaying(false);
+        ProgressCheck();
     }
 
 //unpin a story
